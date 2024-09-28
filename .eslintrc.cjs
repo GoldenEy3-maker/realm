@@ -23,7 +23,6 @@ module.exports = {
 
   // Base config
   extends: ["eslint:recommended"],
-
   overrides: [
     // React
     {
@@ -81,4 +80,7 @@ module.exports = {
       },
     },
   ],
+  rules: {
+    "react/prop-types": "ignore",
+  },
 };

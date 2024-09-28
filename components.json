@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "app/tailwind.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "shared/realm/ui",
+    "utils": "shared/realm/lib",
+    "ui": "shared/realm/ui",
+    "lib": "shared/realm/lib",
+    "hooks": "shared/realm/hooks"
+  }
+}
