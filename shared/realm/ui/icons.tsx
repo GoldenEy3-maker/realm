@@ -5,6 +5,7 @@ import {
   LuCircle,
   LuHome,
   LuMoon,
+  LuSettings,
   LuSun,
 } from "react-icons/lu";
 
@@ -16,4 +17,5 @@ export const Icons = {
   Circle: LuCircle,
   Moon: LuMoon,
   Sun: LuSun,
+  Settings: LuSettings,
 };

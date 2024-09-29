@@ -1,6 +1,1 @@
-import { MetaFunction } from "@remix-run/node";
-import { ModelsPage } from "pages/realm/models";
-
-export const meta: MetaFunction = () => [{ title: "Realm Models" }];
-
-export default ModelsPage;
+export { ModelsPage as default, meta } from "pages/realm/models";

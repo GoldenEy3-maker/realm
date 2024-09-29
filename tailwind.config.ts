@@ -71,6 +71,15 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
+      keyframes: {
+        ripple: {
+          from: { scale: "0" },
+          to: { scale: "3" },
+        },
+      },
+      animation: {
+        ripple: "ripple 500ms linear forwards",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

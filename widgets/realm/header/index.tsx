@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
-import { RoutesMap } from "../lib";
-import { ModeToggle } from "./mode-toggle";
+import { RoutesMap } from "shared/realm/lib";
+import { ModeToggle } from "shared/realm/ui";
 
 export function Header() {
   return (

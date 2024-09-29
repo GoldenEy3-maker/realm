@@ -27,7 +27,3 @@ export {
 
 export { Icons } from "./icons";
 export { ModeToggle } from "./mode-toggle";
-
-export { Navigation } from "./navigation";
-export { Header } from "./header";
-export { Footer } from "./footer";

@@ -1,6 +1,1 @@
-import { MetaFunction } from "@remix-run/node";
-import { DashboradPage } from "pages/realm/dashboard";
-
-export const meta: MetaFunction = () => [{ title: "Realm" }];
-
-export default DashboradPage;
+export { DashboradPage as default, meta } from "pages/realm/dashboard";

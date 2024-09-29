@@ -1,9 +1,9 @@
 import { LinksFunction } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
-import { Footer, Header, Navigation } from "shared/realm/ui";
+import { Footer, Header, MainSidebar } from "widgets/realm";
+import { useNProgress } from "shared/realm/hooks";
 
 import "nprogress/nprogress.css";
-import { useNProgress } from "shared/realm/hooks/nprogress";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,7 +23,7 @@ export function Layout() {
 
   return (
     <div className="flex min-h-svh">
-      <Navigation />
+      <MainSidebar />
       <div className="flex-1">
         <Header />
         <Outlet />
