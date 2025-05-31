@@ -12,6 +12,8 @@ import appCss from "@/app/styles/app.css?url";
 import { seo } from "@/app/seo";
 import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { NavigationLoadingBar } from "@/features/navigation-loading-bar";
+import { getThemeServerFn, ThemeProvider, useTheme } from "@/features/theme";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -55,6 +57,7 @@ export const Route = createRootRouteWithContext<{
     ],
   }),
   beforeLoad: async () => {},
+
   errorComponent: (props) => {
     return (
       <RootDocument>
@@ -68,9 +71,11 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <Outlet />
-    </RootDocument>
+    <ThemeProvider defaultTheme="system">
+      <RootDocument>
+        <Outlet />
+      </RootDocument>
+    </ThemeProvider>
   );
 }
 
@@ -81,6 +86,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body suppressHydrationWarning>
+        <NavigationLoadingBar />
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />

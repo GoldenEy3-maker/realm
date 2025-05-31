@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getTasksQueryOptions } from "../api/tasks-query-options";
 
 export function TaskList() {
-  const { data } = useSuspenseQuery(getTasksQueryOptions(20));
+  const { data } = useSuspenseQuery(getTasksQueryOptions());
 
   return (
     <div>

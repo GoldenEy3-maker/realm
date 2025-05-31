@@ -3,7 +3,7 @@ import { tasks } from "@/shared/db/schema/tasks";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-export const getTasks = createServerFn({ method: "GET" })
+export const getTasksServerFn = createServerFn({ method: "GET" })
   .validator(
     z.object({
       limit: z.number().min(1).max(100).default(10),
