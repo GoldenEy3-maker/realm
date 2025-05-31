@@ -1,9 +1,9 @@
-import { relations } from "drizzle-orm";
-import { pgEnum, pgTable, PgUUID, text, timestamp } from "drizzle-orm/pg-core";
+import { relations as drizzleRelations } from "drizzle-orm";
+import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
-export const createTable = pgTable;
-
+export const table = pgTable;
 export const createEnum = pgEnum;
+export const relations = drizzleRelations;
 
 export const timestampMetadataFields = {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
@@ -17,6 +17,4 @@ export const uuid = (name: string) => {
   return text(name).$defaultFn(() => crypto.randomUUID());
 };
 
-export const createRelations = relations;
-
-export * from "drizzle-orm/pg-core";
+export * as t from "drizzle-orm/pg-core";

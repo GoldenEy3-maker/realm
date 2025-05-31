@@ -1,6 +1,6 @@
-import { TaskList } from "@/entities/task";
-import { createFileRoute } from "@tanstack/react-router";
-import { Suspense } from "react";
+import { ThemeToggle } from "@/features/theme";
+import { Button } from "@/shared/ui/button";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -10,9 +10,10 @@ function Home() {
   return (
     <div className="p-2">
       <h3>Welcome Home!!!</h3>
-      <Suspense fallback={<div>Loading...</div>}>
-        <TaskList />
-      </Suspense>
+      <Button asChild>
+        <Link to="/tasks">Tasks</Link>
+      </Button>
+      <ThemeToggle />
     </div>
   );
 }

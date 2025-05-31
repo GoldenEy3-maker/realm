@@ -1,11 +1,18 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getTasks } from "../server-fns/get-tasks";
+import { getTasksServerFn } from "../server-fns/get-tasks";
 
 export const TASKS_QUERY_KEY = "tasks";
 
-export function getTasksQueryOptions(limit: number) {
+interface GetTasksQueryOptionsParams {
+  limit?: number;
+}
+
+export function getTasksQueryOptions(
+  params: GetTasksQueryOptionsParams = { limit: 20 }
+) {
   return queryOptions({
-    queryKey: [TASKS_QUERY_KEY, limit],
-    queryFn: () => getTasks({ data: { limit } }),
+    queryKey: [TASKS_QUERY_KEY, params.limit],
+    queryFn: ({ signal }) =>
+      getTasksServerFn({ data: { limit: params.limit }, signal }),
   });
 }

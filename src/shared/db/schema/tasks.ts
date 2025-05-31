@@ -1,21 +1,13 @@
-import {
-  boolean,
-  createTable,
-  index,
-  text,
-  timestampMetadataFields,
-  uuid,
-  varchar,
-} from "../utils";
+import { timestampMetadataFields, table, t, uuid } from "../utils";
 
-export const tasks = createTable(
+export const tasks = table(
   "tasks",
   {
     id: uuid("id").primaryKey(),
-    title: varchar("title", { length: 255 }).notNull(),
-    description: text("description"),
-    completed: boolean("completed").notNull().default(false),
+    title: t.varchar("title", { length: 256 }).notNull(),
+    description: t.text("description"),
+    completed: t.boolean("completed").notNull().default(false),
     ...timestampMetadataFields,
   },
-  (table) => [index("taks_title_index").on(table.title)]
+  (table) => [t.index("taks_title_index").on(table.title)]
 );
