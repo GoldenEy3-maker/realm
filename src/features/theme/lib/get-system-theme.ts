@@ -3,7 +3,7 @@ import { MEDIA_PREFERS_COLOR_SCHEMA } from "@/shared/constants/media-prefers-col
 import { ThemesMap } from "../constants/themes-map";
 
 export function getSystemTheme(
-  e?: MediaQueryList | MediaQueryListEvent
+  e?: MediaQueryList | MediaQueryListEvent,
 ): `${typeof ThemesMap.LIGHT}` | `${typeof ThemesMap.DARK}` {
   if (IS_SERVER) return "light";
   if (!e) e = matchMedia(MEDIA_PREFERS_COLOR_SCHEMA);

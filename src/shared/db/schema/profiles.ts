@@ -11,6 +11,7 @@ export const profiles = table("profiles", {
   bio: t.text("bio"),
   dateOfBirth: t.date("date_of_birth"),
   gender: t.varchar("gender", { length: 20 }),
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   preferences: t.json("preferences").$type<Record<string, any>>(),
   socialLinks: t.json("social_links").$type<Record<string, string>>(),
   ...timestampMetadataFields,
