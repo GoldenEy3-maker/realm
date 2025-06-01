@@ -18,7 +18,7 @@ export const users = table(
   (table) => [
     t.uniqueIndex("email_index").on(table.email),
     t.uniqueIndex("username_index").on(table.username),
-  ]
+  ],
 );
 
 export const usersRelations = relations(users, ({ one }) => ({

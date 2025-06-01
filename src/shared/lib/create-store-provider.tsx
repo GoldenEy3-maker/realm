@@ -7,7 +7,7 @@ export interface StoreProviderProps<T> {
 }
 
 export function createStoreProvider<T, A>(
-  createStore: (initState?: T) => StoreApi<T & A>
+  createStore: (initState?: T) => StoreApi<T & A>,
 ) {
   type StoreApi = ReturnType<typeof createStore>;
 

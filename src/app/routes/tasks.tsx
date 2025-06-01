@@ -12,7 +12,7 @@ export const Route = createFileRoute("/tasks")({
 function RouteComponent() {
   return (
     <div>
-      <div>Hello "/tasks"!</div>
+      <div>Hello &quot;/tasks&quot;!</div>
       <Suspense fallback={<div>Loading...</div>}>
         <TaskList />
       </Suspense>

@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 function injectThemeScript(
   defaultTheme: Theme,
   storageKey: string,
-  systemThemes: Theme[]
+  systemThemes: Theme[],
 ) {
   const root = document.documentElement;
 

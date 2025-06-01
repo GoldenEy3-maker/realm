@@ -1,6 +1,4 @@
 import { useTheme } from "../model/theme-context";
-import { useEffect } from "react";
-import { useState } from "react";
 import { Button } from "@/shared/ui/button";
 import {
   DropdownMenu,

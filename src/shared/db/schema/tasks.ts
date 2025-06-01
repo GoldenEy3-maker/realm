@@ -9,5 +9,5 @@ export const tasks = table(
     completed: t.boolean("completed").notNull().default(false),
     ...timestampMetadataFields,
   },
-  (table) => [t.index("taks_title_index").on(table.title)]
+  (table) => [t.index("taks_title_index").on(table.title)],
 );

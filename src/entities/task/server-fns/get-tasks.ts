@@ -7,7 +7,7 @@ export const getTasksServerFn = createServerFn({ method: "GET" })
   .validator(
     z.object({
       limit: z.number().min(1).max(100).default(10),
-    })
+    }),
   )
   .handler(async ({ data }) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));

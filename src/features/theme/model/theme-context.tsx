@@ -35,10 +35,10 @@ export function ThemeProvider({
   defaultTheme = "system",
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(
-    () => (getTheme(THEME_STORAGE_KEY) || defaultTheme) as Theme
+    () => (getTheme(THEME_STORAGE_KEY) || defaultTheme) as Theme,
   );
   const [resolvedTheme, setResolvedTheme] = useState(() =>
-    theme === ThemesMap.SYSTEM ? getSystemTheme() : theme
+    theme === ThemesMap.SYSTEM ? getSystemTheme() : theme,
   );
 
   const applyTheme = useCallback((theme: Theme) => {
@@ -73,7 +73,7 @@ export function ThemeProvider({
         saveThemeToLS(THEME_STORAGE_KEY, value);
       }
     },
-    []
+    [],
   );
 
   const handleMediaQuery = useCallback(
@@ -85,7 +85,7 @@ export function ThemeProvider({
         applyTheme(ThemesMap.SYSTEM);
       }
     },
-    [theme]
+    [theme],
   );
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export function ThemeProvider({
         setThemeState(e.newValue as Theme);
       }
     },
-    [setTheme, defaultTheme]
+    [setTheme, defaultTheme],
   );
 
   useEffect(() => {
@@ -125,7 +125,7 @@ export function ThemeProvider({
       setTheme,
       resolvedTheme: theme === ThemesMap.SYSTEM ? resolvedTheme : theme,
     }),
-    [theme, setTheme, resolvedTheme]
+    [theme, setTheme, resolvedTheme],
   );
 
   return (

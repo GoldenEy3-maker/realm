@@ -8,7 +8,7 @@ interface GetTasksQueryOptionsParams {
 }
 
 export function getTasksQueryOptions(
-  params: GetTasksQueryOptionsParams = { limit: 20 }
+  params: GetTasksQueryOptionsParams = { limit: 20 },
 ) {
   return queryOptions({
     queryKey: [TASKS_QUERY_KEY, params.limit],
