@@ -13,7 +13,7 @@ import { seo } from "@/app/seo";
 import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { NavigationLoadingBar } from "@/features/navigation-loading-bar";
-import { getThemeServerFn, ThemeProvider, useTheme } from "@/features/theme";
+import { ThemeProvider } from "@/features/theme";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -57,7 +57,6 @@ export const Route = createRootRouteWithContext<{
     ],
   }),
   beforeLoad: async () => {},
-
   errorComponent: (props) => {
     return (
       <RootDocument>
