@@ -1,7 +1,7 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "@tanstack/react-start/config";
 import tsConfigPaths from "vite-tsconfig-paths";
-// import babel from "vite-plugin-babel";
+import eslintPlugin from "@nabla/vite-plugin-eslint";
 
 export default defineConfig({
   tsr: {
@@ -11,11 +11,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      // babel({
-      //   babelConfig: {
-      //     plugins: ["babel-plugin-react-compiler", {}],
-      //   },
-      // }),
+      eslintPlugin(),
       tailwindcss(),
       tsConfigPaths({
         projects: ["./tsconfig.json"],

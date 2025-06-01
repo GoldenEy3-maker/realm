@@ -3,7 +3,6 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import pluginHooks from "eslint-plugin-react-hooks";
-import pluginRefresh from "eslint-plugin-react-refresh";
 import pluginQuery from "@tanstack/eslint-plugin-query";
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -27,7 +26,6 @@ export default [
     },
   },
   pluginJs.configs.recommended,
-  pluginRefresh.configs.recommended,
   pluginReact.configs.flat.recommended,
   ...pluginQuery.configs["flat/recommended"],
   ...tseslint.configs.recommended,
@@ -37,6 +35,12 @@ export default [
     },
     rules: {
       "react/react-in-jsx-scope": "off",
+      "@typescript-eslint/no-empty-object-type": [
+        "error",
+        {
+          allowInterfaces: "with-single-extends",
+        },
+      ],
       ...pluginHooks.configs.recommended.rules,
     },
   },

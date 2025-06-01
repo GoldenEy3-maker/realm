@@ -26,7 +26,8 @@ function injectThemeScript(
     const theme = isSystem ? getSystemTheme() : themeName;
     updateDOM(theme as Theme);
   } catch (e) {
-    //
+    console.error(e);
+    // Unsupported
   }
 }
 

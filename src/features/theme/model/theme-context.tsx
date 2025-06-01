@@ -85,7 +85,7 @@ export function ThemeProvider({
         applyTheme(ThemesMap.SYSTEM);
       }
     },
-    [theme],
+    [applyTheme, theme],
   );
 
   useEffect(() => {
@@ -117,7 +117,7 @@ export function ThemeProvider({
 
   useEffect(() => {
     applyTheme(theme);
-  }, [theme]);
+  }, [applyTheme, theme]);
 
   const providerValue = useMemo(
     () => ({
