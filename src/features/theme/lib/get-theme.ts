@@ -6,6 +6,7 @@ export function getTheme(key: string) {
   try {
     theme = localStorage.getItem(key) || undefined;
   } catch (e) {
+    console.error(e);
     // Unsupported
   }
   return theme;
