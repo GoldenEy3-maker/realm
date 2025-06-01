@@ -1,4 +1,4 @@
 **/build
 **/public
 pnpm-lock.yaml
-routeTree.gen.ts
+route-tree.gen.ts
