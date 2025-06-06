@@ -63,6 +63,18 @@ export const eslintBoundariesConfig = {
             message:
               "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
           },
+          {
+            from: "widgets",
+            disallow: ["widgets"],
+            message:
+              "В слое widgets нельзя использовать кросс-модульные зависимости",
+          },
+          {
+            from: "features",
+            disallow: ["features"],
+            message:
+              "В слое features нельзя использовать кросс-модульные зависимости",
+          },
         ],
       },
     ],
