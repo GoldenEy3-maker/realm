@@ -1,5 +1,6 @@
 import { relations as drizzleRelations } from "drizzle-orm";
 import { pgEnum, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import * as pgCore from "drizzle-orm/pg-core";
 
 export const table = pgTable;
 export const createEnum = pgEnum;
@@ -13,8 +14,11 @@ export const timestampMetadataFields = {
     .$onUpdate(() => new Date()),
 };
 
-export const uuid = (name: string) => {
+const uuid = (name: string) => {
   return text(name).$defaultFn(() => crypto.randomUUID());
 };
 
-export * as t from "drizzle-orm/pg-core";
+export const schemaBuilder = {
+  ...pgCore,
+  uuid,
+};

@@ -1,19 +1,28 @@
 import { users } from "./users";
-import { table, timestampMetadataFields, t, uuid, relations } from "../utils";
+import {
+  table,
+  timestampMetadataFields,
+  schemaBuilder,
+  relations,
+} from "../utils";
 
 export const profiles = table("profiles", {
-  id: uuid("id").primaryKey(),
-  userId: t.text("user_id").notNull(),
-  surname: t.varchar("surname", { length: 256 }).notNull(),
-  name: t.varchar("name", { length: 256 }).notNull(),
-  patronymic: t.varchar("patronymic", { length: 256 }),
-  avatarUrl: t.text("avatar_url"),
-  bio: t.text("bio"),
-  dateOfBirth: t.date("date_of_birth"),
-  gender: t.varchar("gender", { length: 20 }),
+  id: schemaBuilder.uuid("id").primaryKey(),
+  userId: schemaBuilder
+    .text("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+  surname: schemaBuilder.varchar("surname", { length: 256 }).notNull(),
+  name: schemaBuilder.varchar("name", { length: 256 }).notNull(),
+  patronymic: schemaBuilder.varchar("patronymic", { length: 256 }),
+  avatarUrl: schemaBuilder.text("avatar_url"),
+  bio: schemaBuilder.text("bio"),
+  dateOfBirth: schemaBuilder.date("date_of_birth"),
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  preferences: t.json("preferences").$type<Record<string, any>>(),
-  socialLinks: t.json("social_links").$type<Record<string, string>>(),
+  preferences: schemaBuilder.json("preferences").$type<Record<string, any>>(),
+  socialLinks: schemaBuilder
+    .json("social_links")
+    .$type<Record<string, string>>(),
   ...timestampMetadataFields,
 });
 
