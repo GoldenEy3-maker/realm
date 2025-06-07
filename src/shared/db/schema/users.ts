@@ -1,26 +1,34 @@
 import { profiles } from "./profiles";
-import { table, timestampMetadataFields, relations, t, uuid } from "../utils";
+import {
+  table,
+  timestampMetadataFields,
+  relations,
+  schemaBuilder,
+} from "../utils";
+import { teamMembers } from "./teams";
 
 export const users = table(
   "users",
   {
-    id: uuid("id").primaryKey(),
-    email: t.varchar("email", { length: 256 }).notNull().unique(),
-    phone: t.varchar("phone", { length: 15 }).notNull(),
-    password: t.text("password").notNull(),
-    username: t.varchar("username", { length: 50 }).unique(),
-    isActive: t.boolean("is_active").notNull().default(true),
-    emailVerified: t.timestamp("email_verified", { mode: "date" }),
-    phoneVerified: t.timestamp("phone_verified", { mode: "date" }),
-    lastLogin: t.timestamp("last_login", { mode: "date" }),
+    id: schemaBuilder.uuid("id").primaryKey(),
+    email: schemaBuilder.varchar("email", { length: 256 }).notNull().unique(),
+    phone: schemaBuilder.varchar("phone", { length: 15 }).notNull(),
+    password: schemaBuilder.text("password").notNull(),
+    username: schemaBuilder.varchar("username", { length: 50 }).unique(),
+    isActive: schemaBuilder.boolean("is_active").notNull().default(true),
+    emailVerified: schemaBuilder.timestamp("email_verified", { mode: "date" }),
+    phoneVerified: schemaBuilder.timestamp("phone_verified", { mode: "date" }),
+    lastLogin: schemaBuilder.timestamp("last_login", { mode: "date" }),
+    tokenVersion: schemaBuilder.integer("token_version").notNull().default(0),
     ...timestampMetadataFields,
   },
   (table) => [
-    t.uniqueIndex("email_index").on(table.email),
-    t.uniqueIndex("username_index").on(table.username),
+    schemaBuilder.uniqueIndex("email_index").on(table.email),
+    schemaBuilder.uniqueIndex("username_index").on(table.username),
   ],
 );
 
-export const usersRelations = relations(users, ({ one }) => ({
+export const usersRelations = relations(users, ({ one, many }) => ({
   profile: one(profiles),
+  teams: many(teamMembers),
 }));

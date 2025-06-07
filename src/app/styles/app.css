@@ -36,6 +36,10 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.645 0.246 16.439);
+
+  --document-max-width: 1920px;
+  --grid-container-padding: clamp(1rem, calc(-0.481rem + 3.704vw), 3rem);
+  /* min: 16px, max: 48px */
 }
 
 .dark {
@@ -118,5 +122,20 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .grid-container {
+    display: grid;
+    grid-template-columns:
+      [sidebar-start] repeat(4, 1fr) [sidebar-end] var(--grid-container-padding) [main-start] repeat(18, 1fr) [main-end] var(--grid-container-padding);
+    grid-auto-rows: max-content;
+  }
+
+  .subgrid-container {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: main;
   }
 }
