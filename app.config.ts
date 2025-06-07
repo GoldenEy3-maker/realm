@@ -1,7 +1,7 @@
+import eslintPlugin from "@nabla/vite-plugin-eslint";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "@tanstack/react-start/config";
 import tsConfigPaths from "vite-tsconfig-paths";
-import eslintPlugin from "@nabla/vite-plugin-eslint";
 
 export default defineConfig({
   tsr: {

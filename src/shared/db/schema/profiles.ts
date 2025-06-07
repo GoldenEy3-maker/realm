@@ -1,10 +1,10 @@
-import { users } from "./users";
 import {
+  relations,
+  schemaBuilder,
   table,
   timestampMetadataFields,
-  schemaBuilder,
-  relations,
 } from "../utils";
+import { users } from "./users";
 
 export const profiles = table("profiles", {
   id: schemaBuilder.uuid("id").primaryKey(),

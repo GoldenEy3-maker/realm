@@ -1,7 +1,8 @@
+import { createFileRoute, Outlet } from "@tanstack/react-router";
+
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
 import { Sidebar } from "@/widgets/sidebar";
-import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_root")({
   component: RouteComponent,

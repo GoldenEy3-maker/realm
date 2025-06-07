@@ -1,5 +1,6 @@
-import { Theme } from "../model/theme";
 import { createPortal } from "react-dom";
+
+import { Theme } from "../model/theme";
 
 function injectThemeScript(
   defaultTheme: Theme,

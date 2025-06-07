@@ -1,10 +1,10 @@
-import { profiles } from "./profiles";
 import {
-  table,
-  timestampMetadataFields,
   relations,
   schemaBuilder,
+  table,
+  timestampMetadataFields,
 } from "../utils";
+import { profiles } from "./profiles";
 import { teamMembers } from "./teams";
 
 export const users = table(

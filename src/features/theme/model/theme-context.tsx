@@ -3,18 +3,20 @@ import {
   PropsWithChildren,
   use,
   useCallback,
-  useState,
   useEffect,
   useMemo,
+  useState,
 } from "react";
-import { Theme } from "./theme";
-import { THEME_STORAGE_KEY } from "../constants/theme-storage-key";
-import { ThemeScript } from "../lib/theme-script";
-import { ThemesMap } from "../constants/themes-map";
-import { getTheme } from "../lib/get-theme";
-import { getSystemTheme } from "../lib/get-system-theme";
-import { saveThemeToLS } from "../lib/save-theme-to-ls";
+
 import { MEDIA_PREFERS_COLOR_SCHEMA } from "@/shared/constants/media-prefers-color-schema";
+
+import { THEME_STORAGE_KEY } from "../constants/theme-storage-key";
+import { ThemesMap } from "../constants/themes-map";
+import { getSystemTheme } from "../lib/get-system-theme";
+import { getTheme } from "../lib/get-theme";
+import { saveThemeToLS } from "../lib/save-theme-to-ls";
+import { ThemeScript } from "../lib/theme-script";
+import { Theme } from "./theme";
 
 const systemThemes = [ThemesMap.LIGHT, ThemesMap.DARK];
 

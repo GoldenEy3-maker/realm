@@ -1,6 +1,7 @@
-import { getTasksQueryOptions, TaskList } from "@/entities/task";
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
+
+import { getTasksQueryOptions, TaskList } from "@/entities/task";
 
 export const Route = createFileRoute("/_root/tasks")({
   component: RouteComponent,
