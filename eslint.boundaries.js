@@ -43,37 +43,37 @@ export const eslintBoundariesConfig = {
             from: "shared",
             disallow: ["app", "features", "widgets", "entities"],
             message:
-              "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
+              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "entities",
             disallow: ["app", "features", "widgets"],
             message:
-              "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
+              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "features",
             disallow: ["app", "widgets"],
             message:
-              "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
+              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "widgets",
             disallow: ["app"],
             message:
-              "Модуль нижележащего слоя (${file.type}) не может импортировать модуль вышележащего слоя (${dependency.type})",
+              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "widgets",
             disallow: ["widgets"],
             message:
-              "В слое widgets нельзя использовать кросс-модульные зависимости",
+              "Cross-module dependencies are not allowed in the widgets layer",
           },
           {
             from: "features",
             disallow: ["features"],
             message:
-              "В слое features нельзя использовать кросс-модульные зависимости",
+              "Cross-module dependencies are not allowed in the features layer",
           },
         ],
       },
@@ -83,7 +83,7 @@ export const eslintBoundariesConfig = {
       {
         default: "disallow",
         message:
-          "Модуль (${file.type}) должен импортироваться через public API. Прямой импорт из ${dependency.source} запрещен",
+          "Module (${file.type}) must be imported through public API. Direct import from ${dependency.source} is not allowed",
 
         rules: [
           {
