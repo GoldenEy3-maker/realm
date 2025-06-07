@@ -1,7 +1,7 @@
 import { db } from "@/shared/db";
 import { tasks } from "@/shared/db/schema/tasks";
 import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
+import { z } from "zod/v4";
 
 export const getTasksServerFn = createServerFn({ method: "GET" })
   .validator(
