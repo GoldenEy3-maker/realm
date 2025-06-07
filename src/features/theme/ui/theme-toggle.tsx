@@ -1,13 +1,15 @@
-import { useTheme } from "../model/theme-context";
+import { Moon, Sun } from "lucide-react";
+
+import { useIsClient } from "@/shared/hooks/use-is-client";
 import { Button } from "@/shared/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
-import { Sun, Moon } from "lucide-react";
-import { useIsClient } from "@/shared/hooks/use-is-client";
+
+import { useTheme } from "../model/theme-context";
 
 export function ThemeToggle() {
   const { setTheme } = useTheme();

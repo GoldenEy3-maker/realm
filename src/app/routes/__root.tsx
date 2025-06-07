@@ -1,17 +1,18 @@
+import { QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {
+  createRootRouteWithContext,
   HeadContent,
   Outlet,
   Scripts,
-  createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import * as React from "react";
+
 import { DefaultCatchBoundary } from "@/app/default-catch-boundary";
 import { NotFound } from "@/app/not-found";
-import appCss from "@/app/styles/app.css?url";
 import { seo } from "@/app/seo";
-import { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import appCss from "@/app/styles/app.css?url";
 import { NavigationLoadingBar } from "@/features/navigation-loading-bar";
 import { ThemeProvider } from "@/features/theme";
 

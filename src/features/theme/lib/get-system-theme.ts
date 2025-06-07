@@ -1,5 +1,6 @@
 import { IS_SERVER } from "@/shared/constants/is-server";
 import { MEDIA_PREFERS_COLOR_SCHEMA } from "@/shared/constants/media-prefers-color-schema";
+
 import { ThemesMap } from "../constants/themes-map";
 
 export function getSystemTheme(
