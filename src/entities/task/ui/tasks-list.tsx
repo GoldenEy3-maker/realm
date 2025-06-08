@@ -1,14 +1,22 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 
-import { getTasksQueryOptions } from "../api/tasks-query-options";
+import { Button } from "@/shared/ui/button";
 
-export function TaskList() {
+import { getTasksQueryOptions } from "../api/get-tasks-query-options";
+
+export function TasksList() {
   const { data } = useSuspenseQuery(getTasksQueryOptions());
 
   return (
     <div>
-      <h3 className="text-2xl font-bold">Tasks</h3>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {data.map((task) => (
+        <Button asChild variant="link" key={task.id}>
+          <Link to="/tasks/$taskSlug" params={{ taskSlug: task.slug }}>
+            {task.title}
+          </Link>
+        </Button>
+      ))}
     </div>
   );
 }
