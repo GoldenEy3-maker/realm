@@ -13,7 +13,9 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as RootRouteImport } from './routes/_root/route'
 import { Route as RootIndexImport } from './routes/_root/index'
-import { Route as RootTasksImport } from './routes/_root/tasks'
+import { Route as RootTasksIndexImport } from './routes/_root/tasks/index'
+import { Route as RootTasksTaskSlugIndexImport } from './routes/_root/tasks/$taskSlug/index'
+import { Route as RootTasksTaskSlugTestTestIdImport } from './routes/_root/tasks/$taskSlug/test.$testId'
 
 // Create/Update Routes
 
@@ -28,11 +30,24 @@ const RootIndexRoute = RootIndexImport.update({
   getParentRoute: () => RootRouteRoute,
 } as any)
 
-const RootTasksRoute = RootTasksImport.update({
-  id: '/tasks',
-  path: '/tasks',
+const RootTasksIndexRoute = RootTasksIndexImport.update({
+  id: '/tasks/',
+  path: '/tasks/',
   getParentRoute: () => RootRouteRoute,
 } as any)
+
+const RootTasksTaskSlugIndexRoute = RootTasksTaskSlugIndexImport.update({
+  id: '/tasks/$taskSlug/',
+  path: '/tasks/$taskSlug/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+
+const RootTasksTaskSlugTestTestIdRoute =
+  RootTasksTaskSlugTestTestIdImport.update({
+    id: '/tasks/$taskSlug/test/$testId',
+    path: '/tasks/$taskSlug/test/$testId',
+    getParentRoute: () => RootRouteRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -45,18 +60,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RootRouteImport
       parentRoute: typeof rootRoute
     }
-    '/_root/tasks': {
-      id: '/_root/tasks'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof RootTasksImport
-      parentRoute: typeof RootRouteImport
-    }
     '/_root/': {
       id: '/_root/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof RootIndexImport
+      parentRoute: typeof RootRouteImport
+    }
+    '/_root/tasks/': {
+      id: '/_root/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks'
+      preLoaderRoute: typeof RootTasksIndexImport
+      parentRoute: typeof RootRouteImport
+    }
+    '/_root/tasks/$taskSlug/': {
+      id: '/_root/tasks/$taskSlug/'
+      path: '/tasks/$taskSlug'
+      fullPath: '/tasks/$taskSlug'
+      preLoaderRoute: typeof RootTasksTaskSlugIndexImport
+      parentRoute: typeof RootRouteImport
+    }
+    '/_root/tasks/$taskSlug/test/$testId': {
+      id: '/_root/tasks/$taskSlug/test/$testId'
+      path: '/tasks/$taskSlug/test/$testId'
+      fullPath: '/tasks/$taskSlug/test/$testId'
+      preLoaderRoute: typeof RootTasksTaskSlugTestTestIdImport
       parentRoute: typeof RootRouteImport
     }
   }
@@ -65,13 +94,17 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface RootRouteRouteChildren {
-  RootTasksRoute: typeof RootTasksRoute
   RootIndexRoute: typeof RootIndexRoute
+  RootTasksIndexRoute: typeof RootTasksIndexRoute
+  RootTasksTaskSlugIndexRoute: typeof RootTasksTaskSlugIndexRoute
+  RootTasksTaskSlugTestTestIdRoute: typeof RootTasksTaskSlugTestTestIdRoute
 }
 
 const RootRouteRouteChildren: RootRouteRouteChildren = {
-  RootTasksRoute: RootTasksRoute,
   RootIndexRoute: RootIndexRoute,
+  RootTasksIndexRoute: RootTasksIndexRoute,
+  RootTasksTaskSlugIndexRoute: RootTasksTaskSlugIndexRoute,
+  RootTasksTaskSlugTestTestIdRoute: RootTasksTaskSlugTestTestIdRoute,
 }
 
 const RootRouteRouteWithChildren = RootRouteRoute._addFileChildren(
@@ -80,28 +113,45 @@ const RootRouteRouteWithChildren = RootRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof RootRouteRouteWithChildren
-  '/tasks': typeof RootTasksRoute
   '/': typeof RootIndexRoute
+  '/tasks': typeof RootTasksIndexRoute
+  '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
+  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
 }
 
 export interface FileRoutesByTo {
-  '/tasks': typeof RootTasksRoute
   '/': typeof RootIndexRoute
+  '/tasks': typeof RootTasksIndexRoute
+  '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
+  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_root': typeof RootRouteRouteWithChildren
-  '/_root/tasks': typeof RootTasksRoute
   '/_root/': typeof RootIndexRoute
+  '/_root/tasks/': typeof RootTasksIndexRoute
+  '/_root/tasks/$taskSlug/': typeof RootTasksTaskSlugIndexRoute
+  '/_root/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/tasks' | '/'
+  fullPaths:
+    | ''
+    | '/'
+    | '/tasks'
+    | '/tasks/$taskSlug'
+    | '/tasks/$taskSlug/test/$testId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/tasks' | '/'
-  id: '__root__' | '/_root' | '/_root/tasks' | '/_root/'
+  to: '/' | '/tasks' | '/tasks/$taskSlug' | '/tasks/$taskSlug/test/$testId'
+  id:
+    | '__root__'
+    | '/_root'
+    | '/_root/'
+    | '/_root/tasks/'
+    | '/_root/tasks/$taskSlug/'
+    | '/_root/tasks/$taskSlug/test/$testId'
   fileRoutesById: FileRoutesById
 }
 
@@ -129,16 +179,26 @@ export const routeTree = rootRoute
     "/_root": {
       "filePath": "_root/route.tsx",
       "children": [
-        "/_root/tasks",
-        "/_root/"
+        "/_root/",
+        "/_root/tasks/",
+        "/_root/tasks/$taskSlug/",
+        "/_root/tasks/$taskSlug/test/$testId"
       ]
-    },
-    "/_root/tasks": {
-      "filePath": "_root/tasks.tsx",
-      "parent": "/_root"
     },
     "/_root/": {
       "filePath": "_root/index.tsx",
+      "parent": "/_root"
+    },
+    "/_root/tasks/": {
+      "filePath": "_root/tasks/index.tsx",
+      "parent": "/_root"
+    },
+    "/_root/tasks/$taskSlug/": {
+      "filePath": "_root/tasks/$taskSlug/index.tsx",
+      "parent": "/_root"
+    },
+    "/_root/tasks/$taskSlug/test/$testId": {
+      "filePath": "_root/tasks/$taskSlug/test.$testId.tsx",
       "parent": "/_root"
     }
   }

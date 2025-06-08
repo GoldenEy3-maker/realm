@@ -1,8 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 
 import { getTasksServerFn } from "../server-fns/get-tasks";
-
-export const TASKS_QUERY_KEY = "tasks";
+import { TASKS_QUERY_KEY } from "./tasks-query-key";
 
 interface GetTasksQueryOptionsParams {
   limit?: number;
