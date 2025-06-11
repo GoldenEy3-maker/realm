@@ -2,16 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
 
 import { getTasksQueryOptions, TasksList } from "@/entities/task";
-import { setCrumbs } from "@/features/auto-breadcrumbs";
+import { createCrumbs } from "@/features/dynamic-breadcrumbs";
 
 export const Route = createFileRoute("/_root/tasks/")({
   component: RouteComponent,
   loader: ({ context }) => {
     context.queryClient.prefetchQuery(getTasksQueryOptions());
 
-    return {
-      ...setCrumbs([{ label: "Задачи" }]),
-    };
+    return createCrumbs([
+      {
+        type: "static",
+        label: "Задачи",
+      },
+    ]);
   },
 });
 
