@@ -10,6 +10,7 @@ export const getTaskBySlugServerFn = createServerFn({
 })
   .validator(z.object({ slug: z.string() }))
   .handler(async ({ data }) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const selectResult = await db
       .select()
       .from(tasks)

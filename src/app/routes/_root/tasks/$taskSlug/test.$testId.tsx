@@ -1,28 +1,33 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { getTaskBySlugQueryOptions } from "@/entities/task";
-import { setCrumbs } from "@/features/auto-breadcrumbs";
+import { createCrumbs } from "@/features/dynamic-breadcrumbs";
 
 export const Route = createFileRoute("/_root/tasks/$taskSlug/test/$testId")({
   component: RouteComponent,
-  loader: async ({ context, params }) => {
-    const task = await context.queryClient.ensureQueryData(
-      getTaskBySlugQueryOptions(params.taskSlug),
-    );
+  loader: ({ context, params }) => {
+    const queryOptions = getTaskBySlugQueryOptions(params.taskSlug);
 
-    return {
-      ...setCrumbs([
-        { label: "Задачи", href: "/tasks" },
-        {
-          label: task.title,
-          href: "/tasks/$taskSlug",
-          params: { taskSlug: params.taskSlug },
-        },
-        {
-          label: "Тестовый урл",
-        },
-      ]),
-    };
+    context.queryClient.prefetchQuery(queryOptions);
+
+    return createCrumbs([
+      {
+        type: "static",
+        label: "Задачи",
+        href: "/tasks",
+      },
+      {
+        type: "suspense",
+        label: "title",
+        href: "/tasks/$taskSlug",
+        params: { taskSlug: "slug" },
+        queryOptions,
+      },
+      {
+        type: "static",
+        label: "Тестовый урл",
+      },
+    ]);
   },
 });
 
