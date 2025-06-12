@@ -11,6 +11,5 @@ export const getTasksServerFn = createServerFn({ method: "GET" })
     }),
   )
   .handler(async ({ data }) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     return db.select().from(tasks).limit(data.limit);
   });
