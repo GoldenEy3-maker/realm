@@ -1,6 +1,6 @@
 import {
   createContext,
-  PropsWithChildren,
+  type PropsWithChildren,
   use,
   useCallback,
   useEffect,
@@ -16,7 +16,7 @@ import { getSystemTheme } from "../lib/get-system-theme";
 import { getTheme } from "../lib/get-theme";
 import { saveThemeToLS } from "../lib/save-theme-to-ls";
 import { ThemeScript } from "../lib/theme-script";
-import { Theme } from "./theme";
+import type { Theme } from "./theme";
 
 const systemThemes = [ThemesMap.LIGHT, ThemesMap.DARK];
 

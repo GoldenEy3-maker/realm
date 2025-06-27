@@ -87,9 +87,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body suppressHydrationWarning>
         <NavigationLoadingBar />
-        <div className="mx-auto flex min-h-svh max-w-[var(--document-max-width)] flex-col">
-          {children}
-        </div>
+        <div className="flex min-h-svh flex-col">{children}</div>
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />
