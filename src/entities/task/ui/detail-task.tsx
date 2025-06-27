@@ -1,12 +1,13 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { cn } from "@/shared/lib/cn";
+import { ComponentPropsWithoutChildren } from "@/shared/types/component-props-without-children";
+import { Slug } from "@/shared/types/slug";
 
 import { getTaskBySlugQueryOptions } from "../api/get-task-by-slug-query-options";
 
-interface DetailTaskProps
-  extends Omit<React.ComponentProps<"div">, "children"> {
-  slug: string;
+interface DetailTaskProps extends ComponentPropsWithoutChildren<"div"> {
+  slug: Slug;
 }
 
 export const DetailTask = ({ slug, className, ...props }: DetailTaskProps) => {

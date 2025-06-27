@@ -10,6 +10,6 @@ export const getTasksServerFn = createServerFn({ method: "GET" })
       limit: z.number().min(1).max(100).default(10),
     }),
   )
-  .handler(async ({ data }) => {
+  .handler(({ data }) => {
     return db.select().from(tasks).limit(data.limit);
   });

@@ -2,6 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { QueryKeyMap } from "@/shared/constants/query-keys";
 
+import { taskDtoToDomainArray } from "../lib/task-mappers";
 import { getTasksServerFn } from "../server-fns/get-tasks";
 
 interface GetTasksQueryOptionsParams {
@@ -13,7 +14,12 @@ export function getTasksQueryOptions(
 ) {
   return queryOptions({
     queryKey: [QueryKeyMap.Tasks, params.limit],
-    queryFn: ({ signal }) =>
-      getTasksServerFn({ data: { limit: params.limit }, signal }),
+    queryFn: async ({ signal }) => {
+      const dtoData = await getTasksServerFn({
+        data: { limit: params.limit },
+        signal,
+      });
+      return taskDtoToDomainArray(dtoData);
+    },
   });
 }

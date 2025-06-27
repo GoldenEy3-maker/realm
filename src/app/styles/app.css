@@ -37,7 +37,6 @@
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.795 0.184 86.047);
 
-  --document-max-width: 1920px;
   --grid-container-padding: clamp(1rem, calc(0.63rem + 0.926vw), 1.5rem);
   /* min: 16px, max: 24px */
 }
@@ -138,5 +137,11 @@
     grid-template-columns: subgrid;
     grid-column: main;
     grid-auto-rows: max-content;
+  }
+}
+
+@layer utilities {
+  .col-main {
+    grid-column: main;
   }
 }
