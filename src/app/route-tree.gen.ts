@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as AuthImport } from './routes/auth'
 import { Route as RootRouteImport } from './routes/_root/route'
 import { Route as RootIndexImport } from './routes/_root/index'
 import { Route as RootTasksIndexImport } from './routes/_root/tasks/index'
@@ -18,6 +19,12 @@ import { Route as RootTasksTaskSlugIndexImport } from './routes/_root/tasks/$tas
 import { Route as RootTasksTaskSlugTestTestIdImport } from './routes/_root/tasks/$taskSlug/test.$testId'
 
 // Create/Update Routes
+
+const AuthRoute = AuthImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const RootRouteRoute = RootRouteImport.update({
   id: '/_root',
@@ -58,6 +65,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: ''
       preLoaderRoute: typeof RootRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
     '/_root/': {
@@ -113,6 +127,7 @@ const RootRouteRouteWithChildren = RootRouteRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '': typeof RootRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/': typeof RootIndexRoute
   '/tasks': typeof RootTasksIndexRoute
   '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
@@ -120,6 +135,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
   '/': typeof RootIndexRoute
   '/tasks': typeof RootTasksIndexRoute
   '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
@@ -129,6 +145,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_root': typeof RootRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/_root/': typeof RootIndexRoute
   '/_root/tasks/': typeof RootTasksIndexRoute
   '/_root/tasks/$taskSlug/': typeof RootTasksTaskSlugIndexRoute
@@ -139,15 +156,22 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/auth'
     | '/'
     | '/tasks'
     | '/tasks/$taskSlug'
     | '/tasks/$taskSlug/test/$testId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tasks' | '/tasks/$taskSlug' | '/tasks/$taskSlug/test/$testId'
+  to:
+    | '/auth'
+    | '/'
+    | '/tasks'
+    | '/tasks/$taskSlug'
+    | '/tasks/$taskSlug/test/$testId'
   id:
     | '__root__'
     | '/_root'
+    | '/auth'
     | '/_root/'
     | '/_root/tasks/'
     | '/_root/tasks/$taskSlug/'
@@ -157,10 +181,12 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   RootRouteRoute: typeof RootRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   RootRouteRoute: RootRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 
 export const routeTree = rootRoute
@@ -173,7 +199,8 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/_root"
+        "/_root",
+        "/auth"
       ]
     },
     "/_root": {
@@ -184,6 +211,9 @@ export const routeTree = rootRoute
         "/_root/tasks/$taskSlug/",
         "/_root/tasks/$taskSlug/test/$testId"
       ]
+    },
+    "/auth": {
+      "filePath": "auth.tsx"
     },
     "/_root/": {
       "filePath": "_root/index.tsx",
