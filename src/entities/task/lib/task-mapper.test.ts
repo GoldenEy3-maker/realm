@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import { taskDtoToDomain } from "../lib/task-mappers";
 import { TaskDto } from "../model/task-dto";
+import { taskDtoToDomain } from "./task-mappers";
 
 describe("Task Mapper", () => {
   const mockTaskDto: TaskDto = {
@@ -25,9 +25,6 @@ describe("Task Mapper", () => {
       completed: mockTaskDto.completed,
       createdAt: mockTaskDto.createdAt,
       updatedAt: mockTaskDto.updatedAt,
-      isOverdue: false,
-      priority: "medium",
-      tags: [],
     });
   });
 

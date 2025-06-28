@@ -1,7 +1,7 @@
-import * as z from "zod/v4";
+import { schemaValidation } from "@/shared/lib/schema-validation";
 
 import { TaskRawModel } from "./task-raw-model";
 
-export const TaskDtoSchema = z.custom<TaskRawModel>();
+export const TaskDtoSchema = schemaValidation.custom<TaskRawModel>();
 
-export type TaskDto = z.output<typeof TaskDtoSchema>;
+export type TaskDto = schemaValidation.output<typeof TaskDtoSchema>;

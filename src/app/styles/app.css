@@ -128,7 +128,10 @@
   .grid-container {
     display: grid;
     grid-template-columns:
-      [sidebar-start] repeat(4, 1fr) [sidebar-end full-width-start] var(--grid-container-padding) [main-start] repeat(18, 1fr) [main-end] var(--grid-container-padding) [full-width-end];
+      [sidebar-start] repeat(4, 1fr)
+      [sidebar-end full-width-start] var(--grid-container-padding)
+      [main-start] repeat(18, 1fr) [main-end] var(--grid-container-padding)
+      [full-width-end];
     grid-auto-rows: max-content;
   }
 
@@ -137,11 +140,5 @@
     grid-template-columns: subgrid;
     grid-column: main;
     grid-auto-rows: max-content;
-  }
-}
-
-@layer utilities {
-  .col-main {
-    grid-column: main;
   }
 }

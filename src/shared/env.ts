@@ -1,14 +1,15 @@
 import { createEnv } from "@t3-oss/env-core";
-import { z } from "zod/v4";
+
+import { schemaValidation } from "./lib/schema-validation";
 
 export const env = createEnv({
   clientPrefix: "VITE_",
   client: {
-    VITE_MODE: z.enum(["development", "production"]),
+    VITE_MODE: schemaValidation.enum(["development", "production"]),
   },
   server: {
-    DATABASE_URL: z.string(),
-    NODE_ENV: z.enum(["development", "production"]),
+    DATABASE_URL: schemaValidation.string(),
+    NODE_ENV: schemaValidation.enum(["development", "production"]),
   },
   runtimeEnv: {
     VITE_MODE: import.meta.env.MODE,
