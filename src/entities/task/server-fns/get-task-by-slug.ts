@@ -1,14 +1,14 @@
 import { createServerFn } from "@tanstack/react-start";
 import { eq } from "drizzle-orm";
-import { z } from "zod/v4";
 
 import { db } from "@/shared/db";
 import { tasks } from "@/shared/db/schema/tasks";
+import { schemaValidation } from "@/shared/lib/schema-validation";
 
 export const getTaskBySlugServerFn = createServerFn({
   method: "GET",
 })
-  .validator(z.object({ slug: z.string() }))
+  .validator(schemaValidation.object({ slug: schemaValidation.string() }))
   .handler(async ({ data }) => {
     const selectResult = await db
       .select()

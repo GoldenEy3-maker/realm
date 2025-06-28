@@ -1,13 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod/v4";
 
 import { db } from "@/shared/db";
 import { tasks } from "@/shared/db/schema/tasks";
+import { schemaValidation } from "@/shared/lib/schema-validation";
 
 export const getTasksServerFn = createServerFn({ method: "GET" })
   .validator(
-    z.object({
-      limit: z.number().min(1).max(100).default(10),
+    schemaValidation.object({
+      limit: schemaValidation.number().min(1).max(100).default(10),
     }),
   )
   .handler(({ data }) => {
