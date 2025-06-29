@@ -12,10 +12,10 @@ import {
   CardHeader,
 } from "@/shared/ui/card";
 import { Heading } from "@/shared/ui/heading";
-import { Input } from "@/shared/ui/input";
-import { Label } from "@/shared/ui/label";
 import { Logo } from "@/shared/ui/logo";
 import { Separator } from "@/shared/ui/separator";
+
+import { AuthForm } from "./auth-form";
 
 export function AuthPage() {
   return (
@@ -63,13 +63,7 @@ export function AuthPage() {
                 Или
               </span>
             </div>
-            <form className="flex flex-col gap-4">
-              <Label className="flex flex-col items-start gap-2">
-                <span>Email</span>
-                <Input type="email" placeholder="Введите email" />
-              </Label>
-              <Button>Далее</Button>
-            </form>
+            <AuthForm />
           </CardContent>
         </Card>
         <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
