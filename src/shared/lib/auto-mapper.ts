@@ -1,11 +1,11 @@
-import * as z from "zod/v4";
+import { schemaValidation } from "./schema-validation";
 
 export function createAutoMapper<
   TSource extends Record<string, unknown>,
   TTarget extends Record<string, unknown>,
 >(
-  sourceSchema: z.ZodSchema<TSource>,
-  targetSchema: z.ZodSchema<TTarget>,
+  sourceSchema: schemaValidation.ZodSchema<TSource>,
+  targetSchema: schemaValidation.ZodSchema<TTarget>,
   transformFn?: (source: TSource) => Partial<TTarget>,
 ) {
   const mapper = {

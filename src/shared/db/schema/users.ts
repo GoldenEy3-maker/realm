@@ -5,15 +5,12 @@ import {
   timestampMetadataFields,
 } from "../utils";
 import { profiles } from "./profiles";
-import { teamMembers } from "./teams";
 
 export const users = table(
   "users",
   {
     id: schemaBuilder.uuid("id").primaryKey(),
     email: schemaBuilder.varchar("email", { length: 256 }).notNull().unique(),
-    phone: schemaBuilder.varchar("phone", { length: 15 }).notNull(),
-    password: schemaBuilder.text("password").notNull(),
     username: schemaBuilder.varchar("username", { length: 50 }).unique(),
     isActive: schemaBuilder.boolean("is_active").notNull().default(true),
     emailVerified: schemaBuilder.timestamp("email_verified", { mode: "date" }),
@@ -23,12 +20,11 @@ export const users = table(
     ...timestampMetadataFields,
   },
   (table) => [
-    schemaBuilder.uniqueIndex("email_index").on(table.email),
-    schemaBuilder.uniqueIndex("username_index").on(table.username),
+    schemaBuilder.uniqueIndex("users_email_unique_index").on(table.email),
+    schemaBuilder.uniqueIndex("users_username_unique_index").on(table.username),
   ],
 );
 
-export const usersRelations = relations(users, ({ one, many }) => ({
+export const usersRelations = relations(users, ({ one }) => ({
   profile: one(profiles),
-  teams: many(teamMembers),
 }));

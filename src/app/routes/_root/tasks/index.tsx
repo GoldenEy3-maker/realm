@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
 
-import { getTasksQueryOptions, TasksList } from "@/entities/task";
+import { getTasksQueryOptions, TaskList } from "@/entities/task";
 import { createCrumbs } from "@/features/dynamic-breadcrumbs";
 
 export const Route = createFileRoute("/_root/tasks/")({
@@ -24,7 +24,7 @@ function RouteComponent() {
       <div className="col-span-full">Hello &quot;/tasks&quot;!</div>
       <div className="col-span-full">
         <Suspense fallback={<div>Loading...</div>}>
-          <TasksList />
+          <TaskList />
         </Suspense>
       </div>
     </main>

@@ -8,90 +8,144 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as RootRouteRouteImport } from './routes/_root/route'
+import { Route as RootIndexRouteImport } from './routes/_root/index'
+import { Route as RootTasksIndexRouteImport } from './routes/_root/tasks/index'
+import { Route as RootTasksTaskSlugIndexRouteImport } from './routes/_root/tasks/$taskSlug/index'
+import { Route as RootTasksTaskSlugTestTestIdRouteImport } from './routes/_root/tasks/$taskSlug/test.$testId'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as RootRouteImport } from './routes/_root/route'
-import { Route as RootIndexImport } from './routes/_root/index'
-import { Route as RootTasksIndexImport } from './routes/_root/tasks/index'
-import { Route as RootTasksTaskSlugIndexImport } from './routes/_root/tasks/$taskSlug/index'
-import { Route as RootTasksTaskSlugTestTestIdImport } from './routes/_root/tasks/$taskSlug/test.$testId'
-
-// Create/Update Routes
-
-const RootRouteRoute = RootRouteImport.update({
-  id: '/_root',
-  getParentRoute: () => rootRoute,
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const RootIndexRoute = RootIndexImport.update({
+const RootRouteRoute = RootRouteRouteImport.update({
+  id: '/_root',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RootIndexRoute = RootIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => RootRouteRoute,
 } as any)
-
-const RootTasksIndexRoute = RootTasksIndexImport.update({
+const RootTasksIndexRoute = RootTasksIndexRouteImport.update({
   id: '/tasks/',
   path: '/tasks/',
   getParentRoute: () => RootRouteRoute,
 } as any)
-
-const RootTasksTaskSlugIndexRoute = RootTasksTaskSlugIndexImport.update({
+const RootTasksTaskSlugIndexRoute = RootTasksTaskSlugIndexRouteImport.update({
   id: '/tasks/$taskSlug/',
   path: '/tasks/$taskSlug/',
   getParentRoute: () => RootRouteRoute,
 } as any)
-
 const RootTasksTaskSlugTestTestIdRoute =
-  RootTasksTaskSlugTestTestIdImport.update({
+  RootTasksTaskSlugTestTestIdRouteImport.update({
     id: '/tasks/$taskSlug/test/$testId',
     path: '/tasks/$taskSlug/test/$testId',
     getParentRoute: () => RootRouteRoute,
   } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/auth': typeof AuthRoute
+  '/': typeof RootIndexRoute
+  '/tasks': typeof RootTasksIndexRoute
+  '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
+  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
+}
+export interface FileRoutesByTo {
+  '/auth': typeof AuthRoute
+  '/': typeof RootIndexRoute
+  '/tasks': typeof RootTasksIndexRoute
+  '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
+  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_root': typeof RootRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_root/': typeof RootIndexRoute
+  '/_root/tasks/': typeof RootTasksIndexRoute
+  '/_root/tasks/$taskSlug/': typeof RootTasksTaskSlugIndexRoute
+  '/_root/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/auth'
+    | '/'
+    | '/tasks'
+    | '/tasks/$taskSlug'
+    | '/tasks/$taskSlug/test/$testId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/auth'
+    | '/'
+    | '/tasks'
+    | '/tasks/$taskSlug'
+    | '/tasks/$taskSlug/test/$testId'
+  id:
+    | '__root__'
+    | '/_root'
+    | '/auth'
+    | '/_root/'
+    | '/_root/tasks/'
+    | '/_root/tasks/$taskSlug/'
+    | '/_root/tasks/$taskSlug/test/$testId'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  RootRouteRoute: typeof RootRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_root': {
       id: '/_root'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof RootRouteImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof RootRouteRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_root/': {
       id: '/_root/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof RootIndexImport
-      parentRoute: typeof RootRouteImport
+      preLoaderRoute: typeof RootIndexRouteImport
+      parentRoute: typeof RootRouteRoute
     }
     '/_root/tasks/': {
       id: '/_root/tasks/'
       path: '/tasks'
       fullPath: '/tasks'
-      preLoaderRoute: typeof RootTasksIndexImport
-      parentRoute: typeof RootRouteImport
+      preLoaderRoute: typeof RootTasksIndexRouteImport
+      parentRoute: typeof RootRouteRoute
     }
     '/_root/tasks/$taskSlug/': {
       id: '/_root/tasks/$taskSlug/'
       path: '/tasks/$taskSlug'
       fullPath: '/tasks/$taskSlug'
-      preLoaderRoute: typeof RootTasksTaskSlugIndexImport
-      parentRoute: typeof RootRouteImport
+      preLoaderRoute: typeof RootTasksTaskSlugIndexRouteImport
+      parentRoute: typeof RootRouteRoute
     }
     '/_root/tasks/$taskSlug/test/$testId': {
       id: '/_root/tasks/$taskSlug/test/$testId'
       path: '/tasks/$taskSlug/test/$testId'
       fullPath: '/tasks/$taskSlug/test/$testId'
-      preLoaderRoute: typeof RootTasksTaskSlugTestTestIdImport
-      parentRoute: typeof RootRouteImport
+      preLoaderRoute: typeof RootTasksTaskSlugTestTestIdRouteImport
+      parentRoute: typeof RootRouteRoute
     }
   }
 }
-
-// Create and export the route tree
 
 interface RootRouteRouteChildren {
   RootIndexRoute: typeof RootIndexRoute
@@ -111,96 +165,10 @@ const RootRouteRouteWithChildren = RootRouteRoute._addFileChildren(
   RootRouteRouteChildren,
 )
 
-export interface FileRoutesByFullPath {
-  '': typeof RootRouteRouteWithChildren
-  '/': typeof RootIndexRoute
-  '/tasks': typeof RootTasksIndexRoute
-  '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
-  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof RootIndexRoute
-  '/tasks': typeof RootTasksIndexRoute
-  '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
-  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/_root': typeof RootRouteRouteWithChildren
-  '/_root/': typeof RootIndexRoute
-  '/_root/tasks/': typeof RootTasksIndexRoute
-  '/_root/tasks/$taskSlug/': typeof RootTasksTaskSlugIndexRoute
-  '/_root/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | ''
-    | '/'
-    | '/tasks'
-    | '/tasks/$taskSlug'
-    | '/tasks/$taskSlug/test/$testId'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tasks' | '/tasks/$taskSlug' | '/tasks/$taskSlug/test/$testId'
-  id:
-    | '__root__'
-    | '/_root'
-    | '/_root/'
-    | '/_root/tasks/'
-    | '/_root/tasks/$taskSlug/'
-    | '/_root/tasks/$taskSlug/test/$testId'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  RootRouteRoute: typeof RootRouteRouteWithChildren
-}
-
 const rootRouteChildren: RootRouteChildren = {
   RootRouteRoute: RootRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/_root"
-      ]
-    },
-    "/_root": {
-      "filePath": "_root/route.tsx",
-      "children": [
-        "/_root/",
-        "/_root/tasks/",
-        "/_root/tasks/$taskSlug/",
-        "/_root/tasks/$taskSlug/test/$testId"
-      ]
-    },
-    "/_root/": {
-      "filePath": "_root/index.tsx",
-      "parent": "/_root"
-    },
-    "/_root/tasks/": {
-      "filePath": "_root/tasks/index.tsx",
-      "parent": "/_root"
-    },
-    "/_root/tasks/$taskSlug/": {
-      "filePath": "_root/tasks/$taskSlug/index.tsx",
-      "parent": "/_root"
-    },
-    "/_root/tasks/$taskSlug/test/$testId": {
-      "filePath": "_root/tasks/$taskSlug/test.$testId.tsx",
-      "parent": "/_root"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

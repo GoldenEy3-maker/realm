@@ -1,8 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { Suspense } from "react";
 
-import { DetailTask, getTaskBySlugQueryOptions } from "@/entities/task";
+import { getTaskBySlugQueryOptions } from "@/entities/task";
 import { createCrumbs } from "@/features/dynamic-breadcrumbs";
+import { DetailTask } from "@/pages/detail-task";
 
 export const Route = createFileRoute("/_root/tasks/$taskSlug/")({
   component: RouteComponent,
@@ -30,17 +31,8 @@ function RouteComponent() {
   const { taskSlug } = Route.useParams();
 
   return (
-    <div className="subgrid-container">
-      <Link
-        className="col-span-full"
-        to="/tasks/$taskSlug/test/$testId"
-        params={{ taskSlug, testId: "1" }}
-      >
-        Тестовый урл
-      </Link>
-      <Suspense fallback={<p>Loading...</p>}>
-        <DetailTask slug={taskSlug} className="col-span-full" />
-      </Suspense>
-    </div>
+    <Suspense fallback={<p>Loading...</p>}>
+      <DetailTask slug={taskSlug} />
+    </Suspense>
   );
 }

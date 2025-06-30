@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
+import { ThemeToggle } from "@/features/theme";
 import { cn } from "@/shared/lib/cn";
 import { Button } from "@/shared/ui/button";
 
@@ -16,6 +17,10 @@ export function Sidebar({ className, ...props }: SidebarProps) {
         <Button variant="outline" asChild>
           <Link to="/tasks">Tasks</Link>
         </Button>
+        <Button variant="outline" asChild>
+          <Link to="/auth">Авторизация</Link>
+        </Button>
+        <ThemeToggle />
       </nav>
     </aside>
   );

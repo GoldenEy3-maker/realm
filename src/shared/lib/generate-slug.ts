@@ -42,6 +42,11 @@ function transliterate(text: string): string {
     .join("");
 }
 
-export function generateSlug(title: string) {
-  return transliterate(title).replace(/ /g, "-");
+/**
+ * Generates a slug from a value with transliteration cyrillic to latin.
+ * @param value - The value to generate a slug from
+ * @returns The slug
+ */
+export function generateSlug(value: string) {
+  return transliterate(value).replace(/ /g, "-");
 }

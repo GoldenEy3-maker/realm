@@ -11,7 +11,7 @@ import importPlugin from "eslint-plugin-import";
 
 export default tseslint.config(
   {
-    ignores: [".output", ".vinxi", "src/**/*.gen.ts"],
+    ignores: [".output", ".nitro", ".tanstack", "src/**/*.gen.ts"],
   },
   {
     files: ["**/*.{ts,tsx}"],

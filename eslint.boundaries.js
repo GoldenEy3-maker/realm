@@ -16,6 +16,10 @@ export const eslintBoundariesConfig = {
         pattern: "./src/app",
       },
       {
+        type: "pages",
+        pattern: "./src/pages/*",
+      },
+      {
         type: "widgets",
         pattern: "./src/widgets/*",
       },
@@ -41,25 +45,25 @@ export const eslintBoundariesConfig = {
         rules: [
           {
             from: "shared",
-            disallow: ["app", "features", "widgets", "entities"],
+            disallow: ["app", "pages", "features", "widgets", "entities"],
             message:
               "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "entities",
-            disallow: ["app", "features", "widgets"],
+            disallow: ["app", "pages", "features", "widgets"],
             message:
               "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "features",
-            disallow: ["app", "widgets"],
+            disallow: ["app", "pages", "widgets"],
             message:
               "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
           {
             from: "widgets",
-            disallow: ["app"],
+            disallow: ["app", "pages"],
             message:
               "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
           },
@@ -74,6 +78,12 @@ export const eslintBoundariesConfig = {
             disallow: ["features"],
             message:
               "Cross-module dependencies are not allowed in the features layer",
+          },
+          {
+            from: "pages",
+            disallow: ["pages"],
+            message:
+              "Cross-module dependencies are not allowed in the pages layer",
           },
         ],
       },
@@ -91,7 +101,7 @@ export const eslintBoundariesConfig = {
             allow: "**",
           },
           {
-            target: ["features", "widgets", "entities"],
+            target: ["features", "widgets", "entities", "pages"],
             allow: ["index.(ts|tsx)"],
           },
         ],
