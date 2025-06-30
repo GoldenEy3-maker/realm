@@ -4,6 +4,7 @@ import { Slug } from "@/shared/types/slug";
 export const TaskDomainSchema = schemaValidation.object({
   id: schemaValidation.uuid(),
   slug: schemaValidation.custom<Slug>(),
+  serialNumber: schemaValidation.number(),
   title: schemaValidation.string(),
   description: schemaValidation.string().optional(),
   completed: schemaValidation.boolean(),
