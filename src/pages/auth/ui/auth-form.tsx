@@ -4,6 +4,7 @@ import { useForm } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";
 
 import { authFormSchema } from "../model/auth-form-schema";
+import { authSendMailCodeServerFn } from "../server-fns/auth-send-mail-code";
 
 export function AuthForm() {
   const form = useForm({
@@ -13,9 +14,8 @@ export function AuthForm() {
     validators: {
       onChange: authFormSchema,
     },
-    onSubmit: async (values) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(values);
+    onSubmit: async (data) => {
+      await authSendMailCodeServerFn({ data: data.value });
     },
   });
 

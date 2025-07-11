@@ -3,7 +3,7 @@ import {
   schemaBuilder,
   table,
   timestampMetadataFields,
-} from "../utils";
+} from "../schema-utils";
 import { users } from "./users";
 
 export const profiles = table("profiles", {

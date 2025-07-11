@@ -5,6 +5,8 @@ import { useFormFieldContext } from "./form-field-context";
 interface FormMessageProps extends React.ComponentProps<"p"> {}
 
 export function FormMessage({ className, ...props }: FormMessageProps) {
+  "use no memo";
+
   const { field, formMessageId } = useFormFieldContext();
   const errors = field.getMeta().errors;
 
@@ -18,7 +20,7 @@ export function FormMessage({ className, ...props }: FormMessageProps) {
     <p
       data-slot="form-message"
       id={formMessageId}
-      className={cn("text-destructive text-sm", className)}
+      className={cn("text-destructive text-sm leading-tight", className)}
       {...props}
     >
       {body}
