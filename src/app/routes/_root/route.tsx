@@ -1,11 +1,21 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
+import { getSessionQueryOptions } from "@/shared/lib/auth";
 import { Footer } from "@/widgets/footer";
 import { Header } from "@/widgets/header";
 import { Sidebar } from "@/widgets/sidebar";
 
 export const Route = createFileRoute("/_root")({
   component: RouteComponent,
+  beforeLoad: async ({ context }) => {
+    const session = await context.queryClient.ensureQueryData(
+      getSessionQueryOptions(),
+    );
+
+    if (!session) {
+      throw redirect({ to: "/auth" });
+    }
+  },
 });
 
 function RouteComponent() {

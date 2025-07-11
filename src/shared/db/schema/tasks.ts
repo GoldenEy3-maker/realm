@@ -1,4 +1,4 @@
-import { schemaBuilder, table, timestampMetadataFields } from "../utils";
+import { schemaBuilder, table, timestampMetadataFields } from "../schema-utils";
 
 export const tasks = table(
   "tasks",
