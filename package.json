@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "bun run mailer:run & vite dev",
     "lint": "eslint .",
-    "prebuild": "bun run lint",
+    "prebuild": "bun run lint && bun run test:run",
     "build": "vite build",
     "start": "bun run .output/server/index.mjs",
     "db:generate": "drizzle-kit generate --config=drizzle.config.ts",
@@ -15,7 +15,7 @@
     "db:studio": "drizzle-kit studio --config=drizzle.config.ts",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\" \"!src/**/*.gen.ts\"",
     "test:cli": "vitest",
-    "test:run": "vitest run --update",
+    "test:run": "vitest run",
     "mailer:run": "mailpit --smtp-auth-file mailer-auth.md --smtp-auth-allow-insecure"
   },
   "dependencies": {
