@@ -1,11 +1,11 @@
 import { IS_SERVER } from "@/shared/constants/is-server";
 import { MEDIA_PREFERS_COLOR_SCHEMA } from "@/shared/constants/media-prefers-color-schema";
 
-import { ThemesMap } from "../constants/themes-map";
+import { ThemeMap } from "./theme-map";
 
 export function getSystemTheme(
   e?: MediaQueryList | MediaQueryListEvent,
-): `${typeof ThemesMap.LIGHT}` | `${typeof ThemesMap.DARK}` {
+): `${typeof ThemeMap.LIGHT}` | `${typeof ThemeMap.DARK}` {
   if (IS_SERVER) return "light";
   if (!e) e = matchMedia(MEDIA_PREFERS_COLOR_SCHEMA);
   const isDark = e.matches;

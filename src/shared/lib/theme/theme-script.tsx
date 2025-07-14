@@ -1,15 +1,15 @@
 import { createPortal } from "react-dom";
 
-import { Theme } from "../model/theme";
+import { ThemeMap } from "@/shared/lib/theme/theme-map";
 
 function injectThemeScript(
-  defaultTheme: Theme,
+  defaultTheme: ThemeMap,
   storageKey: string,
-  systemThemes: Theme[],
+  systemThemes: ThemeMap[],
 ) {
   const root = document.documentElement;
 
-  function updateDOM(theme: Theme) {
+  function updateDOM(theme: ThemeMap) {
     root.classList.remove(...systemThemes);
     root.classList.add(theme);
     root.style.colorScheme = theme;
@@ -25,7 +25,7 @@ function injectThemeScript(
     const themeName = localStorage.getItem(storageKey) || defaultTheme;
     const isSystem = themeName === "system";
     const theme = isSystem ? getSystemTheme() : themeName;
-    updateDOM(theme as Theme);
+    updateDOM(theme as ThemeMap);
   } catch (e) {
     console.error(e);
     // Unsupported
@@ -33,9 +33,9 @@ function injectThemeScript(
 }
 
 interface ThemeScriptProps {
-  defaultTheme: Theme;
+  defaultTheme: ThemeMap;
   storageKey: string;
-  systemThemes: Theme[];
+  systemThemes: ThemeMap[];
 }
 
 export function ThemeScript({

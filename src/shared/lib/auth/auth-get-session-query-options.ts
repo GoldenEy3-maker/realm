@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { QueryKeyMap } from "@/shared/constants/query-keys";
+import { QueryKeyMap } from "@/shared/constants/query-key-map";
 
 import { authServerFn } from "./auth-server-fn";
 
