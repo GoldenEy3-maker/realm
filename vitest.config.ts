@@ -8,6 +8,7 @@ export default mergeConfig(
     test: {
       environment: "node",
       globals: true,
+      teardownTimeout: 0,
     },
   }),
 );

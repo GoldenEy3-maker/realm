@@ -14,7 +14,9 @@ import { NotFound } from "@/app/not-found";
 import { seo } from "@/app/seo";
 import appCss from "@/app/styles/app.css?url";
 import { NavigationLoadingBar } from "@/features/navigation-loading-bar";
-import { ThemeProvider } from "@/features/theme";
+import { MotionConfig } from "@/shared/lib/motion";
+import { ThemeProvider } from "@/shared/lib/theme";
+import { Toaster } from "@/shared/ui/sonner";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -70,11 +72,13 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <ThemeProvider defaultTheme="system">
-      <RootDocument>
-        <Outlet />
-      </RootDocument>
-    </ThemeProvider>
+    <MotionConfig>
+      <ThemeProvider disableTransitionOnChange>
+        <RootDocument>
+          <Outlet />
+        </RootDocument>
+      </ThemeProvider>
+    </MotionConfig>
   );
 }
 
@@ -87,6 +91,7 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
       <body suppressHydrationWarning>
         <NavigationLoadingBar />
         <div className="flex min-h-svh flex-col">{children}</div>
+        <Toaster richColors position="bottom-center" />
         <TanStackRouterDevtools position="bottom-right" />
         <ReactQueryDevtools buttonPosition="bottom-left" />
         <Scripts />

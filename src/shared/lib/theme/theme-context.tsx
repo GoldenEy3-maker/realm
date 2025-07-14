@@ -8,62 +8,69 @@ import {
   useState,
 } from "react";
 
-import { MEDIA_PREFERS_COLOR_SCHEMA } from "@/shared/constants/media-prefers-color-schema";
+import { MEDIA_PREFERS_COLOR_SCHEMA } from "../../constants/media-prefers-color-schema";
+import { getSystemTheme } from "./get-system-theme";
+import { getTheme } from "./get-theme";
+import { saveThemeToLS } from "./save-theme-to-LS";
+import { disableAnimation } from "./theme-disable-animation";
+import { ThemeMap } from "./theme-map";
+import { ThemeScript } from "./theme-script";
+import { THEME_STORAGE_KEY } from "./theme-storage-key";
 
-import { THEME_STORAGE_KEY } from "../constants/theme-storage-key";
-import { ThemesMap } from "../constants/themes-map";
-import { getSystemTheme } from "../lib/get-system-theme";
-import { getTheme } from "../lib/get-theme";
-import { saveThemeToLS } from "../lib/save-theme-to-ls";
-import { ThemeScript } from "../lib/theme-script";
-import type { Theme } from "./theme";
-
-const systemThemes = [ThemesMap.LIGHT, ThemesMap.DARK];
+const systemThemes = [ThemeMap.LIGHT, ThemeMap.DARK];
 
 interface ThemeContextState {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
-  resolvedTheme: `${typeof ThemesMap.LIGHT}` | `${typeof ThemesMap.DARK}`;
+  theme: ThemeMap;
+  setTheme: (theme: ThemeMap) => void;
+  resolvedTheme: `${typeof ThemeMap.LIGHT}` | `${typeof ThemeMap.DARK}`;
 }
 
 const ThemeContext = createContext<ThemeContextState | null>(null);
 
 interface ThemeProviderProps extends PropsWithChildren {
-  defaultTheme?: Theme;
+  defaultTheme?: ThemeMap;
+  disableTransitionOnChange?: boolean;
 }
 
 export function ThemeProvider({
   children,
   defaultTheme = "system",
+  disableTransitionOnChange = false,
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(
-    () => (getTheme(THEME_STORAGE_KEY) || defaultTheme) as Theme,
+  const [theme, setThemeState] = useState<ThemeMap>(
+    () => (getTheme(THEME_STORAGE_KEY) || defaultTheme) as ThemeMap,
   );
   const [resolvedTheme, setResolvedTheme] = useState(() =>
-    theme === ThemesMap.SYSTEM ? getSystemTheme() : theme,
+    theme === ThemeMap.SYSTEM ? getSystemTheme() : theme,
   );
 
-  const applyTheme = useCallback((theme: Theme) => {
-    let resolved = theme;
-    if (!resolved) return;
+  const applyTheme = useCallback(
+    (theme: ThemeMap) => {
+      let resolved = theme;
+      if (!resolved) return;
 
-    if (theme === ThemesMap.SYSTEM) {
-      resolved = getSystemTheme();
-    }
+      if (theme === ThemeMap.SYSTEM) {
+        resolved = getSystemTheme();
+      }
 
-    const value = ThemesMap[resolved.toUpperCase() as keyof typeof ThemesMap];
-    const root = document.documentElement;
+      const enable = disableTransitionOnChange ? disableAnimation() : null;
+      const value = ThemeMap[resolved.toUpperCase() as keyof typeof ThemeMap];
+      const root = document.documentElement;
 
-    root.classList.remove(...systemThemes);
+      root.classList.remove(...systemThemes);
 
-    if (value) {
-      root.classList.add(value);
-      root.style.colorScheme = value;
-    }
-  }, []);
+      if (value) {
+        root.classList.add(value);
+        root.style.colorScheme = value;
+      }
+
+      enable?.();
+    },
+    [disableTransitionOnChange],
+  );
 
   const setTheme = useCallback(
-    (value: Theme | ((prevTheme: Theme) => Theme)) => {
+    (value: ThemeMap | ((prevTheme: ThemeMap) => ThemeMap)) => {
       if (typeof value === "function") {
         setThemeState((prevTheme) => {
           const newTheme = value(prevTheme);
@@ -83,8 +90,8 @@ export function ThemeProvider({
       const resolved = getSystemTheme(e);
       setResolvedTheme(resolved);
 
-      if (theme === ThemesMap.SYSTEM) {
-        applyTheme(ThemesMap.SYSTEM);
+      if (theme === ThemeMap.SYSTEM) {
+        applyTheme(ThemeMap.SYSTEM);
       }
     },
     [applyTheme, theme],
@@ -106,7 +113,7 @@ export function ThemeProvider({
       if (!e.newValue) {
         setTheme(defaultTheme);
       } else {
-        setThemeState(e.newValue as Theme);
+        setThemeState(e.newValue as ThemeMap);
       }
     },
     [setTheme, defaultTheme],
@@ -125,7 +132,7 @@ export function ThemeProvider({
     () => ({
       theme,
       setTheme,
-      resolvedTheme: theme === ThemesMap.SYSTEM ? resolvedTheme : theme,
+      resolvedTheme: theme === ThemeMap.SYSTEM ? resolvedTheme : theme,
     }),
     [theme, setTheme, resolvedTheme],
   );
