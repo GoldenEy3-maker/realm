@@ -1,6 +1,6 @@
-import { QueryKey } from "@tanstack/react-query";
+import { type QueryKey } from "@tanstack/react-query";
 
-import { SuspenceCrumb } from "../model/suspence-crumb";
+import { type SuspenceCrumb } from "../model/suspence-crumb";
 
 export function createSuspenceCrumb<
   TData = unknown,

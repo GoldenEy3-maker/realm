@@ -5,7 +5,7 @@ import { STATIC_UUID } from "@/shared/constants/static-uuid";
 import { schemaValidation } from "../../schema-validation";
 import { authConfig } from "../auth-config";
 import { generateSessionToken } from "../auth-generate-session-token";
-import { AuthSession } from "../auth-session-schema";
+import { type AuthSession } from "../auth-session-schema";
 
 describe("generateSessionToken()", () => {
   it("should generate a session token", async () => {

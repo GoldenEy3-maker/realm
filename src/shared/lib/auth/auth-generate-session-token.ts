@@ -1,8 +1,8 @@
 import { SignJWT } from "jose";
 
 import { millisecondsToSeconds } from "../milleseconds-to-seconds";
-import { AuthConfig } from "./auth-config";
-import { AuthSession } from "./auth-session-schema";
+import { type AuthConfig } from "./auth-config";
+import { type AuthSession } from "./auth-session-schema";
 
 export function generateSessionToken(payload: AuthSession, config: AuthConfig) {
   return new SignJWT(payload)

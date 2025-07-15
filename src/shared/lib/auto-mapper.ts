@@ -1,4 +1,4 @@
-import { schemaValidation } from "./schema-validation";
+import { type schemaValidation } from "./schema-validation";
 
 export function createAutoMapper<
   TSource extends Record<string, unknown>,

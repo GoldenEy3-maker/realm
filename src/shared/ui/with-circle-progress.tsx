@@ -2,7 +2,10 @@ import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 
 import { cn } from "../lib/cn";
-import { MotionLazyDomAnimationFeature } from "../lib/motion";
+import {
+  MotionLazyDomAnimationFeature,
+  MotionTransitionMap,
+} from "../lib/motion";
 import { CircleProgress } from "./circle-progress";
 
 interface WithCircleProgressProps extends React.ComponentProps<"div"> {
@@ -24,6 +27,7 @@ export function WithCircleProgress({
               initial={{ width: 0, opacity: 0, marginRight: 0 }}
               animate={{ width: "auto", opacity: 1, marginRight: 8 }}
               exit={{ width: 0, opacity: 0, marginRight: 0 }}
+              transition={MotionTransitionMap.SPRING}
               className="flex items-center justify-center overflow-hidden"
             >
               <CircleProgress className="shrink-0" />

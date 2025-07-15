@@ -1,7 +1,7 @@
-import { QueryKey } from "@tanstack/react-query";
+import { type QueryKey } from "@tanstack/react-query";
 
-import { StaticCrumb } from "./static-crumb";
-import { SuspenceCrumb } from "./suspence-crumb";
+import { type StaticCrumb } from "./static-crumb";
+import { type SuspenceCrumb } from "./suspence-crumb";
 
 export type CombinedCrumb<T = unknown, TQueryKey extends QueryKey = QueryKey> =
   | ({

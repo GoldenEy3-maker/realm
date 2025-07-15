@@ -4,7 +4,7 @@ import {
   BreadcrumbPage,
 } from "@/shared/ui/breadcrumb";
 
-import { StaticCrumb } from "../model/static-crumb";
+import { type StaticCrumb } from "../model/static-crumb";
 
 interface DynamicBreadcrumbsItemProps extends StaticCrumb {}
 

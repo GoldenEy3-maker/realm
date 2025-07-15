@@ -1,4 +1,4 @@
-import { AnyFieldApi } from "@tanstack/react-form";
+import { type AnyFieldApi } from "@tanstack/react-form";
 import { createContext, useContext } from "react";
 
 type FormFieldContextState = {

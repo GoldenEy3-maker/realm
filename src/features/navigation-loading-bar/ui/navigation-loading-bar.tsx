@@ -1,6 +1,6 @@
 import { useLocation, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
+import LoadingBar, { type LoadingBarRef } from "react-top-loading-bar";
 
 export function NavigationLoadingBar() {
   const loadingRef = useRef<LoadingBarRef>(null);

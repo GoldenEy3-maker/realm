@@ -1,5 +1,5 @@
-import { createContext, ReactNode, useContext, useRef } from "react";
-import { StoreApi, useStore } from "zustand";
+import { createContext, type ReactNode, useContext, useRef } from "react";
+import { type StoreApi, useStore } from "zustand";
 
 export interface StoreProviderProps<T> {
   children: ReactNode;

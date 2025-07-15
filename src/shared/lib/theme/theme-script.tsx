@@ -1,6 +1,6 @@
 import { createPortal } from "react-dom";
 
-import { ThemeMap } from "@/shared/lib/theme/theme-map";
+import { type ThemeMap } from "@/shared/lib/theme/theme-map";
 
 function injectThemeScript(
   defaultTheme: ThemeMap,

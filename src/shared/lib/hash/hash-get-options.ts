@@ -1,4 +1,4 @@
-import { HashOptions } from "./hash-options";
+import { type HashOptions } from "./hash-options";
 
 export function getOptions(options: Partial<HashOptions> = {}): HashOptions {
   return {

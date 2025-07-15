@@ -1,6 +1,6 @@
 import { hashEncode } from "./hash-encode";
 import { getOptions } from "./hash-get-options";
-import { HashOptions } from "./hash-options";
+import { type HashOptions } from "./hash-options";
 
 export function hashMatch(
   data: string,

@@ -7,7 +7,7 @@ import { authConfig } from "../auth-config";
 import { encodeSessionToken } from "../auth-encode-session-token";
 import { generateSessionToken } from "../auth-generate-session-token";
 import { getSession } from "../auth-get-session";
-import { AuthSession } from "../auth-session-schema";
+import { type AuthSession } from "../auth-session-schema";
 
 vi.mock("@tanstack/react-start/server", () => ({
   getCookie: vi.fn(),

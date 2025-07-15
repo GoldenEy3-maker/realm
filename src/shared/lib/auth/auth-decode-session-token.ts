@@ -1,5 +1,5 @@
 import { hashDecode } from "../hash";
-import { AuthConfig } from "./auth-config";
+import { type AuthConfig } from "./auth-config";
 
 export function decodeSessionToken(
   hashedSessionToken: string,

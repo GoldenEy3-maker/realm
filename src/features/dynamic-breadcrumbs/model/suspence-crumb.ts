@@ -1,5 +1,5 @@
-import { QueryKey, UseQueryOptions } from "@tanstack/react-query";
-import { LinkOptions } from "@tanstack/react-router";
+import { type QueryKey, type UseQueryOptions } from "@tanstack/react-query";
+import { type LinkOptions } from "@tanstack/react-router";
 
 export interface SuspenceCrumb<
   TData = unknown,

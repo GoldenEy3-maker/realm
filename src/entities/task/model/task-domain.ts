@@ -1,5 +1,5 @@
 import { schemaValidation } from "@/shared/lib/schema-validation";
-import { Slug } from "@/shared/types/slug";
+import { type Slug } from "@/shared/types/slug";
 
 export const TaskDomainSchema = schemaValidation.object({
   id: schemaValidation.uuid(),

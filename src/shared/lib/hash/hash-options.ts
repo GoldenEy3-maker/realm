@@ -1,4 +1,4 @@
-import { BinaryToTextEncoding } from "crypto";
+import { type BinaryToTextEncoding } from "crypto";
 
 export interface HashOptions {
   algorithm: string;

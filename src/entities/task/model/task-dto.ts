@@ -1,6 +1,6 @@
 import { schemaValidation } from "@/shared/lib/schema-validation";
 
-import { TaskRawModel } from "./task-raw-model";
+import { type TaskRawModel } from "./task-raw-model";
 
 export const TaskDtoSchema = schemaValidation.custom<TaskRawModel>();
 

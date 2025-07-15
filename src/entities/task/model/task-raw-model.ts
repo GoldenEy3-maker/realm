@@ -1,5 +1,5 @@
-import { InferSelectModel } from "drizzle-orm";
+import { type InferSelectModel } from "drizzle-orm";
 
-import { tasks } from "@/shared/db/schema/tasks";
+import type { tasks } from "@/shared/db/schema/tasks";
 
 export type TaskRawModel = InferSelectModel<typeof tasks>;

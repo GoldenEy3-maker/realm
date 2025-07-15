@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { STATIC_UUID } from "@/shared/constants/static-uuid";
 
 import { authConfig } from "../auth-config";
-import { AuthSession } from "../auth-session-schema";
+import { type AuthSession } from "../auth-session-schema";
 import { setSession } from "../auth-set-session";
 
 vi.mock("@tanstack/react-start/server", () => ({
