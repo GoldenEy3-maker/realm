@@ -1,6 +1,6 @@
-import { QueryKey } from "@tanstack/react-query";
+import { type QueryKey } from "@tanstack/react-query";
 
-import { CombinedCrumb } from "../model/combined-crumb";
+import { type CombinedCrumb } from "../model/combined-crumb";
 import { createStaticCrumb } from "./create-static-crumb";
 import { createSuspenceCrumb } from "./create-suspence-crumb";
 

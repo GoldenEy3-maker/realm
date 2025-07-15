@@ -1,7 +1,7 @@
 import { createHmac } from "crypto";
 
 import { getOptions } from "./hash-get-options";
-import { HashOptions } from "./hash-options";
+import { type HashOptions } from "./hash-options";
 
 export function hashEncode(
   data: string,

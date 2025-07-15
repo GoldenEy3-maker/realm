@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { type FormEvent } from "react";
 
 /**
  * Prevents the default form event from bubbling up and executing the callback.

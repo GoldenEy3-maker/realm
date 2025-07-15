@@ -1,7 +1,7 @@
 import { serverEnv } from "@/shared/env/server";
 
 import { IS_PROD } from "../../constants/is-prod";
-import { schemaValidation } from "../schema-validation";
+import { type schemaValidation } from "../schema-validation";
 
 export interface AuthConfig {
   sessionCookieName: string;

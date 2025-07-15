@@ -2,7 +2,7 @@ import { createHmac } from "crypto";
 
 import { Logger } from "../logger";
 import { getOptions } from "./hash-get-options";
-import { HashOptions } from "./hash-options";
+import { type HashOptions } from "./hash-options";
 
 export function hashDecode(
   hashedData: string,

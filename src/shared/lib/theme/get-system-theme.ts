@@ -1,7 +1,7 @@
 import { IS_SERVER } from "@/shared/constants/is-server";
 import { MEDIA_PREFERS_COLOR_SCHEMA } from "@/shared/constants/media-prefers-color-schema";
 
-import { ThemeMap } from "./theme-map";
+import { type ThemeMap } from "./theme-map";
 
 export function getSystemTheme(
   e?: MediaQueryList | MediaQueryListEvent,

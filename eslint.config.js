@@ -53,6 +53,13 @@ export default tseslint.config(
           allowInterfaces: "with-single-extends",
         },
       ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          prefer: "type-imports",
+          disallowTypeAnnotations: false,
+        },
+      ],
     },
   },
   eslintBoundariesConfig,

@@ -4,7 +4,7 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/shared/ui/button";
 
 import { getTasksQueryOptions } from "../api/get-tasks-query-options";
-import { TaskDomain } from "../model/task-domain";
+import { type TaskDomain } from "../model/task-domain";
 
 export function TaskList() {
   const { data } = useSuspenseQuery(getTasksQueryOptions());

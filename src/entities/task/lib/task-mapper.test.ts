@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { TaskDto } from "../model/task-dto";
+import { type TaskDto } from "../model/task-dto";
 import { taskDtoToDomain } from "./task-mappers";
 
 describe("Task Mapper", () => {

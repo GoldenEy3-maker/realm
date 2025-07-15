@@ -1,4 +1,4 @@
-import { toast, Toaster as Sonner, ToasterProps } from "sonner";
+import { toast, Toaster as Sonner, type ToasterProps } from "sonner";
 
 import { useTheme } from "../lib/theme";
 

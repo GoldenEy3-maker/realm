@@ -1,8 +1,8 @@
 import {
-  FormAsyncValidateOrFn,
-  FormOptions,
-  FormValidateOrFn,
-  ReactFormExtendedApi,
+  type FormAsyncValidateOrFn,
+  type FormOptions,
+  type FormValidateOrFn,
+  type ReactFormExtendedApi,
   useForm as useFormCore,
 } from "@tanstack/react-form";
 

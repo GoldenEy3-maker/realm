@@ -4,7 +4,7 @@ import { STATIC_UUID } from "@/shared/constants/static-uuid";
 
 import { authConfig } from "../auth-config";
 import { generateSessionToken } from "../auth-generate-session-token";
-import { AuthSession } from "../auth-session-schema";
+import { type AuthSession } from "../auth-session-schema";
 import { verifySessionToken } from "../auth-verify-token-session";
 
 describe("verifySessionToken()", () => {

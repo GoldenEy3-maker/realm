@@ -2,7 +2,7 @@ import { MutationCache, QueryClient } from "@tanstack/react-query";
 
 import { toast } from "@/shared/ui/sonner";
 
-import { QueryKeyMap } from "../constants/query-key-map";
+import { type QueryKeyMap } from "../constants/query-key-map";
 import { callIfFunction } from "./call-if-function";
 import { Logger } from "./logger";
 

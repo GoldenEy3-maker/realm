@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/shared/ui/breadcrumb";
 
-import { CombinedCrumb } from "../model/combined-crumb";
+import { type CombinedCrumb } from "../model/combined-crumb";
 import { DynamicBreadcrmbsStaticItem } from "./dynamic-breadcrumbs-static-item";
 import { DynamicBreadcrumbsSuspenseItem } from "./dynamic-breadcrumbs-suspence-item";
 

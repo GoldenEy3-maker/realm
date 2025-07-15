@@ -1,4 +1,4 @@
-import Mail from "nodemailer/lib/mailer";
+import type Mail from "nodemailer/lib/mailer";
 
 import { transporter } from "./mailer-transporter";
 

@@ -1,7 +1,7 @@
 import {
-  FormAsyncValidateOrFn,
-  FormValidateOrFn,
-  ReactFormExtendedApi,
+  type FormAsyncValidateOrFn,
+  type FormValidateOrFn,
+  type ReactFormExtendedApi,
   useField,
 } from "@tanstack/react-form";
 import { useId } from "react";

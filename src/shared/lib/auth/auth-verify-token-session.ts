@@ -3,7 +3,7 @@ import { jwtVerify } from "jose";
 import { serverEnv } from "@/shared/env/server";
 
 import { Logger } from "../logger";
-import { AuthSession, authSessionSchema } from "./auth-session-schema";
+import { type AuthSession, authSessionSchema } from "./auth-session-schema";
 
 export async function verifySessionToken(
   sessionToken: string,

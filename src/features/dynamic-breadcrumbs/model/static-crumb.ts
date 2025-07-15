@@ -1,4 +1,4 @@
-import { LinkOptions } from "@tanstack/react-router";
+import { type LinkOptions } from "@tanstack/react-router";
 
 export interface StaticCrumb {
   label: string | undefined;

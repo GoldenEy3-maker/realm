@@ -3,10 +3,10 @@ import { createServerFn } from "@tanstack/react-start";
 import { serverEnv } from "@/shared/env/server";
 import { mailerSend } from "@/shared/lib/mailer";
 
-import { authFormSchema } from "../model/auth-form-schema";
+import { authEmailFormSchema } from "../model/auth-email-form-schema";
 
-export const authSendMailCodeServerFn = createServerFn({ method: "POST" })
-  .validator(authFormSchema)
+export const authSendEmailCodeServerFn = createServerFn({ method: "POST" })
+  .validator(authEmailFormSchema)
   .handler(({ data }) => {
     return mailerSend({
       from: serverEnv.MAILER_FROM,

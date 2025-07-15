@@ -2,7 +2,7 @@ import { getCookie } from "@tanstack/react-start/server";
 
 import { authConfig } from "./auth-config";
 import { decodeSessionToken } from "./auth-decode-session-token";
-import { AuthSession } from "./auth-session-schema";
+import { type AuthSession } from "./auth-session-schema";
 import { verifySessionToken } from "./auth-verify-token-session";
 
 export async function getSession(): Promise<AuthSession | null> {

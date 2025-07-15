@@ -1,4 +1,4 @@
-import { UnkFunction } from "../types/unk-function";
+import { type UnkFunction } from "../types/unk-function";
 import { isFunction } from "./is-function";
 
 type CallIfFunctionResult<T extends unknown | UnkFunction> =

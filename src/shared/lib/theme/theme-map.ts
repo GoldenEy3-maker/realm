@@ -1,4 +1,4 @@
-import { ValueOf } from "../../types/value-of";
+import { type ValueOf } from "../../types/value-of";
 
 export const ThemeMap = {
   LIGHT: "light",

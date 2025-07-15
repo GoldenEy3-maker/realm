@@ -1,6 +1,6 @@
-import { QueryFunction, useSuspenseQuery } from "@tanstack/react-query";
+import { type QueryFunction, useSuspenseQuery } from "@tanstack/react-query";
 
-import { SuspenceCrumb } from "../model/suspence-crumb";
+import { type SuspenceCrumb } from "../model/suspence-crumb";
 import { DynamicBreadcrmbsStaticItem } from "./dynamic-breadcrumbs-static-item";
 
 interface DynamicBreadcrumbsSuspenseItemProps<TData = unknown>

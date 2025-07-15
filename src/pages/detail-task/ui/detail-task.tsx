@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 
 import { getTaskBySlugQueryOptions } from "@/entities/task";
-import { Slug } from "@/shared/types/slug";
+import { type Slug } from "@/shared/types/slug";
 
 interface DetailTaskProps {
   slug: Slug;
