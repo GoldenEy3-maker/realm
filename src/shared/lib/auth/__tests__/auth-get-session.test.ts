@@ -4,7 +4,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { STATIC_UUID } from "@/shared/constants/static-uuid";
 
 import { authConfig } from "../auth-config";
-import { encodeSessionToken } from "../auth-encode-session-token";
 import { generateSessionToken } from "../auth-generate-session-token";
 import { getSession } from "../auth-get-session";
 import { type AuthSession } from "../auth-session-schema";
@@ -24,13 +23,12 @@ describe("getSession()", () => {
       version: 1,
     };
     const sessionToken = await generateSessionToken(payload, authConfig);
-    const hashedToken = encodeSessionToken(sessionToken, authConfig);
 
-    vi.mocked(getCookie).mockReturnValue(hashedToken);
+    vi.mocked(getCookie).mockReturnValue(sessionToken);
 
     const session = await getSession();
 
-    expect(getCookie).toHaveBeenCalledWith(authConfig.sessionCookieName);
+    expect(getCookie).toHaveBeenCalledWith(authConfig.cookieName);
     expect(session).toStrictEqual(payload);
   });
 
@@ -39,7 +37,7 @@ describe("getSession()", () => {
 
     const session = await getSession();
 
-    expect(getCookie).toHaveBeenCalledWith(authConfig.sessionCookieName);
+    expect(getCookie).toHaveBeenCalledWith(authConfig.cookieName);
     expect(session).toBeNull();
   });
 
@@ -48,7 +46,7 @@ describe("getSession()", () => {
 
     const session = await getSession();
 
-    expect(getCookie).toHaveBeenCalledWith(authConfig.sessionCookieName);
+    expect(getCookie).toHaveBeenCalledWith(authConfig.cookieName);
     expect(session).toBeNull();
   });
 
@@ -57,7 +55,7 @@ describe("getSession()", () => {
 
     const session = await getSession();
 
-    expect(getCookie).toHaveBeenCalledWith(authConfig.sessionCookieName);
+    expect(getCookie).toHaveBeenCalledWith(authConfig.cookieName);
     expect(session).toBeNull();
   });
 
@@ -68,18 +66,17 @@ describe("getSession()", () => {
     };
     const expiredToken = await generateSessionToken(payload, {
       ...authConfig,
-      sessionCookieOptions: {
-        ...authConfig.sessionCookieOptions,
+      cookieOptions: {
+        ...authConfig.cookieOptions,
         maxAge: -1,
       },
     });
-    const hashedExpiredToken = encodeSessionToken(expiredToken, authConfig);
 
-    vi.mocked(getCookie).mockReturnValue(hashedExpiredToken);
+    vi.mocked(getCookie).mockReturnValue(expiredToken);
 
     const session = await getSession();
 
-    expect(getCookie).toHaveBeenCalledWith(authConfig.sessionCookieName);
+    expect(getCookie).toHaveBeenCalledWith(authConfig.cookieName);
     expect(session).toBeNull();
   });
 });

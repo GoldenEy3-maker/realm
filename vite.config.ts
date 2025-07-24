@@ -15,6 +15,7 @@ export default defineConfig({
       projects: ["./tsconfig.json"],
     }),
     tanstackStart({
+      customViteReactPlugin: true,
       target: "bun",
       react: {
         babel: {

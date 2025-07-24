@@ -6,7 +6,7 @@ import { authServerFn } from "./auth-server-fn";
 
 export function getSessionQueryOptions() {
   return queryOptions({
-    queryKey: [QueryKeyMap.Session],
+    queryKey: [QueryKeyMap.SESSION],
     queryFn: authServerFn,
   });
 }

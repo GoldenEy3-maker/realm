@@ -1,13 +1,16 @@
 import { Link } from "@tanstack/react-router";
 
+import { AuthForm } from "@/features/auth-form";
 import { cn } from "@/shared/lib/cn";
 import { AnimatedGridPattern } from "@/shared/magicui/animated-grid-pattern";
 import { Heading } from "@/shared/ui/heading";
 import { Logo } from "@/shared/ui/logo";
 
-import { AuthForm } from "./auth-form";
+interface AuthPageProps {
+  sendedEmail: string | null;
+}
 
-export function AuthPage() {
+export function AuthPage({ sendedEmail }: AuthPageProps) {
   return (
     <main className="bg-sidebar relative flex flex-1 flex-col items-center justify-center overflow-hidden">
       <AnimatedGridPattern
@@ -26,7 +29,7 @@ export function AuthPage() {
             Realm
           </Heading>
         </Link>
-        <AuthForm />
+        <AuthForm sendedEmail={sendedEmail} />
         <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
           Продолжая, вы соглашаетесь с нашими{" "}
           <a href="#">Условиями использования</a> и{" "}

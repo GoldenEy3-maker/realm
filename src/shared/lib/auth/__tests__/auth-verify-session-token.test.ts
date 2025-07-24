@@ -27,7 +27,10 @@ describe("verifySessionToken()", () => {
   it("should return null if the session is not valid secret", async () => {
     const sessionToken = await generateSessionToken(
       { user: { id: STATIC_UUID }, version: 1 },
-      { ...authConfig, sessionSecret: "invalid" },
+      {
+        ...authConfig,
+        tokenOptions: { ...authConfig.tokenOptions, secret: "invalid" },
+      },
     );
     const session = await verifySessionToken(sessionToken);
     expect(session).toBeNull();
@@ -38,8 +41,8 @@ describe("verifySessionToken()", () => {
       { user: { id: STATIC_UUID }, version: 1 },
       {
         ...authConfig,
-        sessionCookieOptions: {
-          ...authConfig.sessionCookieOptions,
+        cookieOptions: {
+          ...authConfig.cookieOptions,
           maxAge: -1,
         },
       },
