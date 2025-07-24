@@ -17,7 +17,7 @@ describe("generateSessionToken()", () => {
     const session = await generateSessionToken(payload, authConfig);
 
     const parsedSession = schemaValidation
-      .jwt({ alg: authConfig.sessionTokenOptions.alg })
+      .jwt({ alg: authConfig.tokenOptions.alg })
       .safeParse(session);
 
     expect(parsedSession.success).toBe(true);
@@ -32,12 +32,20 @@ describe("generateSessionToken()", () => {
 
     const session1 = await generateSessionToken(payload, {
       ...authConfig,
-      sessionTokenOptions: { alg: "HS384" },
+      tokenOptions: {
+        alg: "HS384",
+        secret: "secret",
+        encryption: "wfhXV38dbLpa/3xeDGX9/dzT92rjV3WNVo6zrEBFbyI=",
+      },
     });
 
     const session2 = await generateSessionToken(payload, {
       ...authConfig,
-      sessionTokenOptions: { alg: "HS512" },
+      tokenOptions: {
+        alg: "HS512",
+        secret: "secret",
+        encryption: "wfhXV38dbLpa/3xeDGX9/dzT92rjV3WNVo6zrEBFbyI=",
+      },
     });
 
     const parsedSession1 = schemaValidation
@@ -64,7 +72,7 @@ describe("generateSessionToken()", () => {
     const session = await generateSessionToken(payload, authConfig);
 
     const parsedSession = schemaValidation
-      .jwt({ alg: authConfig.sessionTokenOptions.alg })
+      .jwt({ alg: authConfig.tokenOptions.alg })
       .safeParse(session);
 
     expect(parsedSession.success).toBe(true);

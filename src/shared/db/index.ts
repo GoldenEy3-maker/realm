@@ -11,3 +11,5 @@ export const db = drizzle({
   client: pool,
   logger: serverEnv.NODE_ENV === "development",
 });
+
+export { redis } from "./redis";

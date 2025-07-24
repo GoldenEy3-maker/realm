@@ -1,18 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { zodValidator } from "@tanstack/zod-adapter";
 
-import { authFormStageMapSchema, AuthPage } from "@/pages/auth";
-import { schemaValidation } from "@/shared/lib/schema-validation";
+import { getAuthCodeTokenServerFn } from "@/features/auth-form";
+import { AuthPage } from "@/pages/auth";
 
 export const Route = createFileRoute("/auth")({
   component: RouteComponent,
-  validateSearch: zodValidator(
-    schemaValidation.object({
-      stage: authFormStageMapSchema.optional(),
-    }),
-  ),
+  loader: async () => {
+    const authCodeToken = await getAuthCodeTokenServerFn();
+
+    return { authCodeToken };
+  },
 });
 
 function RouteComponent() {
-  return <AuthPage />;
+  const { authCodeToken } = Route.useLoaderData();
+
+  return <AuthPage sendedEmail={authCodeToken?.email ?? null} />;
 }

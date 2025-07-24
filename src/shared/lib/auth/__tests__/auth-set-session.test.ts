@@ -25,9 +25,9 @@ describe("setSession()", () => {
     await setSession(payload);
 
     expect(setCookie).toHaveBeenCalledWith(
-      authConfig.sessionCookieName,
+      authConfig.cookieName,
       expect.any(String),
-      authConfig.sessionCookieOptions,
+      authConfig.cookieOptions,
     );
   });
 
@@ -49,9 +49,9 @@ describe("setSession()", () => {
     await setSession(payload);
 
     expect(setCookie).toHaveBeenCalledWith(
-      authConfig.sessionCookieName,
+      authConfig.cookieName,
       expect.any(String),
-      authConfig.sessionCookieOptions,
+      authConfig.cookieOptions,
     );
   });
 });
