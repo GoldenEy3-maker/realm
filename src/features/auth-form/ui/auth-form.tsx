@@ -1,7 +1,9 @@
 import { AnimatePresence } from "motion/react";
 import * as m from "motion/react-m";
 import { lazy, Suspense, useCallback, useMemo, useRef, useState } from "react";
+import { useInterval } from "usehooks-ts";
 
+import { ONE_SECOND } from "@/shared/constants/one-second";
 import { AppleLogoIcon } from "@/shared/icons/apple-logo-icon";
 import { ArrowLeftIcon } from "@/shared/icons/arrow-left-icon";
 import { ArrowRightIcon } from "@/shared/icons/arrow-right-icon";
@@ -19,12 +21,8 @@ import { Separator } from "@/shared/ui/separator";
 import { TextMorph } from "@/shared/ui/text-morph";
 
 import { AuthFormStageMap } from "../model/auth-form-stage-map";
-
-const AuthEmailForm = lazy(() =>
-  import("./auth-email-form").then((module) => ({
-    default: module.AuthEmailForm,
-  })),
-);
+import { AuthCodeFormSkeleton } from "./auth-code-form-skeleton";
+import { AuthEmailForm } from "./auth-email-form";
 
 const AuthCodeForm = lazy(() =>
   import("./auth-code-form").then((module) => ({
@@ -78,14 +76,16 @@ export function AuthForm({ sendedEmail }: AuthFormProps) {
   const formRender = useMemo(() => {
     if (isCodeStage) {
       return (
-        <AuthCodeForm
-          onUnmount={(resendTime) => {
-            stoppedResendTimeoutRef.current = resendTime;
-          }}
-          stoppedResendTimeout={stoppedResendTimeoutRef.current}
-          onSubmitWithoutEmail={goToEmailStage}
-          email={emailValueRef.current}
-        />
+        <Suspense fallback={<AuthCodeFormSkeleton />}>
+          <AuthCodeForm
+            onUnmount={(resendTime) => {
+              stoppedResendTimeoutRef.current = resendTime;
+            }}
+            stoppedResendTimeout={stoppedResendTimeoutRef.current}
+            onSubmitWithoutEmail={goToEmailStage}
+            email={emailValueRef.current}
+          />
+        </Suspense>
       );
     }
 
@@ -100,6 +100,12 @@ export function AuthForm({ sendedEmail }: AuthFormProps) {
       />
     );
   }, [isCodeStage, goToCodeStage, goToEmailStage]);
+
+  useInterval(() => {
+    if (stoppedResendTimeoutRef.current) {
+      stoppedResendTimeoutRef.current -= 1;
+    }
+  }, ONE_SECOND);
 
   return (
     <Card className="w-full gap-5">
@@ -199,7 +205,7 @@ export function AuthForm({ sendedEmail }: AuthFormProps) {
               </AnimatePresence>
             </MotionLazyDomAnimationFeature>
           </div>
-          <Suspense>{formRender}</Suspense>
+          {formRender}
         </div>
       </CardContent>
     </Card>

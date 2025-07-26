@@ -1,6 +1,6 @@
 import { setCookie } from "@tanstack/react-start/server";
 
-import type { AuthCodeConfig } from "../config/auth-code-token-config";
+import type { AuthCodeConfig } from "../config/auth-code-config";
 
 export function setAuthCodeCookie(token: string, config: AuthCodeConfig) {
   return setCookie(config.cookieName, token, {

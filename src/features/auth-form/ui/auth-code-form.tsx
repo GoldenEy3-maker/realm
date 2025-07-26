@@ -8,6 +8,7 @@ import { noop } from "@/shared/lib/noop";
 import { useForm } from "@/shared/ui/form";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/shared/ui/input-otp";
 
+import { AUTH_CODE_LENGTH } from "../constants/auth-code-length";
 import { useVerifyEmailCodeMutation } from "../lib/use-verify-email-code-mutation";
 import { authCodeFormSchema } from "../model/auth-code-form-schema";
 import { AuthCodeResendButton } from "./auth-code-resend-button";
@@ -16,7 +17,6 @@ interface AuthCodeFormProps {
   onSubmitWithoutEmail?: () => void;
   onSuccess?: () => void;
   email: string;
-  codeLength?: number;
   resendTimeout?: number;
   onUnmount?: (resendTime: number) => void;
   stoppedResendTimeout?: number | null;
@@ -26,7 +26,6 @@ export function AuthCodeForm({
   onSubmitWithoutEmail = noop,
   onSuccess = noop,
   email,
-  codeLength = 6,
   resendTimeout: resendTimeoutProp = 60,
   onUnmount = noop,
   stoppedResendTimeout,
@@ -90,7 +89,7 @@ export function AuthCodeForm({
             <form.Control>
               <InputOTP
                 ref={inputOTPRef}
-                maxLength={codeLength}
+                maxLength={AUTH_CODE_LENGTH}
                 onComplete={form.handleSubmit}
                 value={field.state.value}
                 onChange={field.handleChange}
@@ -98,7 +97,7 @@ export function AuthCodeForm({
                 pattern={REGEXP_ONLY_DIGITS}
               >
                 <InputOTPGroup className="gap-2">
-                  {Array.from({ length: codeLength }).map((_, index) => (
+                  {Array.from({ length: AUTH_CODE_LENGTH }).map((_, index) => (
                     <InputOTPSlot
                       key={index}
                       index={index}

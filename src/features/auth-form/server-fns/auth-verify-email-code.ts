@@ -8,7 +8,7 @@ import { users } from "@/shared/db/schema/users";
 import { setSession } from "@/shared/lib/auth/auth-set-session";
 import { Exception } from "@/shared/lib/exception";
 
-import { authCodeConfig } from "../config/auth-code-token-config";
+import { authCodeConfig } from "../config/auth-code-config";
 import { authFormSchema } from "../model/auth-form-schema";
 
 export const authVerifyEmailCodeServerFn = createServerFn({ method: "POST" })
@@ -20,13 +20,8 @@ export const authVerifyEmailCodeServerFn = createServerFn({ method: "POST" })
 
     await redis.close();
 
-    if (!code) {
+    if (!code || code !== data.code)
       throw Exception.unauthorized("Неверный код!");
-    }
-
-    if (code !== data.code) {
-      throw Exception.unauthorized("Неверный код!");
-    }
 
     let [user] = await db
       .select({ id: users.id, tokenVersion: users.tokenVersion })
@@ -42,9 +37,8 @@ export const authVerifyEmailCodeServerFn = createServerFn({ method: "POST" })
         })
         .returning({ id: users.id, tokenVersion: users.tokenVersion });
 
-      if (!newUser) {
+      if (!newUser)
         throw Exception.internalServerError("Возникла ошибка регистрации!");
-      }
 
       user = newUser;
     }

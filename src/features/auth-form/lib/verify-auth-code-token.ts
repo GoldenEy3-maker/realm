@@ -2,7 +2,7 @@ import { jwtVerify } from "jose";
 
 import { Logger } from "@/shared/lib/logger";
 
-import type { AuthCodeConfig } from "../config/auth-code-token-config";
+import type { AuthCodeConfig } from "../config/auth-code-config";
 import { authCodeTokenSchema } from "../model/auth-code-token-schema";
 
 export async function verifyAuthCodeToken(

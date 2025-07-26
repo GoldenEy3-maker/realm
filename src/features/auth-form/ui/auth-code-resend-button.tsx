@@ -1,6 +1,7 @@
 import { useMemo, useState, useTransition } from "react";
 import { useInterval, useUnmount } from "usehooks-ts";
 
+import { ONE_SECOND } from "@/shared/constants/one-second";
 import { devDelay } from "@/shared/lib/dev-delay";
 import { noop } from "@/shared/lib/noop";
 import { Button } from "@/shared/ui/button";
@@ -61,7 +62,7 @@ export function AuthCodeResendButton({
     if (resendTimeout > 0) {
       setResendTimeout((prev) => prev - 1);
     }
-  }, 1000);
+  }, ONE_SECOND);
 
   useUnmount(() => {
     onUnmount(resendTimeout);

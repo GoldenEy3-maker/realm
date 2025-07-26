@@ -1,9 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getCookie } from "@tanstack/react-start/server";
 
-import { Logger } from "@/shared/lib/logger";
-
-import { authCodeConfig } from "../config/auth-code-token-config";
+import { authCodeConfig } from "../config/auth-code-config";
 import { verifyAuthCodeToken } from "../lib/verify-auth-code-token";
 
 export const getAuthCodeTokenServerFn = createServerFn({
@@ -11,10 +9,7 @@ export const getAuthCodeTokenServerFn = createServerFn({
 }).handler(() => {
   const token = getCookie(authCodeConfig.cookieName);
 
-  if (!token) {
-    Logger.log("No auth code token found");
-    return null;
-  }
+  if (!token) return null;
 
   return verifyAuthCodeToken(token, authCodeConfig);
 });

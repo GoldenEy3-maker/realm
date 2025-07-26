@@ -7,8 +7,8 @@ import { Exception } from "@/shared/lib/exception";
 import { getRandomInt } from "@/shared/lib/get-random-int";
 import { mailerSend } from "@/shared/lib/mailer";
 
+import { authCodeConfig } from "../config/auth-code-config";
 import { AUTH_CODE_EXPIRATION_TIME } from "../config/auth-code-expiration";
-import { authCodeConfig } from "../config/auth-code-token-config";
 import { generateAuthCodeToken } from "../lib/generate-auth-code-token";
 import { setAuthCodeCookie } from "../lib/set-auth-code-cookie";
 import { authEmailFormSchema } from "../model/auth-email-form-schema";
@@ -50,9 +50,7 @@ export const authSendEmailCodeServerFn = createServerFn({ method: "POST" })
 
       return mailerResponse;
     } catch (error) {
-      if (error instanceof Error) {
-        throw Exception.badRequest(error.message);
-      }
+      if (error instanceof Error) throw Exception.badRequest(error.message);
 
       throw Exception.internalServerError("Неизвестная ошибка!");
     }

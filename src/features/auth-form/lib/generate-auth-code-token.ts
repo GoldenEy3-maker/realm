@@ -2,7 +2,7 @@ import { SignJWT } from "jose";
 
 import { millisecondsToSeconds } from "@/shared/lib/milleseconds-to-seconds";
 
-import type { AuthCodeConfig } from "../config/auth-code-token-config";
+import type { AuthCodeConfig } from "../config/auth-code-config";
 
 export function generateAuthCodeToken(email: string, config: AuthCodeConfig) {
   const jwt = new SignJWT({ email })

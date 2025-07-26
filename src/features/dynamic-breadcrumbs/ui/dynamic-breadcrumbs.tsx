@@ -23,9 +23,16 @@ export function DynamicBreadcrumbs({
   const matches = useMatches();
 
   const crumbs = matches
-    .filter((match) => match.loaderData?.crumbs)
+    .filter(
+      ({ loaderData }) =>
+        loaderData && "crumbs" in loaderData && loaderData.crumbs,
+    )
     .flatMap(({ loaderData }) => {
-      return loaderData!.crumbs as CombinedCrumb[];
+      if ("crumbs" in loaderData!) {
+        return loaderData.crumbs as CombinedCrumb[];
+      }
+
+      return [];
     });
 
   return (
