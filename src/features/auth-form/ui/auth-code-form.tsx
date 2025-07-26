@@ -96,12 +96,12 @@ export function AuthCodeForm({
                 onBlur={field.handleBlur}
                 pattern={REGEXP_ONLY_DIGITS}
               >
-                <InputOTPGroup className="gap-2">
+                <InputOTPGroup className="flex-1 gap-2">
                   {Array.from({ length: AUTH_CODE_LENGTH }).map((_, index) => (
                     <InputOTPSlot
                       key={index}
                       index={index}
-                      className="size-12 rounded-md border"
+                      className="h-12 w-full flex-1 rounded-md border"
                     />
                   ))}
                 </InputOTPGroup>
