@@ -1,7 +1,8 @@
 import { serverEnv } from "@/shared/env/server";
 import { type schemaValidation } from "@/shared/lib/schema-validation";
+import { type Secret } from "@/shared/types/secret";
 
-import { AUTH_CODE_EXPIRATION_TIME } from "./auth-code-expiration";
+import { AUTH_CODE_EXPIRATION_TIME } from "../constants/auth-code-expiration";
 
 export interface AuthCodeConfig {
   cookieName: string;
@@ -13,7 +14,7 @@ export interface AuthCodeConfig {
   };
   tokenOptions: {
     algorithm: schemaValidation.z.core.util.JWTAlgorithm;
-    secret: string;
+    secret: Secret;
     expiresIn: number;
   };
 }

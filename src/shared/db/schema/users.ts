@@ -14,7 +14,6 @@ export const users = table(
     username: schemaBuilder.varchar("username", { length: 50 }).unique(),
     isActive: schemaBuilder.boolean("is_active").notNull().default(true),
     emailVerified: schemaBuilder.timestamp("email_verified", { mode: "date" }),
-    phoneVerified: schemaBuilder.timestamp("phone_verified", { mode: "date" }),
     lastLogin: schemaBuilder.timestamp("last_login", { mode: "date" }),
     tokenVersion: schemaBuilder.integer("token_version").notNull().default(0),
     ...timestampMetadataFields,

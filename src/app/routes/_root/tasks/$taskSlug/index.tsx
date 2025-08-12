@@ -8,7 +8,7 @@ import { DetailTask } from "@/pages/detail-task";
 export const Route = createFileRoute("/_root/tasks/$taskSlug/")({
   component: RouteComponent,
   loader: async ({ context, params }) => {
-    const queryOptions = getTaskBySlugQueryOptions(params.taskSlug);
+    const queryOptions = getTaskBySlugQueryOptions({ slug: params.taskSlug });
 
     context.queryClient.prefetchQuery(queryOptions);
 

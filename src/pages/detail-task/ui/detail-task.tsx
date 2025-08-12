@@ -1,7 +1,6 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 
-import { getTaskBySlugQueryOptions } from "@/entities/task";
+import { useTaskBySlugSuspenseQuery } from "@/entities/task";
 import { type Slug } from "@/shared/types/slug";
 
 interface DetailTaskProps {
@@ -9,7 +8,7 @@ interface DetailTaskProps {
 }
 
 export const DetailTask = ({ slug }: DetailTaskProps) => {
-  const { data } = useSuspenseQuery(getTaskBySlugQueryOptions(slug));
+  const { data } = useTaskBySlugSuspenseQuery({ slug });
 
   return (
     <div className="subgrid-container">

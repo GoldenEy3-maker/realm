@@ -19,7 +19,7 @@ describe("getSession()", () => {
 
   it("should return the session when valid cookie is present", async () => {
     const payload: AuthSession = {
-      user: { id: STATIC_UUID },
+      user: { id: STATIC_UUID, email: "test@test.com", username: "test" },
       version: 1,
     };
     const sessionToken = await generateSessionToken(payload, authConfig);
@@ -61,7 +61,7 @@ describe("getSession()", () => {
 
   it("should return null when token is expired", async () => {
     const payload: AuthSession = {
-      user: { id: STATIC_UUID },
+      user: { id: STATIC_UUID, email: "test@test.com", username: "test" },
       version: 1,
     };
     const expiredToken = await generateSessionToken(payload, {

@@ -4,4 +4,4 @@ export const authTokenSchema = schemaValidation.object({
   _enc: schemaValidation.string(),
 });
 
-export type AuthToken = schemaValidation.output<typeof authTokenSchema>;
+export type AuthToken = schemaValidation.infer<typeof authTokenSchema>;

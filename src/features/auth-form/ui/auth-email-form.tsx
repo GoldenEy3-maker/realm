@@ -1,4 +1,3 @@
-import { devDelay } from "@/shared/lib/dev-delay";
 import { handleFormEvent } from "@/shared/lib/handle-form-event";
 import { noop } from "@/shared/lib/noop";
 import { Button } from "@/shared/ui/button";
@@ -27,8 +26,7 @@ export function AuthEmailForm({
       onChange: authEmailFormSchema,
     },
     onSubmit: async (data) => {
-      await devDelay();
-      sendEmailCodeMutation.mutate(data.value);
+      await sendEmailCodeMutation.mutateAsync(data.value);
     },
   });
 

@@ -6,6 +6,6 @@ export const authCodeFormSchema = authFormSchema.pick({
   code: true,
 });
 
-export type AuthCodeFormSchema = schemaValidation.output<
+export type AuthCodeFormSchema = schemaValidation.infer<
   typeof authCodeFormSchema
 >;

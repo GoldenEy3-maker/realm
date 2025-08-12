@@ -13,8 +13,10 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as RootRouteRouteImport } from './routes/_root/route'
 import { Route as RootIndexRouteImport } from './routes/_root/index'
 import { Route as RootTasksIndexRouteImport } from './routes/_root/tasks/index'
+import { Route as RootSettingsIndexRouteImport } from './routes/_root/settings/index'
+import { Route as RootProjectsIndexRouteImport } from './routes/_root/projects/index'
+import { Route as RootHelpIndexRouteImport } from './routes/_root/help/index'
 import { Route as RootTasksTaskSlugIndexRouteImport } from './routes/_root/tasks/$taskSlug/index'
-import { Route as RootTasksTaskSlugTestTestIdRouteImport } from './routes/_root/tasks/$taskSlug/test.$testId'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -35,64 +37,85 @@ const RootTasksIndexRoute = RootTasksIndexRouteImport.update({
   path: '/tasks/',
   getParentRoute: () => RootRouteRoute,
 } as any)
+const RootSettingsIndexRoute = RootSettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+const RootProjectsIndexRoute = RootProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+const RootHelpIndexRoute = RootHelpIndexRouteImport.update({
+  id: '/help/',
+  path: '/help/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
 const RootTasksTaskSlugIndexRoute = RootTasksTaskSlugIndexRouteImport.update({
   id: '/tasks/$taskSlug/',
   path: '/tasks/$taskSlug/',
   getParentRoute: () => RootRouteRoute,
 } as any)
-const RootTasksTaskSlugTestTestIdRoute =
-  RootTasksTaskSlugTestTestIdRouteImport.update({
-    id: '/tasks/$taskSlug/test/$testId',
-    path: '/tasks/$taskSlug/test/$testId',
-    getParentRoute: () => RootRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/': typeof RootIndexRoute
+  '/help': typeof RootHelpIndexRoute
+  '/projects': typeof RootProjectsIndexRoute
+  '/settings': typeof RootSettingsIndexRoute
   '/tasks': typeof RootTasksIndexRoute
   '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
-  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/': typeof RootIndexRoute
+  '/help': typeof RootHelpIndexRoute
+  '/projects': typeof RootProjectsIndexRoute
+  '/settings': typeof RootSettingsIndexRoute
   '/tasks': typeof RootTasksIndexRoute
   '/tasks/$taskSlug': typeof RootTasksTaskSlugIndexRoute
-  '/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_root': typeof RootRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_root/': typeof RootIndexRoute
+  '/_root/help/': typeof RootHelpIndexRoute
+  '/_root/projects/': typeof RootProjectsIndexRoute
+  '/_root/settings/': typeof RootSettingsIndexRoute
   '/_root/tasks/': typeof RootTasksIndexRoute
   '/_root/tasks/$taskSlug/': typeof RootTasksTaskSlugIndexRoute
-  '/_root/tasks/$taskSlug/test/$testId': typeof RootTasksTaskSlugTestTestIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/auth'
     | '/'
+    | '/help'
+    | '/projects'
+    | '/settings'
     | '/tasks'
     | '/tasks/$taskSlug'
-    | '/tasks/$taskSlug/test/$testId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
     | '/'
+    | '/help'
+    | '/projects'
+    | '/settings'
     | '/tasks'
     | '/tasks/$taskSlug'
-    | '/tasks/$taskSlug/test/$testId'
   id:
     | '__root__'
     | '/_root'
     | '/auth'
     | '/_root/'
+    | '/_root/help/'
+    | '/_root/projects/'
+    | '/_root/settings/'
     | '/_root/tasks/'
     | '/_root/tasks/$taskSlug/'
-    | '/_root/tasks/$taskSlug/test/$testId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -130,6 +153,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RootTasksIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }
+    '/_root/settings/': {
+      id: '/_root/settings/'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof RootSettingsIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
+    '/_root/projects/': {
+      id: '/_root/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof RootProjectsIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
+    '/_root/help/': {
+      id: '/_root/help/'
+      path: '/help'
+      fullPath: '/help'
+      preLoaderRoute: typeof RootHelpIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
     '/_root/tasks/$taskSlug/': {
       id: '/_root/tasks/$taskSlug/'
       path: '/tasks/$taskSlug'
@@ -137,28 +181,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RootTasksTaskSlugIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }
-    '/_root/tasks/$taskSlug/test/$testId': {
-      id: '/_root/tasks/$taskSlug/test/$testId'
-      path: '/tasks/$taskSlug/test/$testId'
-      fullPath: '/tasks/$taskSlug/test/$testId'
-      preLoaderRoute: typeof RootTasksTaskSlugTestTestIdRouteImport
-      parentRoute: typeof RootRouteRoute
-    }
   }
 }
 
 interface RootRouteRouteChildren {
   RootIndexRoute: typeof RootIndexRoute
+  RootHelpIndexRoute: typeof RootHelpIndexRoute
+  RootProjectsIndexRoute: typeof RootProjectsIndexRoute
+  RootSettingsIndexRoute: typeof RootSettingsIndexRoute
   RootTasksIndexRoute: typeof RootTasksIndexRoute
   RootTasksTaskSlugIndexRoute: typeof RootTasksTaskSlugIndexRoute
-  RootTasksTaskSlugTestTestIdRoute: typeof RootTasksTaskSlugTestTestIdRoute
 }
 
 const RootRouteRouteChildren: RootRouteRouteChildren = {
   RootIndexRoute: RootIndexRoute,
+  RootHelpIndexRoute: RootHelpIndexRoute,
+  RootProjectsIndexRoute: RootProjectsIndexRoute,
+  RootSettingsIndexRoute: RootSettingsIndexRoute,
   RootTasksIndexRoute: RootTasksIndexRoute,
   RootTasksTaskSlugIndexRoute: RootTasksTaskSlugIndexRoute,
-  RootTasksTaskSlugTestTestIdRoute: RootTasksTaskSlugTestTestIdRoute,
 }
 
 const RootRouteRouteWithChildren = RootRouteRoute._addFileChildren(

@@ -2,7 +2,6 @@ import { useRouter } from "@tanstack/react-router";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useRef } from "react";
 
-import { devDelay } from "@/shared/lib/dev-delay";
 import { handleFormEvent } from "@/shared/lib/handle-form-event";
 import { noop } from "@/shared/lib/noop";
 import { useForm } from "@/shared/ui/form";
@@ -52,8 +51,6 @@ export function AuthCodeForm({
         onSubmitWithoutEmail();
         return;
       }
-
-      await devDelay();
 
       try {
         await verifyEmailCodeMutation.mutateAsync({

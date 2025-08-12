@@ -1,5 +1,7 @@
 import { createDecipheriv } from "crypto";
 
+import { type Secret } from "@/shared/types/secret";
+
 import { Logger } from "../logger";
 import { getIvLength } from "./get-iv-length";
 import { getKeyLength } from "./get-key-length";
@@ -14,7 +16,7 @@ import { type EncriptionOptions } from "./options";
  */
 export function decrypt(
   encryptedData: string,
-  secret: string,
+  secret: Secret,
   options: Partial<EncriptionOptions> = {},
 ): string | null {
   const { algorithm, inputEncoding, outputEncoding, encoding } =

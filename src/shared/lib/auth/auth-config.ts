@@ -1,6 +1,7 @@
+import { Environment } from "@/shared/constants/environment";
 import { serverEnv } from "@/shared/env/server";
+import { type Secret } from "@/shared/types/secret";
 
-import { IS_PROD } from "../../constants/is-prod";
 import { type schemaValidation } from "../schema-validation";
 
 export interface AuthConfig {
@@ -13,8 +14,8 @@ export interface AuthConfig {
   };
   tokenOptions: {
     alg: schemaValidation.z.core.util.JWTAlgorithm;
-    secret: string;
-    encryption: string;
+    secret: Secret;
+    encryption: Secret;
   };
 }
 
@@ -28,7 +29,7 @@ export const authConfig: AuthConfig = {
   cookieName: "session",
   cookieOptions: {
     httpOnly: true,
-    secure: IS_PROD,
+    secure: Environment.IS_PROD,
     /** The maximum age of the session in seconds. */
     maxAge: 60 * 60 * 24 * 30, // 30 days
     sameSite: "lax",

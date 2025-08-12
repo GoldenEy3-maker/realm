@@ -1,13 +1,16 @@
 import { createServerFn } from "@tanstack/react-start";
+import { eq } from "drizzle-orm";
 
-import { db } from "../../db";
-import { eq } from "../../db/orm-utils";
-import { users } from "../../db/schema/users";
+import { db } from "@/shared/db";
+import { users } from "@/shared/db/schema/users";
+
 import { getSession } from "./auth-get-session";
+import { authServerFnOptionsSchema } from "./auth-server-fn-options-schema";
 import { setSession } from "./auth-set-session";
 
-export const authServerFn = createServerFn({ method: "GET" }).handler(
-  async () => {
+export const authServerFn = createServerFn({ method: "GET" })
+  .validator(authServerFnOptionsSchema.optional())
+  .handler(async ({ data = { shouldUpdateSession: true } }) => {
     const session = await getSession();
 
     if (!session) return null;
@@ -15,7 +18,9 @@ export const authServerFn = createServerFn({ method: "GET" }).handler(
     const [user] = await db
       .select({
         id: users.id,
+        email: users.email,
         tokenVersion: users.tokenVersion,
+        username: users.username,
       })
       .from(users)
       .where(eq(users.id, session.user.id));
@@ -24,8 +29,8 @@ export const authServerFn = createServerFn({ method: "GET" }).handler(
 
     if (session.version !== user.tokenVersion) return null;
 
-    await setSession({ user, version: user.tokenVersion });
+    if (data?.shouldUpdateSession)
+      await setSession({ user, version: user.tokenVersion });
 
     return session;
-  },
-);
+  });

@@ -4,6 +4,6 @@ import { authFormSchema } from "./auth-form-schema";
 
 export const authEmailFormSchema = authFormSchema.pick({ email: true });
 
-export type AuthEmailFormSchema = schemaValidation.output<
+export type AuthEmailFormSchema = schemaValidation.infer<
   typeof authEmailFormSchema
 >;

@@ -13,11 +13,12 @@ export const organizations = table(
     slug: schemaBuilder.varchar("slug", { length: 256 }).notNull().unique(),
     name: schemaBuilder.varchar("name", { length: 256 }).notNull(),
     description: schemaBuilder.text("description"),
-    avatarUrl: schemaBuilder.text("avatar_url"),
+    logoUrl: schemaBuilder.text("logo_url"),
     websiteUrl: schemaBuilder.text("website_url"),
     authorId: schemaBuilder
       .uuid("author_id")
-      .references(() => users.id, { onDelete: "cascade" }),
+      .references(() => users.id, { onDelete: "cascade" })
+      .notNull(),
     ...timestampMetadataFields,
   },
   (table) => [

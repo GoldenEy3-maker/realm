@@ -1,9 +1,9 @@
 import { createAutoMapper } from "@/shared/lib/auto-mapper";
 
-import { TaskDomainSchema } from "../model/task-domain";
-import { TaskDtoSchema } from "../model/task-dto";
+import { taskDomainSchema } from "../model/task-domain";
+import { taskDtoSchema } from "../model/task-dto";
 
-const taskAutoMapper = createAutoMapper(TaskDtoSchema, TaskDomainSchema);
+const taskAutoMapper = createAutoMapper(taskDtoSchema, taskDomainSchema);
 
 export const { map: taskDtoToDomain, mapArray: taskDtoToDomainArray } =
   taskAutoMapper;

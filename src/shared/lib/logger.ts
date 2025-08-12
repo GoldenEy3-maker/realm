@@ -1,7 +1,7 @@
-import { IS_PROD } from "../constants/is-prod";
+import { Environment } from "../constants/environment";
 
 export class Logger {
-  private static readonly enabled = !IS_PROD;
+  private static readonly enabled = !Environment.IS_PROD;
 
   public static log(message: unknown, ...args: unknown[]) {
     if (!this.enabled) return;

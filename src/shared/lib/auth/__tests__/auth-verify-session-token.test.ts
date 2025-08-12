@@ -10,7 +10,7 @@ import { verifySessionToken } from "../auth-verify-token-session";
 describe("verifySessionToken()", () => {
   it("should verify a session", async () => {
     const payload: AuthSession = {
-      user: { id: STATIC_UUID },
+      user: { id: STATIC_UUID, email: "test@test.com", username: "test" },
       version: 1,
     };
     const sessionToken = await generateSessionToken(payload, authConfig);
@@ -26,7 +26,10 @@ describe("verifySessionToken()", () => {
 
   it("should return null if the session is not valid secret", async () => {
     const sessionToken = await generateSessionToken(
-      { user: { id: STATIC_UUID }, version: 1 },
+      {
+        user: { id: STATIC_UUID, email: "test@test.com", username: "test" },
+        version: 1,
+      },
       {
         ...authConfig,
         tokenOptions: { ...authConfig.tokenOptions, secret: "invalid" },
@@ -38,7 +41,10 @@ describe("verifySessionToken()", () => {
 
   it("should return null if the session is expired", async () => {
     const sessionToken = await generateSessionToken(
-      { user: { id: STATIC_UUID }, version: 1 },
+      {
+        user: { id: STATIC_UUID, email: "test@test.com", username: "test" },
+        version: 1,
+      },
       {
         ...authConfig,
         cookieOptions: {

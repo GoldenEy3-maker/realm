@@ -93,7 +93,7 @@ function RootDocument({ children }: Readonly<{ children: React.ReactNode }>) {
         <div className="flex min-h-svh flex-col">{children}</div>
         <Toaster richColors position="bottom-center" />
         <TanStackRouterDevtools position="bottom-right" />
-        <ReactQueryDevtools buttonPosition="bottom-left" />
+        <ReactQueryDevtools buttonPosition="top-right" />
         <Scripts />
       </body>
     </html>

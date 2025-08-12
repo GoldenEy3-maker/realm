@@ -12,8 +12,8 @@ const HeadingVariants = cva("", {
       h2: "text-3xl leading-tight font-bold",
       h3: "text-[clamp(var(--text-xl),var(--text-2xl))] leading-tight font-semibold",
       h4: "text-xl leading-tight font-semibold",
-      h5: "text-lg leading-tight font-semibold",
-      h6: "text-base leading-tight font-semibold",
+      h5: "text-lg leading-tight font-medium",
+      h6: "text-base leading-tight font-medium",
     },
   },
   defaultVariants: {

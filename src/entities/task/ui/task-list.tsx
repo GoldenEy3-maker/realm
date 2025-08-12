@@ -1,17 +1,15 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 
 import { Button } from "@/shared/ui/button";
 
-import { getTasksQueryOptions } from "../api/get-tasks-query-options";
-import { type TaskDomain } from "../model/task-domain";
+import { useTasksSuspenseQuery } from "../api/use-tasks-suspense-query";
 
 export function TaskList() {
-  const { data } = useSuspenseQuery(getTasksQueryOptions());
+  const { data } = useTasksSuspenseQuery();
 
   return (
     <div>
-      {data.map((task: TaskDomain) => (
+      {data.map((task) => (
         <Button asChild variant="link" key={task.id}>
           <Link to="/tasks/$taskSlug" params={{ taskSlug: task.slug }}>
             {task.title}

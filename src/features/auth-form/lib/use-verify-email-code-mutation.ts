@@ -22,7 +22,7 @@ export function useVerifyEmailCodeMutation({
     onSuccess: (data) => {
       queryClient.resetQueries({ queryKey: [QueryKeyMap.SESSION] });
       queryClient.setQueryData([QueryKeyMap.SESSION], () => ({
-        user: { id: data.id },
+        user: { id: data.id, email: data.email, username: data.username },
         version: data.tokenVersion,
       }));
       onSuccess();
