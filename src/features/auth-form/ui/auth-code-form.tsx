@@ -32,7 +32,7 @@ export function AuthCodeForm({
   const router = useRouter();
   const inputOTPRef = useRef<HTMLInputElement | null>(null);
 
-  const verifyEmailCodeMutation = useVerifyEmailCodeMutation({
+  const { mutateAsync: verifyEmailCode } = useVerifyEmailCodeMutation({
     onSuccess: () => {
       onSuccess();
       router.navigate({ to: "/" });
@@ -53,7 +53,7 @@ export function AuthCodeForm({
       }
 
       try {
-        await verifyEmailCodeMutation.mutateAsync({
+        await verifyEmailCode({
           email,
           code: value.code,
         });

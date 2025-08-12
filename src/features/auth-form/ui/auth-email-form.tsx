@@ -26,11 +26,11 @@ export function AuthEmailForm({
       onChange: authEmailFormSchema,
     },
     onSubmit: async (data) => {
-      await sendEmailCodeMutation.mutateAsync(data.value);
+      await sendEmailCode(data.value);
     },
   });
 
-  const sendEmailCodeMutation = useSendEmailCodeMutation({
+  const { mutateAsync: sendEmailCode } = useSendEmailCodeMutation({
     getEmail: () => form.getFieldValue("email"),
     onSuccess: (variables) => {
       onSuccess(variables);
