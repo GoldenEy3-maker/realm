@@ -1,0 +1,11 @@
+{
+  "validationErrorsMessage": "Ошибка валидации ({errors})",
+  "validationErrorsMesssageExtended": {
+    "one": "Ошибка валидации ({errors} и еще {count} ошибка",
+    "few": "Ошибка валидации ({errors} и еще {count} ошибки",
+    "other": "Ошибка валидации ({errors} и еще {count} ошибок"
+  },
+  "notEmpty": "Не должно быть пустым",
+  "invalidEmail": "Неверный email",
+  "mustBeString": "Должно быть строкой"
+}

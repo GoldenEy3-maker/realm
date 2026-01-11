@@ -1,0 +1,14 @@
+{
+  "name": "@repo/prettier",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./config.d.ts",
+      "default": "./config.js"
+    }
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "failedToSendVerificationEmail": "Failed to send verification email",
+  "verificationCodeSubject": "Your verification code",
+  "emailVerification": "Email Verification",
+  "verificationCodeText": "Your verification code is:",
+  "codeExpiration": "This code will expire in 5 minutes.",
+  "ignoreIfNotRequested": "If you didn't request this code, please ignore this email."
+}

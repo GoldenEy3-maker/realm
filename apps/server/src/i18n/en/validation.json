@@ -1,0 +1,10 @@
+{
+  "validationErrorsMessage": "Validation failed ({errors})",
+  "validationErrorsMesssageExtended": {
+    "one": "Validation failed ({errors} and {count} more error",
+    "other": "Validation failed ({errors} and {count} more errors"
+  },
+  "notEmpty": "Must not be empty",
+  "invalidEmail": "Invalid email",
+  "mustBeString": "Must be a string"
+}

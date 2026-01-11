@@ -1,0 +1,8 @@
+{
+  "failedToSendVerificationEmail": "Не удалось отправить email с кодом верификации",
+  "verificationCodeSubject": "Ваш код верификации",
+  "emailVerification": "Верификация Email",
+  "verificationCodeText": "Ваш код верификации:",
+  "codeExpiration": "Этот код истекает через 5 минут.",
+  "ignoreIfNotRequested": "Если вы не запрашивали этот код, пожалуйста, проигнорируйте это письмо."
+}

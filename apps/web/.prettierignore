@@ -1,0 +1,5 @@
+**/build
+**/dist
+**/public
+pnpm-lock.yaml
+route-tree.gen.ts

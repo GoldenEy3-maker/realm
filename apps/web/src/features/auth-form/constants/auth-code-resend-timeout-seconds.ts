@@ -1,0 +1,1 @@
+export const AUTH_CODE_RESEND_TIMEOUT_SECONDS = 60;
