@@ -6,18 +6,18 @@ import { ThemeMap, useTheme } from "@/shared/lib/theme";
 import type { ComponentPropsWithoutChildren } from "@/shared/types/component-props-without-children";
 import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 
-import { ThemeTabsSkeleton } from "./theme-tabs-skeleton";
+import { ThemeSwitcherSkeleton } from "./theme-switcher-skeleton";
 
-interface ThemeTabsProps extends Omit<
+interface ThemeSwitcherProps extends Omit<
   ComponentPropsWithoutChildren<typeof Tabs>,
   "value" | "onValueChange"
 > {}
 
-export function ThemeTabs(props: ThemeTabsProps) {
+export function ThemeSwitcher(props: ThemeSwitcherProps) {
   const isClient = useIsClient();
   const { theme, setTheme } = useTheme();
 
-  if (!isClient) return <ThemeTabsSkeleton />;
+  if (!isClient) return <ThemeSwitcherSkeleton />;
 
   return (
     <Tabs value={theme} onValueChange={(value) => setTheme(value as ThemeMap)} {...props}>

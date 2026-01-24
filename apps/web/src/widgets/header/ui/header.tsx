@@ -2,7 +2,7 @@ import { useMatches } from "@tanstack/react-router";
 import { Suspense } from "react";
 
 import { NotificationPopover } from "@/features/notification-popover/ui";
-import { ThemeTabs } from "@/features/theme-tabs/ui";
+import { ThemeSwitcher } from "@/features/theme-switcher/ui";
 import { Heading } from "@/shared/ui/heading";
 
 import { HeaderProfileAvatar } from "./header-profile-avatar";
@@ -27,7 +27,7 @@ export function Header() {
             </Heading>
           )}
           <div className="ml-auto flex items-center">
-            <ThemeTabs />
+            <ThemeSwitcher />
             <NotificationPopover />
             <div className="ml-4">
               <Suspense fallback={<HeaderProfileAvatarSkeleton />}>

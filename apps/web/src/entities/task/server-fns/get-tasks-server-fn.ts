@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 
+import { devDelay } from "@/shared/lib/dev-delay";
 import { schemaValidation } from "@/shared/lib/schema-validation";
 import { createServerApiClientInstance } from "@/shared/services/api/create-server-api-client-instance";
 
@@ -11,7 +12,9 @@ export const getTasksServerFn = createServerFn({ method: "GET" })
       limit: schemaValidation.number().min(1).max(100).optional(),
     }),
   )
-  .handler(() => {
+  .handler(async () => {
+    await devDelay();
+
     const apiClient = createServerApiClientInstance(TaskApi);
     return apiClient.getTasks();
   });

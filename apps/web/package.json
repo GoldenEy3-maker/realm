@@ -8,7 +8,7 @@
     "predev": "bun run openapi:generate",
     "dev": "vite dev",
     "lint": "eslint",
-    "prebuild": "bun run test && bun run openapi:generate",
+    "prebuild": "bun run test:run && bun run openapi:generate",
     "build": "vite build",
     "start": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,mjs,css}\" \"!src/**/*.gen.ts\"",
