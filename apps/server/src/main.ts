@@ -9,6 +9,7 @@ import { ValidationPipe } from "./validation/validation.pipe";
 import helmet from "helmet";
 import { HelmetConfig } from "./helmet.config";
 import { I18nMiddleware } from "nestjs-i18n";
+import { NestLensLogger } from "nestlens";
 
 async function bootstrap() {
   const corsOrigins = process.env.AVAILABLE_CORS_ORIGINS?.split(",") ?? [];
@@ -44,6 +45,9 @@ async function bootstrap() {
   app.use(I18nMiddleware);
 
   await new OpenApiReference().setup(app);
+
+  const logger = app.get(NestLensLogger);
+  app.useLogger(logger);
 
   await app.listen(process.env.PORT ?? 3000);
 }
