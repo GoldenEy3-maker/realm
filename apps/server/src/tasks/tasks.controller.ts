@@ -41,7 +41,7 @@ export class TasksController {
       data: { $ref: getSchemaPath(TaskResponseDto) },
       message: "Task fetched successfully",
     },
-    exeptions: [ApiNotFoundResponse, ApiUnprocessableEntityResponse],
+    exceptions: [ApiNotFoundResponse, ApiUnprocessableEntityResponse],
   })
   async findOneBySerialNumber(
     @Param("serialNumber", ParseIntPipe) serialNumber: number,

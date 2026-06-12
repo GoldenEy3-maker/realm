@@ -24,7 +24,7 @@ export class ProfileController {
       data: { $ref: getSchemaPath(ProfileResponseDto) },
       message: "Profile fetched successfully",
     },
-    exeptions: [ApiUnauthorizedResponse, ApiNotFoundResponse],
+    exceptions: [ApiUnauthorizedResponse, ApiNotFoundResponse],
   })
   async getProfile(@Req() req: AuthenticatedRequest) {
     const profile = await this.profileService.getOneByUserId(req.user.sub);

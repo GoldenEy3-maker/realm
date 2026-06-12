@@ -31,7 +31,7 @@ export class AuthController {
       data: { type: "boolean", example: true },
       message: "Email verification code sent successfully",
     },
-    exeptions: [ApiTooManyRequestsResponse],
+    exceptions: [ApiTooManyRequestsResponse],
   })
   sendVerificationCode(@Body() sendVerificationCodeDto: SendVerificationCodeDto): Promise<boolean> {
     return this.authService.generateAndSendVerificationCode(sendVerificationCodeDto.email);
@@ -44,7 +44,7 @@ export class AuthController {
       data: { $ref: getSchemaPath(AuthResponseDto) },
       message: "Code verified successfully",
     },
-    exeptions: [ApiUnprocessableEntityResponse, ApiUnauthorizedResponse],
+    exceptions: [ApiUnprocessableEntityResponse, ApiUnauthorizedResponse],
   })
   verifyCode(@Body() verifyCodeDto: VerifyCodeDto): Promise<AuthResponseDto> {
     return this.authService.verifyCodeAndGenerateTokens(verifyCodeDto.email, verifyCodeDto.code);
@@ -58,7 +58,7 @@ export class AuthController {
       data: { $ref: getSchemaPath(AuthResponseDto) },
       message: "Tokens refreshed successfully",
     },
-    exeptions: [
+    exceptions: [
       ApiTooManyRequestsResponse,
       ApiUnauthorizedResponse,
       ApiUnprocessableEntityResponse,
@@ -76,7 +76,7 @@ export class AuthController {
       data: { $ref: getSchemaPath(SessionResponseDto) },
       message: "Session fetched successfully",
     },
-    exeptions: [ApiNotFoundResponse],
+    exceptions: [ApiNotFoundResponse],
   })
   getSession(@Req() req: AuthenticatedRequest): Promise<SessionResponseDto> {
     return this.authService.getSession(req.user.sub);

@@ -18,7 +18,7 @@ interface OpenApiOptions {
     data: SchemaObject | ReferenceObject;
     message: string;
   };
-  exeptions?: ((options?: ApiResponseNoStatusOptions) => MethodDecorator & ClassDecorator)[];
+  exceptions?: ((options?: ApiResponseNoStatusOptions) => MethodDecorator & ClassDecorator)[];
 }
 
 export function OpenApi(options: OpenApiOptions) {
@@ -32,7 +32,7 @@ export function OpenApi(options: OpenApiOptions) {
         ],
       },
     }),
-    ...(options.exeptions ?? []).map((decorator) =>
+    ...(options.exceptions ?? []).map((decorator) =>
       decorator({ schema: { $ref: getSchemaPath(ErrorResponseDto) } }),
     ),
     ResponseMessage(options.success.message),
