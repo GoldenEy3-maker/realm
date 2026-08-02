@@ -29,8 +29,6 @@ export class ProfileController {
   async getProfile(@Req() req: AuthenticatedRequest) {
     const profile = await this.profileService.getOneByUserId(req.user.sub);
 
-    console.log(typeof profile?.birthDate);
-
     return profile;
   }
 }

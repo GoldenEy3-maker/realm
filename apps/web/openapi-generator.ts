@@ -22,7 +22,10 @@ class OpenApiGenerator {
 
     const ast = await this.getOpenApiAst(source);
 
-    await this.saveOpenApi(astToString(ast));
+    const generatedCode = astToString(ast);
+    const codeWithConstEnums = this.transformEnumsToConst(generatedCode);
+
+    await this.saveOpenApi(codeWithConstEnums);
   }
 
   private async waitForBackend(maxRetries = 30, retryDelay = 1000) {
@@ -71,7 +74,7 @@ class OpenApiGenerator {
     return source;
   }
 
-  private getOpenApiAst(source: string) {
+  private async getOpenApiAst(source: string) {
     const BLOB = factory.createTypeReferenceNode(factory.createIdentifier("Blob"));
     const NULL = factory.createLiteralTypeNode(factory.createNull());
 
@@ -89,6 +92,34 @@ class OpenApiGenerator {
         }
         return undefined;
       },
+    });
+  }
+
+  private transformEnumsToConst(generatedCode: string): string {
+    const enumPattern = /export enum (\w+) \{([^}]+)\}/g;
+
+    return generatedCode.replace(enumPattern, (_match, enumName, enumBody) => {
+      const entries = enumBody
+        .trim()
+        .split(",")
+        .map((entry: string) => entry.trim())
+        .filter((entry: string) => entry.length > 0);
+
+      const constEntries = entries
+        .map((entry: string) => {
+          const cleaned = entry.replace(/\/\*.*?\*\//g, "").trim();
+          const objectSyntax = cleaned.replace(/\s*=\s*/, ": ");
+          return `  ${objectSyntax}`;
+        })
+        .join(",\n");
+
+      return [
+        `export const ${enumName} = {`,
+        constEntries,
+        `} as const;`,
+        ``,
+        `export type ${enumName} = (typeof ${enumName})[keyof typeof ${enumName}];`,
+      ].join("\n");
     });
   }
 

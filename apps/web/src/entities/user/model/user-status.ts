@@ -1,3 +1,1 @@
-import type { SessionResponseDtoStatus } from "@openapi";
-
-export type UserStatus = SessionResponseDtoStatus;
+export { SessionResponseDtoStatus as UserStatus } from "@openapi";
