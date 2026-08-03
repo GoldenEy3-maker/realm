@@ -22,13 +22,13 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const responseBody = exception instanceof HttpException ? exception.getResponse() : {};
 
-    const exeptionMessage =
+    const exceptionMessage =
       exception instanceof Error ? exception.message : internalServerErrorMessage;
 
     const errorResponse: ErrorResponseDto["error"] =
       typeof responseBody === "string"
         ? {
-            message: exeptionMessage,
+            message: exceptionMessage,
             error: responseBody,
             errors: {},
           }
@@ -48,7 +48,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       success: false,
       statusCode: status,
       path: request.url,
-      message: exeptionMessage,
+      message: exceptionMessage,
       error: errorResponse,
       meta: {
         timestamp: format(new Date().toISOString(), "yyyy-MM-dd HH:mm:ss"),

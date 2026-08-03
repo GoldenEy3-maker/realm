@@ -6,7 +6,8 @@ import { AuthPage } from "@/pages/auth/ui";
 export const Route = createFileRoute("/auth")({
   component: RouteComponent,
   loader: async () => {
-    const authEmailVerificationIntentToken = await getAuthEmailVerificationIntentTokenServerFn();
+    const authEmailVerificationIntentToken =
+      await getAuthEmailVerificationIntentTokenServerFn();
 
     return { authEmailVerificationIntentToken };
   },
@@ -15,5 +16,7 @@ export const Route = createFileRoute("/auth")({
 function RouteComponent() {
   const { authEmailVerificationIntentToken } = Route.useLoaderData();
 
-  return <AuthPage emailVeirficationIntentData={authEmailVerificationIntentToken} />;
+  return (
+    <AuthPage emailVerificationIntentData={authEmailVerificationIntentToken} />
+  );
 }

@@ -3,7 +3,7 @@ import { setCookie } from "@tanstack/react-start/server";
 import { jwtVerify, SignJWT } from "jose";
 
 import { Logger } from "@/shared/lib/logger";
-import { millisecondsToSeconds } from "@/shared/lib/milleseconds-to-seconds";
+import { millisecondsToSeconds } from "@/shared/lib/milliseconds-to-seconds";
 
 import type { AuthEmailVerificationIntentConfig } from "../config/auth-email-verification-intent-config";
 import {
@@ -19,7 +19,9 @@ export class AuthEmailVerificationIntentService {
       .setProtectedHeader({
         alg: this.config.tokenOptions.algorithm,
       })
-      .setExpirationTime(millisecondsToSeconds(Date.now()) + this.config.tokenOptions.expiresIn);
+      .setExpirationTime(
+        millisecondsToSeconds(Date.now()) + this.config.tokenOptions.expiresIn
+      );
 
     return jwt.sign(new TextEncoder().encode(this.config.tokenOptions.secret));
   }
@@ -37,7 +39,7 @@ export class AuthEmailVerificationIntentService {
     try {
       const { payload } = await jwtVerify(
         token,
-        new TextEncoder().encode(this.config.tokenOptions.secret),
+        new TextEncoder().encode(this.config.tokenOptions.secret)
       );
 
       return authEmailVerificationIntentTokenSchema.parse(payload);

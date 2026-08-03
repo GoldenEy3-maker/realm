@@ -8,10 +8,10 @@ import { Heading } from "@/shared/ui/heading";
 import { RealmLogo } from "@/shared/ui/realm-logo";
 
 interface AuthPageProps {
-  emailVeirficationIntentData: AuthEmailVerificationIntentTokenSchema | null;
+  emailVerificationIntentData: AuthEmailVerificationIntentTokenSchema | null;
 }
 
-export function AuthPage({ emailVeirficationIntentData }: AuthPageProps) {
+export function AuthPage({ emailVerificationIntentData }: AuthPageProps) {
   return (
     <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden">
       <AnimatedGridPattern
@@ -20,7 +20,7 @@ export function AuthPage({ emailVeirficationIntentData }: AuthPageProps) {
         duration={3}
         className={cn(
           "mask-[radial-gradient(800px_circle_at_center,white,transparent)]",
-          "skew-y-12",
+          "skew-y-12"
         )}
       />
       <div className="relative z-10 flex w-full max-w-sm flex-col items-center gap-5 py-6">
@@ -30,9 +30,10 @@ export function AuthPage({ emailVeirficationIntentData }: AuthPageProps) {
             Realm
           </Heading>
         </Link>
-        <AuthForm emailVeirficationIntentData={emailVeirficationIntentData} />
+        <AuthForm emailVerificationIntentData={emailVerificationIntentData} />
         <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-          Продолжая, вы соглашаетесь с нашими <a href="#">Условиями использования</a> и{" "}
+          Продолжая, вы соглашаетесь с нашими{" "}
+          <a href="#">Условиями использования</a> и{" "}
           <a href="#">Политикой конфиденциальности</a>.
         </div>
       </div>

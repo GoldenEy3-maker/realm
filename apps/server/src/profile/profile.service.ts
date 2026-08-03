@@ -4,7 +4,6 @@ import { ProfileResponseDto } from "./dto/profile-response.dto";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Profile } from "./entities/profile.entity";
 import { Repository } from "typeorm";
-import { ProfileMapper } from "./profile.mapper";
 import { CreateProfileDto } from "./dto/create-profile.dto";
 import { I18nService } from "nestjs-i18n";
 
@@ -25,7 +24,7 @@ export class ProfileService {
 
     const profile = await this.profileRepository.findOne({ where: { user: { id: user.id } } });
 
-    return profile ? ProfileMapper.toDto(profile) : null;
+    return profile?.toDto() ?? null;
   }
 
   async create(userId: number, createProfileDto: CreateProfileDto): Promise<Profile> {

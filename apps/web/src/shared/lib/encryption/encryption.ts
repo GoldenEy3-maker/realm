@@ -1,15 +1,20 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
-import { createCipheriv, createDecipheriv, randomBytes, scryptSync } from "crypto";
+import {
+  createCipheriv,
+  createDecipheriv,
+  randomBytes,
+  scryptSync,
+} from "crypto";
 
 import type { Secret } from "@/shared/types/secret";
 
 import { Logger } from "../logger";
-import type { EncriptionOptions } from "./encription-options";
+import type { EncryptionOptions } from "./encryption-options";
 
-export class Encription {
-  options: EncriptionOptions;
+export class Encryption {
+  options: EncryptionOptions;
 
-  constructor(options: Partial<EncriptionOptions> = {}) {
+  constructor(options: Partial<EncryptionOptions> = {}) {
     const algorithm = options.algorithm ?? "aes-256-cbc";
     const ivLength = this.getIvLength(algorithm);
 
@@ -37,7 +42,11 @@ export class Encription {
 
     const cipher = createCipheriv(this.options.algorithm, key, this.options.iv);
 
-    let encrypted = cipher.update(data, this.options.inputEncoding, this.options.outputEncoding);
+    let encrypted = cipher.update(
+      data,
+      this.options.inputEncoding,
+      this.options.outputEncoding
+    );
 
     encrypted += cipher.final(this.options.outputEncoding);
 
@@ -55,37 +64,41 @@ export class Encription {
    * @param secret - secret key to decrypt
    * @returns decrypted data
    */
-  public decrypt = createServerOnlyFn((encryptedData: string, secret: Secret) => {
-    try {
-      const buffer = Buffer.from(encryptedData, this.options.encoding);
+  public decrypt = createServerOnlyFn(
+    (encryptedData: string, secret: Secret) => {
+      try {
+        const buffer = Buffer.from(encryptedData, this.options.encoding);
 
-      // Extract salt (first 16 bytes)
-      const salt = buffer.subarray(0, 16);
+        // Extract salt (first 16 bytes)
+        const salt = buffer.subarray(0, 16);
 
-      // Extract IV (next ivLength bytes)
-      const ivLength = this.getIvLength(this.options.algorithm);
-      const iv = buffer.subarray(16, 16 + ivLength);
+        // Extract IV (next ivLength bytes)
+        const ivLength = this.getIvLength(this.options.algorithm);
+        const iv = buffer.subarray(16, 16 + ivLength);
 
-      // The rest is encrypted data
-      const encrypted = buffer.subarray(16 + ivLength).toString(this.options.outputEncoding);
+        // The rest is encrypted data
+        const encrypted = buffer
+          .subarray(16 + ivLength)
+          .toString(this.options.outputEncoding);
 
-      const keyLength = this.getKeyLength(this.options.algorithm);
-      const key = this.deriveKey(secret, keyLength, salt);
+        const keyLength = this.getKeyLength(this.options.algorithm);
+        const key = this.deriveKey(secret, keyLength, salt);
 
-      const decipher = createDecipheriv(this.options.algorithm, key, iv);
-      let decrypted = decipher.update(
-        encrypted,
-        this.options.outputEncoding,
-        this.options.inputEncoding,
-      );
-      decrypted += decipher.final(this.options.inputEncoding);
+        const decipher = createDecipheriv(this.options.algorithm, key, iv);
+        let decrypted = decipher.update(
+          encrypted,
+          this.options.outputEncoding,
+          this.options.inputEncoding
+        );
+        decrypted += decipher.final(this.options.inputEncoding);
 
-      return decrypted;
-    } catch (error) {
-      Logger.error("Failed to decrypt data:", error);
-      return null;
+        return decrypted;
+      } catch (error) {
+        Logger.error("Failed to decrypt data:", error);
+        return null;
+      }
     }
-  });
+  );
 
   /**
    * Derive a cryptographic key of the specified length from a secret
@@ -100,7 +113,7 @@ export class Encription {
       // scrypt is a password-based key derivation function that's resistant to attacks
       // Using a unique salt for each encryption prevents rainbow table attacks
       return scryptSync(secret, salt, keyLength);
-    },
+    }
   );
 
   private getKeyLength(algorithm: string) {
@@ -123,7 +136,11 @@ export class Encription {
   private getIvLength(algorithm: string) {
     if (algorithm === "chacha20-poly1305") return 12;
 
-    if (algorithm.startsWith("des-") || algorithm === "bf-cbc" || algorithm === "cast5-cbc") {
+    if (
+      algorithm.startsWith("des-") ||
+      algorithm === "bf-cbc" ||
+      algorithm === "cast5-cbc"
+    ) {
       return 8;
     }
 

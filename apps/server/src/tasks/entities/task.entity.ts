@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { TaskResponseDto } from "../dto/task-response.dto";
 
 @Entity({ name: "tasks" })
 export class Task {
@@ -28,4 +29,8 @@ export class Task {
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
+
+  toDto(): TaskResponseDto {
+    return new TaskResponseDto(this.id, this.title, this.serialNumber, this.description);
+  }
 }

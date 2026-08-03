@@ -10,7 +10,12 @@ import { ArrowRightIcon } from "@/shared/icons/arrow-right-icon";
 import { GoogleLogoIcon } from "@/shared/icons/google-logo-icon";
 import { MotionLazyDomAnimationFeature } from "@/shared/lib/motion";
 import { Button } from "@/shared/ui/button";
-import { Card, CardContent, CardDescription, CardHeader } from "@/shared/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/shared/ui/card";
 import { Heading } from "@/shared/ui/heading";
 import { Separator } from "@/shared/ui/separator";
 import { TextMorph } from "@/shared/ui/text-morph";
@@ -24,27 +29,33 @@ import { AuthEmailForm } from "./auth-email-stage";
 const AuthCodeForm = lazy(() =>
   import("./auth-code-stage/auth-code-form").then((module) => ({
     default: module.AuthCodeForm,
-  })),
+  }))
 );
 
 interface AuthFormProps {
-  emailVeirficationIntentData: AuthEmailVerificationIntentTokenSchema | null;
+  emailVerificationIntentData: AuthEmailVerificationIntentTokenSchema | null;
 }
 
-export function AuthForm({ emailVeirficationIntentData }: AuthFormProps) {
+export function AuthForm({ emailVerificationIntentData }: AuthFormProps) {
   const [stage, setStage] = useState<AuthFormStageMap>(
-    emailVeirficationIntentData ? AuthFormStageMap.CODE : AuthFormStageMap.EMAIL,
+    emailVerificationIntentData ? AuthFormStageMap.CODE : AuthFormStageMap.EMAIL
   );
 
-  const emailValueRef = useRef<string>(emailVeirficationIntentData?.email ?? "");
+  const emailValueRef = useRef<string>(
+    emailVerificationIntentData?.email ?? ""
+  );
   const resendTimeoutRef = useRef<number>(
-    emailVeirficationIntentData?.sentAt
+    emailVerificationIntentData?.sentAt
       ? Math.max(
           0,
           AUTH_CODE_RESEND_TIMEOUT_SECONDS -
-            Math.abs(Math.floor((emailVeirficationIntentData.sentAt - Date.now()) / 1000)),
+            Math.abs(
+              Math.floor(
+                (emailVerificationIntentData.sentAt - Date.now()) / 1000
+              )
+            )
         )
-      : 0,
+      : 0
   );
 
   const isEmailStage = stage === AuthFormStageMap.EMAIL;

@@ -8,7 +8,9 @@ import { TaskApi } from "../api/task-api";
 export const getTaskBySerialNumberServerFn = createServerFn({
   method: "GET",
 })
-  .inputValidator(schemaValidation.object({ serialNumber: schemaValidation.number() }))
+  .validator(
+    schemaValidation.object({ serialNumber: schemaValidation.number() })
+  )
   .handler(({ data }) => {
     const taskApi = createServerApiClientInstance(TaskApi);
 

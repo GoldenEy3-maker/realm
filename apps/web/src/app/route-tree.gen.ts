@@ -9,25 +9,25 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
 import { Route as RootRouteRouteImport } from './routes/_root/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as RootIndexRouteImport } from './routes/_root/index'
-import { Route as RootTimelineIndexRouteImport } from './routes/_root/timeline/index'
-import { Route as RootTasksIndexRouteImport } from './routes/_root/tasks/index'
-import { Route as RootShedulerIndexRouteImport } from './routes/_root/sheduler/index'
-import { Route as RootShareIndexRouteImport } from './routes/_root/share/index'
-import { Route as RootSettingsIndexRouteImport } from './routes/_root/settings/index'
-import { Route as RootHelpIndexRouteImport } from './routes/_root/help/index'
 import { Route as RootChatIndexRouteImport } from './routes/_root/chat/index'
+import { Route as RootHelpIndexRouteImport } from './routes/_root/help/index'
+import { Route as RootSettingsIndexRouteImport } from './routes/_root/settings/index'
+import { Route as RootShareIndexRouteImport } from './routes/_root/share/index'
+import { Route as RootShedulerIndexRouteImport } from './routes/_root/sheduler/index'
+import { Route as RootTasksIndexRouteImport } from './routes/_root/tasks/index'
+import { Route as RootTimelineIndexRouteImport } from './routes/_root/timeline/index'
 import { Route as RootTasksSerialNumberIndexRouteImport } from './routes/_root/tasks/$serialNumber/index'
 
+const RootRouteRoute = RootRouteRouteImport.update({
+  id: '/_root',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RootRouteRoute = RootRouteRouteImport.update({
-  id: '/_root',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RootIndexRoute = RootIndexRouteImport.update({
@@ -35,29 +35,9 @@ const RootIndexRoute = RootIndexRouteImport.update({
   path: '/',
   getParentRoute: () => RootRouteRoute,
 } as any)
-const RootTimelineIndexRoute = RootTimelineIndexRouteImport.update({
-  id: '/timeline/',
-  path: '/timeline/',
-  getParentRoute: () => RootRouteRoute,
-} as any)
-const RootTasksIndexRoute = RootTasksIndexRouteImport.update({
-  id: '/tasks/',
-  path: '/tasks/',
-  getParentRoute: () => RootRouteRoute,
-} as any)
-const RootShedulerIndexRoute = RootShedulerIndexRouteImport.update({
-  id: '/sheduler/',
-  path: '/sheduler/',
-  getParentRoute: () => RootRouteRoute,
-} as any)
-const RootShareIndexRoute = RootShareIndexRouteImport.update({
-  id: '/share/',
-  path: '/share/',
-  getParentRoute: () => RootRouteRoute,
-} as any)
-const RootSettingsIndexRoute = RootSettingsIndexRouteImport.update({
-  id: '/settings/',
-  path: '/settings/',
+const RootChatIndexRoute = RootChatIndexRouteImport.update({
+  id: '/chat/',
+  path: '/chat/',
   getParentRoute: () => RootRouteRoute,
 } as any)
 const RootHelpIndexRoute = RootHelpIndexRouteImport.update({
@@ -65,9 +45,29 @@ const RootHelpIndexRoute = RootHelpIndexRouteImport.update({
   path: '/help/',
   getParentRoute: () => RootRouteRoute,
 } as any)
-const RootChatIndexRoute = RootChatIndexRouteImport.update({
-  id: '/chat/',
-  path: '/chat/',
+const RootSettingsIndexRoute = RootSettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+const RootShareIndexRoute = RootShareIndexRouteImport.update({
+  id: '/share/',
+  path: '/share/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+const RootShedulerIndexRoute = RootShedulerIndexRouteImport.update({
+  id: '/sheduler/',
+  path: '/sheduler/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+const RootTasksIndexRoute = RootTasksIndexRouteImport.update({
+  id: '/tasks/',
+  path: '/tasks/',
+  getParentRoute: () => RootRouteRoute,
+} as any)
+const RootTimelineIndexRoute = RootTimelineIndexRouteImport.update({
+  id: '/timeline/',
+  path: '/timeline/',
   getParentRoute: () => RootRouteRoute,
 } as any)
 const RootTasksSerialNumberIndexRoute =
@@ -78,16 +78,16 @@ const RootTasksSerialNumberIndexRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/auth': typeof AuthRoute
   '/': typeof RootIndexRoute
-  '/chat': typeof RootChatIndexRoute
-  '/help': typeof RootHelpIndexRoute
-  '/settings': typeof RootSettingsIndexRoute
-  '/share': typeof RootShareIndexRoute
-  '/sheduler': typeof RootShedulerIndexRoute
-  '/tasks': typeof RootTasksIndexRoute
-  '/timeline': typeof RootTimelineIndexRoute
-  '/tasks/$serialNumber': typeof RootTasksSerialNumberIndexRoute
+  '/auth': typeof AuthRoute
+  '/chat/': typeof RootChatIndexRoute
+  '/help/': typeof RootHelpIndexRoute
+  '/settings/': typeof RootSettingsIndexRoute
+  '/share/': typeof RootShareIndexRoute
+  '/sheduler/': typeof RootShedulerIndexRoute
+  '/tasks/': typeof RootTasksIndexRoute
+  '/timeline/': typeof RootTimelineIndexRoute
+  '/tasks/$serialNumber/': typeof RootTasksSerialNumberIndexRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
@@ -118,16 +118,16 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/auth'
     | '/'
-    | '/chat'
-    | '/help'
-    | '/settings'
-    | '/share'
-    | '/sheduler'
-    | '/tasks'
-    | '/timeline'
-    | '/tasks/$serialNumber'
+    | '/auth'
+    | '/chat/'
+    | '/help/'
+    | '/settings/'
+    | '/share/'
+    | '/sheduler/'
+    | '/tasks/'
+    | '/timeline/'
+    | '/tasks/$serialNumber/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
@@ -162,18 +162,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_root': {
+      id: '/_root'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof RootRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_root': {
-      id: '/_root'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof RootRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_root/': {
@@ -183,59 +183,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RootIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }
-    '/_root/timeline/': {
-      id: '/_root/timeline/'
-      path: '/timeline'
-      fullPath: '/timeline'
-      preLoaderRoute: typeof RootTimelineIndexRouteImport
-      parentRoute: typeof RootRouteRoute
-    }
-    '/_root/tasks/': {
-      id: '/_root/tasks/'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof RootTasksIndexRouteImport
-      parentRoute: typeof RootRouteRoute
-    }
-    '/_root/sheduler/': {
-      id: '/_root/sheduler/'
-      path: '/sheduler'
-      fullPath: '/sheduler'
-      preLoaderRoute: typeof RootShedulerIndexRouteImport
-      parentRoute: typeof RootRouteRoute
-    }
-    '/_root/share/': {
-      id: '/_root/share/'
-      path: '/share'
-      fullPath: '/share'
-      preLoaderRoute: typeof RootShareIndexRouteImport
-      parentRoute: typeof RootRouteRoute
-    }
-    '/_root/settings/': {
-      id: '/_root/settings/'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof RootSettingsIndexRouteImport
+    '/_root/chat/': {
+      id: '/_root/chat/'
+      path: '/chat'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof RootChatIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }
     '/_root/help/': {
       id: '/_root/help/'
       path: '/help'
-      fullPath: '/help'
+      fullPath: '/help/'
       preLoaderRoute: typeof RootHelpIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }
-    '/_root/chat/': {
-      id: '/_root/chat/'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof RootChatIndexRouteImport
+    '/_root/settings/': {
+      id: '/_root/settings/'
+      path: '/settings'
+      fullPath: '/settings/'
+      preLoaderRoute: typeof RootSettingsIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
+    '/_root/share/': {
+      id: '/_root/share/'
+      path: '/share'
+      fullPath: '/share/'
+      preLoaderRoute: typeof RootShareIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
+    '/_root/sheduler/': {
+      id: '/_root/sheduler/'
+      path: '/sheduler'
+      fullPath: '/sheduler/'
+      preLoaderRoute: typeof RootShedulerIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
+    '/_root/tasks/': {
+      id: '/_root/tasks/'
+      path: '/tasks'
+      fullPath: '/tasks/'
+      preLoaderRoute: typeof RootTasksIndexRouteImport
+      parentRoute: typeof RootRouteRoute
+    }
+    '/_root/timeline/': {
+      id: '/_root/timeline/'
+      path: '/timeline'
+      fullPath: '/timeline/'
+      preLoaderRoute: typeof RootTimelineIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }
     '/_root/tasks/$serialNumber/': {
       id: '/_root/tasks/$serialNumber/'
       path: '/tasks/$serialNumber'
-      fullPath: '/tasks/$serialNumber'
+      fullPath: '/tasks/$serialNumber/'
       preLoaderRoute: typeof RootTasksSerialNumberIndexRouteImport
       parentRoute: typeof RootRouteRoute
     }

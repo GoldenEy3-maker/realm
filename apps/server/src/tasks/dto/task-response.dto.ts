@@ -12,4 +12,11 @@ export class TaskResponseDto {
 
   @ApiProperty({ type: "string", example: "Description of the task" })
   description: string;
+
+  constructor(id: number, title: string, serialNumber: number, description: string) {
+    this.id = id;
+    this.title = title;
+    this.serialNumber = serialNumber;
+    this.description = description;
+  }
 }

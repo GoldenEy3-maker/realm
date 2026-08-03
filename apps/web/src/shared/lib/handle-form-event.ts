@@ -1,11 +1,11 @@
-import { type FormEvent } from "react";
+import { type SubmitEvent } from "react";
 
 /**
  * Prevents the default form event from bubbling up and executing the callback.
  * @param callback - callback to execute
  */
 export function handleFormEvent(callback: () => void) {
-  return (event: FormEvent) => {
+  return (event: SubmitEvent) => {
     event.stopPropagation();
     event.preventDefault();
     callback();

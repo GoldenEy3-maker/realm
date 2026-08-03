@@ -12,7 +12,7 @@ import { AuthFormUIMessages } from "../constants/auth-form-ui-messages";
 import { authFormSchema } from "../model/auth-form-schema";
 
 export const authVerifyEmailCodeServerFn = createServerFn({ method: "POST" })
-  .inputValidator(authFormSchema)
+  .validator(authFormSchema)
   .handler(async ({ data }) => {
     await devDelay();
 

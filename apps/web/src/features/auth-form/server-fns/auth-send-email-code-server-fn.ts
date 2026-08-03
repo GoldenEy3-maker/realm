@@ -11,7 +11,7 @@ import { AuthEmailVerificationIntentService } from "../lib/auth-email-verificati
 import { authEmailFormSchema } from "../model/auth-email-form-schema";
 
 export const authSendEmailCodeServerFn = createServerFn({ method: "POST" })
-  .inputValidator(authEmailFormSchema)
+  .validator(authEmailFormSchema)
   .handler(async ({ data }) => {
     await devDelay();
 
@@ -27,9 +27,10 @@ export const authSendEmailCodeServerFn = createServerFn({ method: "POST" })
         throw new Error(AuthFormUIMessages.EMAIL_CODE_SEND_ERROR);
       }
 
-      const authEmailVerificationIntentService = new AuthEmailVerificationIntentService(
-        getAuthEmailVerificationIntentConfigServerFn(),
-      );
+      const authEmailVerificationIntentService =
+        new AuthEmailVerificationIntentService(
+          getAuthEmailVerificationIntentConfigServerFn()
+        );
 
       const token = await authEmailVerificationIntentService.generateToken({
         email: data.email,

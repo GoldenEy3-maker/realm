@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { ProfileResponseDto } from "../dto/profile-response.dto";
 
 @Entity({ name: "profiles" })
 export class Profile {
@@ -38,4 +39,15 @@ export class Profile {
 
   @UpdateDateColumn({ name: "updated_at" })
   updatedAt: Date;
+
+  toDto(): ProfileResponseDto {
+    return new ProfileResponseDto(
+      this.id,
+      this.firstName,
+      this.lastName,
+      this.avatarUrl,
+      this.bio,
+      this.birthDate,
+    );
+  }
 }

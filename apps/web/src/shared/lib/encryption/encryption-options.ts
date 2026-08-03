@@ -1,6 +1,6 @@
 import type { Encoding } from "crypto";
 
-export interface EncriptionOptions {
+export interface EncryptionOptions {
   algorithm: string;
   iv: Buffer<ArrayBufferLike>;
   inputEncoding: Encoding;

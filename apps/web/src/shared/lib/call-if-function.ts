@@ -1,11 +1,10 @@
-import { type UnkownFunction } from "../types/unkown-function";
+import { type UnknownFunction } from "../types/unknown-function";
 import { isFunction } from "./is-function";
 
-type CallIfFunctionResult<T extends unknown | UnkownFunction> = T extends UnkownFunction
-  ? ReturnType<Extract<T, UnkownFunction>>
-  : T;
+type CallIfFunctionResult<T extends unknown | UnknownFunction> =
+  T extends UnknownFunction ? ReturnType<Extract<T, UnknownFunction>> : T;
 
-export function callIfFunction<T extends unknown | UnkownFunction>(
+export function callIfFunction<T extends unknown | UnknownFunction>(
   entry: T,
   ...args: unknown[]
 ): CallIfFunctionResult<T> {
@@ -13,5 +12,5 @@ export function callIfFunction<T extends unknown | UnkownFunction>(
     return entry(...args) as CallIfFunctionResult<T>;
   }
 
-  return entry as Exclude<T, UnkownFunction>;
+  return entry as Exclude<T, UnknownFunction>;
 }

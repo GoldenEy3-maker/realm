@@ -7,10 +7,10 @@ import { createServerApiClientInstance } from "@/shared/services/api/create-serv
 import { TaskApi } from "../api/task-api";
 
 export const getTasksServerFn = createServerFn({ method: "GET" })
-  .inputValidator(
+  .validator(
     schemaValidation.object({
       limit: schemaValidation.number().min(1).max(100).optional(),
-    }),
+    })
   )
   .handler(async () => {
     await devDelay();

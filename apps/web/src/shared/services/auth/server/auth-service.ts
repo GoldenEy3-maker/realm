@@ -1,10 +1,14 @@
 import { createServerOnlyFn } from "@tanstack/react-start";
-import { deleteCookie, getCookie, setCookie } from "@tanstack/react-start/server";
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from "@tanstack/react-start/server";
 import { jwtVerify, SignJWT } from "jose";
 
-import { Encription } from "@/shared/lib/encription";
+import { Encryption } from "@/shared/lib/encryption";
 import { Logger } from "@/shared/lib/logger";
-import { millisecondsToSeconds } from "@/shared/lib/milleseconds-to-seconds";
+import { millisecondsToSeconds } from "@/shared/lib/milliseconds-to-seconds";
 
 import { type AuthConfig } from "../config/auth-config";
 import { authSessionSchema } from "../model/auth-session-schema";
@@ -35,14 +39,14 @@ export class AuthService {
     try {
       const { payload } = await jwtVerify(
         token,
-        new TextEncoder().encode(this.config.tokenOptions.secret),
+        new TextEncoder().encode(this.config.tokenOptions.secret)
       );
 
       const { _enc } = authSessionSchema.parse(payload);
 
-      const decryptedPrivatePayload = new Encription().decrypt(
+      const decryptedPrivatePayload = new Encryption().decrypt(
         _enc,
-        this.config.tokenOptions.encryption,
+        this.config.tokenOptions.encryption
       );
 
       if (!decryptedPrivatePayload) throw new Error("Invalid session token");
@@ -59,16 +63,18 @@ export class AuthService {
   }
 
   generateSessionToken(payload: AuthSessionTokens) {
-    const encryptedPrivatePayload = new Encription().encrypt(
+    const encryptedPrivatePayload = new Encryption().encrypt(
       JSON.stringify(payload),
-      this.config.tokenOptions.encryption,
+      this.config.tokenOptions.encryption
     );
 
     const jwt = new SignJWT({ _enc: encryptedPrivatePayload })
       .setProtectedHeader({
         alg: this.config.tokenOptions.alg,
       })
-      .setExpirationTime(millisecondsToSeconds(Date.now()) + this.config.cookieOptions.maxAge);
+      .setExpirationTime(
+        millisecondsToSeconds(Date.now()) + this.config.cookieOptions.maxAge
+      );
 
     return jwt.sign(new TextEncoder().encode(this.config.tokenOptions.secret));
   }
