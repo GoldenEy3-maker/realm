@@ -1,6 +1,6 @@
 # 06 — Roadmap
 
-Статус: Draft v0.8 · Обновлено: 2026-08-04
+Статус: Draft v0.10 · Обновлено: 2026-08-07
 
 ## Фаза 0 — Собирательный образ (сейчас)
 
@@ -10,11 +10,15 @@
 - [x] Foundations + components в `design/realm.pen`
 - [x] Ревью DS (токены / kit согласованы)
 - [x] Экраны dark: Auth (email + code), Shell, Kanban, Task overlay sheet, Planning, Activity, Chat
-- [x] **Layered cool slate** поверхности (заменяет Flat canvas; см. [04](./04-design-system.md))
-- [x] Mobile 375px рядом с каждым desktop-экраном
-- [x] Экран Dashboard (Home) desktop + mobile, компоненты Focus timer / Meeting chip / Reminder row, Planning с meeting-блоками, экран Reminders desktop + mobile, Time-таб в Task detail overlay
+- [x] **Warm paper + Soft green** — фундамент токенов / Foundations / UI kit; канон Home = `13 Dashboard V2` (см. [04](./04-design-system.md))
+- [x] Desktop dark `04–10`, `12` мигрированы на V2 shell (SecondaryNav только на Kanban/Task Detail)
+- [x] Mobile 375px рядом с каждым desktop-экраном (ещё cool-slate layout)
+- [x] Экран Dashboard V2, Reminders, Focus timer / Meeting chip / Reminder row, Planning с meeting-блоками, Time-таб в Task detail
+- [ ] Light twins desktop-экранов
+- [ ] Миграция mobile `04m–12m` на warm paper
+- [ ] Retire/replace `11 Dashboard` → `13`
 - [ ] Экраны: выбор/создание workspace, Projects list, Settings
-- [ ] Kit: Dropdown, Textarea, состояния Checkbox/Switch/Input; контрольный light-экран
+- [ ] Kit: Dropdown, Textarea, состояния Checkbox/Switch/Input
 
 **Критерий:** можно открыть ТЗ и `.pen` и понять продукт без кода.
 
@@ -90,3 +94,5 @@
 | 2026-08-04 | v0.6 | Новая фаза v1.1 «Личная продуктивность»: `TimeEntry` (live-таймер, один активный на пользователя), `Meeting` (лёгкий календарный блок, attendees, без RSVP/type), `Reminder` (личная заметка, свой экран + rail); Dashboard (Home) спроектирован полностью — Focus timer / Today's tasks / Today's meetings / compact Planning preview / Reminders / Recent activity, без аналитики/BI; Planning теперь показывает задачи и meetings на одной сетке |
 | 2026-08-04 | v0.7 | Pencil v1.1 реализован полностью: экраны Dashboard и Reminders (desktop + mobile), `Pattern/MeetingChip` на Planning (desktop + mobile), rail-пункт Reminders на всех desktop-экранах, третий таб **Time** в `Sheet/TaskDetail` (таймер, Today/This task статы, History); `04-design-system.md` — паттерны Focus timer / Meeting chip / Reminder row / Task detail Time tab |
 | 2026-08-04 | v0.8 | Визуальный рефайн **Cool slate + Layered**: новая палитра (soft indigo `#5B7CFF`, `$primary-muted`, мягкий текст), layered chrome (rail → nav `$surface` → cards + shadow), column/day wells `$surface`, elevation на Card/Sheet/Dialog/Button/Input; Flat canvas отменён; foundations + kit + ключевые экраны обновлены |
+| 2026-08-07 | v0.9 | Пивот на **Warm paper + Soft green**: новые themed tokens (`panel`, `accent`, pill radii, pastel `event-*`); Foundations + Components UI kit пересобраны; `13 Dashboard V2` light/dark токенизированы; legacy `04–12` не трогали |
+| 2026-08-07 | v0.10 | Desktop dark `04–10`+`12` мигрированы на V2 shell: SecondaryNav только на Kanban/Task Detail; Chat channels → ChannelPanel; docs shell rules обновлены |

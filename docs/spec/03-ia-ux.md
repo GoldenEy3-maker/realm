@@ -1,12 +1,13 @@
 # 03 — IA / UX
 
-Статус: Draft v0.6 · Обновлено: 2026-08-04
+Статус: Draft v0.8 · Обновлено: 2026-08-07
 
 Макеты в Pencil ([`design/realm.pen`](../../design/realm.pen)):
 
-- Desktop: `04–10` (Auth, Shell, Kanban, Task detail page с табами Comments/Activity/Time, Planning, Activity, Chat), `11 Dashboard`, `12 Reminders`
-- Mobile 375px рядом: `04m–10m`, `11m Dashboard`, `12m Reminders`
-- Поверхности: зафиксирован **Layered cool slate** (см. [04-design-system.md](./04-design-system.md))
+- Desktop dark warm paper: `04–10`, `12` (+ Auth); канон Home — `13 Dashboard V2` (light/dark)
+- `11 Dashboard` — legacy (не канон)
+- Mobile 375px `04m–12m` — ещё не мигрированы
+- Поверхности / shell: **Warm paper + Soft green** (см. [04-design-system.md](./04-design-system.md))
 - Ещё без макетов: выбор/создание workspace, Projects list, Settings, `⌘K`
 
 ## Информационная архитектура
@@ -29,16 +30,22 @@ Deep-link URL: `.../projects/:id/tasks/:taskId` — страница Task detail
 
 ## App shell
 
-Три зоны (+ опциональная четвёртая):
+**Global screens** (Dashboard, Planning, Activity, Chat, Reminders, empty App Shell):
 
-1. **Icon rail** (slim) — глобальные разделы  
-   Dashboard · Projects · Planning · Activity · Chat · Reminders *(v1.1)* · (spacer) · Settings · User
-2. **Secondary nav** — контекст раздела  
-   Поиск, Favorites, дерево Projects, фильтры каналов и т.д.
-3. **Main** — основной контент
-4. **Task detail** — отдельная страница (не overlay sheet); вход с Kanban/List/Planning
+1. **Icon rail** (64) — глобальные разделы  
+   Dashboard · Projects · Planning · Activity · Chat · Reminders · (spacer) · Settings · User
+2. **Main** (`$panel`) — основной контент  
+   Chat: слева внутри контента — `ChannelPanel` (каналы / DM), не глобальный SecondaryNav
 
-Secondary nav можно сворачивать; rail — всегда.
+**Project screens** (Kanban, Task Detail):
+
+1. **Icon rail** (64)
+2. **Secondary nav** (~260, `$surface`) — workspace, search, favorites, дерево projects
+3. **Main** (`$panel`) — board / task page
+
+**Task detail** — отдельная страница в project shell (не overlay sheet); вход с Kanban/List/Planning.
+
+Secondary nav на project-экранах можно сворачивать; rail — всегда.
 
 ## Экраны v1
 
@@ -82,7 +89,7 @@ Landing после входа в workspace. Не аналитика/BI — св�
 
 ### Task detail (page)
 
-- Отдельная страница в app shell (rail + secondary nav + main), не overlay/sheet
+- Отдельная страница в project shell (rail + secondary nav + main), не overlay/sheet
 - Back → проект / предыдущий view
 - Title, status, due, assignees, labels, priority
 - Description
