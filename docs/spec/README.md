@@ -1,6 +1,6 @@
 # Realm — Живое ТЗ
 
-Статус: **черновик v0.8** · Тема: dark primary + light secondary · Модель: `Workspace → Projects → Tasks`
+Статус: **черновик v0.10** · Тема: dark primary + light secondary · Модель: `Workspace → Projects → (Overview / Tasks / Wiki / Members) → Tasks`
 
 Документы ниже — единый источник продуктовой правды. Визуальный источник — [`design/realm.pen`](../../design/realm.pen). Код приложения сюда не подтягиваем как истину: проектируем заново.
 
@@ -31,11 +31,13 @@
 - Стек-выборы: Bun (package manager), TypeORM (migrations, без synchronize), Zod-схемы в `packages/shared` на обе стороны.
 - Шрифты: Inter + JetBrains Mono.
 - Поверхности: **Warm paper shell** (`$background` → rail `$surface` → stage `$panel` → `$card`); см. [04-design-system.md](./04-design-system.md).
-- Палитра: warm cream canvas, stone ink CTA (light) / mint CTA (dark), soft green `$accent` для active states; calendar events — pastel chips.
+- Палитра: warm cream canvas, stone ink CTA (light) / mint CTA (dark), soft green `$accent`; inverted chrome — `$inverse`/`$inverse-fg`; calendar — themed `$event-*` + `$event-*-fg`.
+- Type scale: `12 · 14 · 16 · 20 · 24 · 28 · 32` (секции 16; без 11/13).
 - User/Profile разделены (+ уникальный `username` для `@упоминаний`, presence `status`, `isArchived`); TaskStatus — фиксированный enum (без per-project кастомизации); Chat — самостоятельная фича, не привязан к задачам (обсуждение задачи — TaskComment); favorites — per-user; labels — workspace-scope; ID — bigint auto-increment.
 - Дизайн: современный, мягкий productivity UI; light warm paper — primary feel, dark — полноценный twin.
-- **v1.1 (после ядра):** Time-tracking (`TimeEntry`, live-таймер), Meetings (`Meeting`, лёгкие календарные блоки на Planning), Reminders (`Reminder`, личный экран + rail). Dashboard (Home) спроектирован под них — Focus timer / Today's tasks / Today's meetings / compact Planning preview / Reminders / Recent activity, аналитику/BI намеренно не делаем.
-- Дизайн v1.1 полностью в Pencil: экраны Dashboard и Reminders (desktop + mobile), `Pattern/MeetingChip` на Planning, третий таб **Time** в Task detail overlay.
+- **v1.1 (после ядра):** Time-tracking (`TimeEntry`, live-таймер + plan vs actual с `estimateMinutes`), Meetings (`Meeting` — единственные часовые блоки на Planning), Reminders (`Reminder`, личный экран + rail). Dashboard (Home) — Focus timer / Today's tasks / Today's meetings / compact Planning preview / Reminders / Recent activity; аналитику/BI намеренно не делаем.
+- **Planning:** «моя неделя» — due-полоса задач по `dueDate` (estimate на chip, нагрузка дня) над hour grid meetings; не time-blocking задач, не capacity.
+- Дизайн v1.1 в Pencil: Dashboard, Reminders, Planning (due + meetings), `Pattern/MeetingChip`, Time-таб в Task detail.
 
 ## Связанные артефакты
 

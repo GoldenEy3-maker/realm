@@ -1,6 +1,6 @@
 # 02 — Domain
 
-Статус: Draft v0.6 · Обновлено: 2026-08-04
+Статус: Draft v0.8 · Обновлено: 2026-08-08
 
 ## Иерархия
 
@@ -19,6 +19,8 @@ Workspace
  │         └── ChatAttachment (метаданные)
  ├── Meeting (лёгкий календарный блок — v1.1)
  ├── Project
+ │    ├── ProjectMembership (later)
+ │    ├── WikiPage (later — дерево + blocks)
  │    └── Task (status: enum)
  │         ├── TaskAssignee
  │         ├── TaskComment
@@ -28,9 +30,9 @@ Workspace
  └── ActivityEvent
 ```
 
-**v1.1:** `TimeEntry`, `Meeting`, `Reminder` — спроектированы вместе с v1, но реализуются после ядра (Auth → Workspace → Kanban), см. [01-vision.md](./01-vision.md).
+**v1.1:** `TimeEntry`, `Meeting`, `Reminder` — спроектированы вместе с v1, но реализуются после ядра (Auth → Workspace → Overview/Tasks), см. [01-vision.md](./01-vision.md).
 
-Модель продукта: **Workspace → Projects → Tasks**. Над Workspace в v1 нет Organization.
+Модель продукта: **Workspace → Projects → (Overview / Tasks / Wiki / Members)**. Над Workspace в v1 нет Organization.
 
 ## Сущности
 
@@ -115,6 +117,8 @@ Workspace
 
 **Решено:** избранное — per-user, не флаг на Project (см. ProjectFavorite).
 
+**Project pages (IA):** Overview · Tasks · Wiki · Members. Default landing — Overview. Файлы проекта живут в Wiki (blocks/attachments), отдельного Files-таба нет.
+
 ### ProjectFavorite
 
 Избранные проекты пользователя (per-user).
@@ -124,6 +128,40 @@ Workspace
 | userId | id | |
 | projectId | id | |
 | createdAt | datetime | |
+
+### ProjectMembership — design now · build later
+
+Участники **проекта** (подмножество workspace members). Нужны для вкладки Members и Invite в проект; workspace roles остаются вышестоящими.
+
+| Поле | Тип | Описание |
+|------|-----|----------|
+| id | id | |
+| projectId | id | |
+| userId | id | должен быть WorkspaceMembership того же workspace |
+| role | enum | owner / admin / member (project-scoped; уточняется при реализации) |
+| invitedAt | datetime? | null = active member |
+| acceptedAt | datetime? | null + invitedAt set = Invited |
+| createdAt | datetime | |
+
+**Инвариант:** нельзя принять invite без workspace membership; Owner/Admin workspace могут управлять project membership.
+
+### WikiPage — design now · build later
+
+Страница проектной wiki (Notion-lite: дерево + block body).
+
+| Поле | Тип | Описание |
+|------|-----|----------|
+| id | id | |
+| projectId | id | |
+| parentId | id? | дерево страниц; null = root |
+| title | string | |
+| body | json | block tree: heading / paragraph / list / image / file / embed |
+| position | order | порядок среди siblings |
+| createdById | id | |
+| updatedAt | datetime | |
+| createdAt | datetime | |
+
+Файлы — блоки `file` / image URL внутри `body` (или linked TaskAttachment-like metadata later); отдельной Files-сущности в v1 wiki не вводим.
 
 ### Reminder — v1.1
 
@@ -153,9 +191,21 @@ Workspace
 | title | string | |
 | description | rich text / markdown (упрощённо) | |
 | priority | enum | none / low / medium / high |
-| dueDate | date? | |
+| dueDate | date? | день дедлайна (без времени); не schedule-слот |
+| estimateMinutes | int? | опциональный план «сколько займёт»; UI как `2h` / `30m` / `1h 30m`; пусто = нет плана |
 | createdById | id | |
 | createdAt / updatedAt | datetime | |
+
+**Временная модель Task (зафиксировано):**
+
+| Слой | Поле | Смысл |
+|------|------|--------|
+| Deadline | `dueDate` | к какому **дню** нужно |
+| Estimate | `estimateMinutes` | намерение по объёму |
+| Log | `TimeEntry` | факт работы |
+| Schedule | — | **нет** у задачи (часовые слоты только у `Meeting`) |
+
+Planning показывает задачу в due-полосе дня по `dueDate`, не как блок «с–до» на часовой сетке. Estimate правится в Task detail / на карточке при создании — не с chip на Planning. Сравнение plan vs actual — в Time-табе Task detail.
 
 ### TaskAssignee
 
@@ -176,7 +226,7 @@ Many-to-many Task ↔ User (membership должен быть в том же work
 
 ### TimeEntry — v1.1
 
-Живой таймер на задаче. Один активный (`endedAt = null`) `TimeEntry` на пользователя одновременно во всём workspace — запуск нового автоматически закрывает предыдущий (`endedAt = now()`). «Сегодня по задаче» / «сегодня всего» считается суммой интервалов за день — без отдельного поля лимита/цели.
+Живой таймер на задаче. Один активный (`endedAt = null`) `TimeEntry` на пользователя одновременно во всём workspace — запуск нового автоматически закрывает предыдущий (`endedAt = now()`). «Сегодня по задаче» / «сегодня всего» считается суммой интервалов за день — без отдельного поля лимита/цели. Сумма интервалов по задаче сравнивается с `Task.estimateMinutes` (если задан) в Time-табе — факт vs план, не расписание.
 
 | Поле | Тип | Описание |
 |------|-----|----------|
@@ -191,7 +241,7 @@ Many-to-many Task ↔ User (membership должен быть в том же work
 
 ### Meeting — v1.1
 
-Лёгкий календарный блок, без RSVP/invite-флоу, без повторов, без интеграции с внешним календарём. Показывается на общей недельной сетке Planning вместе с задачами и в карточке «Today's meetings» на Dashboard.
+Лёгкий календарный блок, без RSVP/invite-флоу, без повторов, без интеграции с внешним календарём. **Единственная** сущность с часовым размещением на Planning (`startTime`–`endTime`); задачи живут в due-полосе выше сетки. Также карточка «Today's meetings» на Dashboard.
 
 | Поле | Тип | Описание |
 |------|-----|----------|
@@ -335,6 +385,7 @@ Reminder — не workspace-ресурс с ролевым доступом, а 
 6. Архивированный (`isArchived = true`) пользователь не проходит auth и не может быть назначен как assignee / приглашён заново; уже существующие ссылки на него (авторство задач, комментариев, ActivityEvent) сохраняются.
 7. *(v1.1)* `TimeEntry.userId` и участники `Meeting.attendees` — только members того же workspace, что и Task/Meeting.
 8. *(v1.1)* У пользователя не может быть двух `TimeEntry` одновременно с `endedAt = null`.
+9. *(later)* `ProjectMembership.userId` и авторы `WikiPage` — только members того же workspace; wiki page принадлежит ровно одному Project.
 
 ## Нефункциональные ожидания домена
 

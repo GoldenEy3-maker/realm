@@ -1,6 +1,6 @@
 # 06 — Roadmap
 
-Статус: Draft v0.10 · Обновлено: 2026-08-07
+Статус: Draft v0.14 · Обновлено: 2026-08-08
 
 ## Фаза 0 — Собирательный образ (сейчас)
 
@@ -14,6 +14,8 @@
 - [x] Desktop dark `04–10`, `12` мигрированы на V2 shell (SecondaryNav только на Kanban/Task Detail)
 - [x] Mobile 375px рядом с каждым desktop-экраном (ещё cool-slate layout)
 - [x] Экран Dashboard V2, Reminders, Focus timer / Meeting chip / Reminder row, Planning с meeting-блоками, Time-таб в Task detail
+- [x] Planning model: due-полоса задач + hour grid только для meetings; `estimateMinutes` на Task; overdue accent; scope = моё
+- [x] Project workspace IA: Overview (default) · Tasks · Wiki · Members; card-shell header + sidebar mirror; Pencil `06`/`06b`/`06c`/`06d`
 - [ ] Light twins desktop-экранов
 - [ ] Миграция mobile `04m–12m` на warm paper
 - [ ] Retire/replace `11 Dashboard` → `13`
@@ -24,13 +26,14 @@
 
 ## Фаза 1 — Фундамент продукта
 
-**Цель:** auth, workspace, projects, tasks (Kanban/List) end-to-end.
+**Цель:** auth, workspace, projects, Overview + tasks (Kanban/List) end-to-end.
 
 Критерии готовности:
 
 - Magic Email login + JWT access/refresh
 - Create/select workspace, invite member
 - CRUD project + default columns
+- Project Overview page (about / outcomes / dates / pulse)
 - CRUD tasks, drag between columns, assignees, due date, labels
 - Task detail page (не overlay)
 - Dark/light theme toggle
@@ -40,18 +43,20 @@
 
 **Цель:** Dashboard оживает данными; time-tracking, meetings, reminders — см. [01-vision.md](./01-vision.md) и [02-domain.md](./02-domain.md).
 
-- Time-tracking: `TimeEntry`, live-таймер (start/pause/stop) на задаче, один активный на пользователя, Time-таб в Task detail
-- Meetings: `Meeting` + attendees, блоки на Planning вместе с задачами, Dialog просмотра/редактирования, карточка «Today's meetings» на Dashboard
+- Time-tracking: `TimeEntry`, live-таймер (start/pause/stop) на задаче, один активный на пользователя, Time-таб в Task detail (plan vs actual с `estimateMinutes`)
+- Meetings: `Meeting` + attendees, **часовые** блоки на Planning (под due-полосой задач), Dialog просмотра/редактирования, карточка «Today's meetings» на Dashboard
 - Reminders: `Reminder`, экран `/reminders` + rail-пункт, виджет на Dashboard
-- Dashboard (Home) подключается к реальным данным: Today's tasks/meetings, focus timer, compact Planning preview, Reminders, Recent activity
+- Dashboard (Home) подключается к реальным данным: Today's tasks/meetings, focus timer, compact Planning preview (due + meetings), Reminders, Recent activity
 
 ## Фаза 2 — Контекст и прозрачность
 
-**Цель:** activity + planning minimal.
+**Цель:** activity + planning minimal; project wiki & members.
 
 - Activity feed по workspace/project
-- Planning week view по due dates
+- Planning week: due-полоса + meetings hour grid; drag `dueDate`; `estimateMinutes` на задачах
 - Базовые уведомления (in-app)
+- Project Wiki (Notion-lite tree + blocks; файлы внутри статей)
+- Project Members (`ProjectMembership`: Active / Invited, Invite в проект)
 
 ## Фаза 3 — Коммуникация
 
@@ -96,3 +101,7 @@
 | 2026-08-04 | v0.8 | Визуальный рефайн **Cool slate + Layered**: новая палитра (soft indigo `#5B7CFF`, `$primary-muted`, мягкий текст), layered chrome (rail → nav `$surface` → cards + shadow), column/day wells `$surface`, elevation на Card/Sheet/Dialog/Button/Input; Flat canvas отменён; foundations + kit + ключевые экраны обновлены |
 | 2026-08-07 | v0.9 | Пивот на **Warm paper + Soft green**: новые themed tokens (`panel`, `accent`, pill radii, pastel `event-*`); Foundations + Components UI kit пересобраны; `13 Dashboard V2` light/dark токенизированы; legacy `04–12` не трогали |
 | 2026-08-07 | v0.10 | Desktop dark `04–10`+`12` мигрированы на V2 shell: SecondaryNav только на Kanban/Task Detail; Chat channels → ChannelPanel; docs shell rules обновлены |
+| 2026-08-08 | v0.11 | Token hygiene: `inverse`/`inverse-fg`, themed `event-*`+`event-*-fg`; type scale 12/14/16; rail Logo∥Nav∥Bot gaps; запрет `$text`/`$surface` flip для chrome |
+| 2026-08-08 | v0.12 | Planning: «моя неделя» = due-полоса задач (`dueDate` + `estimateMinutes` + нагрузка дня) + hour grid только для Meetings; без schedule-слотов у Task; overdue accent; done/без due скрыты; спеки 01–04 + Pencil `08`/`08m` |
+| 2026-08-08 | v0.13 | Planning UX: убран `+` из due-полосы; убрана overdue-полоса — просрочка остаётся в дне `dueDate`, метка на DueChip; роли пока collaborative (Member CRUD tasks) |
+| 2026-08-08 | v0.14 | Project workspace: табы Overview · Tasks · Wiki · Members; Overview default; Wiki Notion-lite + ProjectMembership в домене (build later); Pencil `06`/`06b`/`06c`/`06d`; Phase 1 = Overview+Tasks, Phase 2 = Wiki+Members |
