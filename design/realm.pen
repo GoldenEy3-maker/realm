@@ -10944,19 +10944,24 @@
                   "name": "Col To do",
                   "width": "fill_container",
                   "height": "fill_container",
-                  "fill": "$surface-raised",
                   "cornerRadius": "$radius-lg",
-                  "stroke": "$border",
-                  "strokeWidth": 1,
                   "layout": "vertical",
                   "gap": 8,
-                  "padding": 8,
                   "children": [
                     {
                       "type": "frame",
                       "id": "RS4mC",
                       "name": "Head",
                       "width": "fill_container",
+                      "fill": "$surface-raised",
+                      "cornerRadius": "$radius-pill",
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner",
+                      "padding": [
+                        6,
+                        "$radius-md"
+                      ],
                       "justifyContent": "space_between",
                       "alignItems": "center",
                       "children": [
@@ -11126,41 +11131,46 @@
                   "name": "Col In progress",
                   "width": "fill_container",
                   "height": "fill_container",
-                  "fill": "$surface-raised",
                   "cornerRadius": "$radius-lg",
-                  "stroke": "$border",
-                  "strokeWidth": 1,
                   "layout": "vertical",
                   "gap": 8,
-                  "padding": 8,
                   "children": [
                     {
                       "type": "frame",
-                      "id": "J64Uh",
+                      "id": "dc6zq",
                       "name": "Head",
                       "width": "fill_container",
+                      "fill": "$surface-raised",
+                      "cornerRadius": "$radius-pill",
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner",
+                      "padding": [
+                        6,
+                        "$radius-md"
+                      ],
                       "justifyContent": "space_between",
                       "alignItems": "center",
                       "children": [
                         {
                           "type": "frame",
-                          "id": "phYS4",
+                          "id": "fYmfn",
                           "name": "L",
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "text",
-                              "id": "BWBLO",
+                              "id": "B56j2k",
                               "name": "T",
                               "fill": "$text",
-                              "content": "In progress",
+                              "content": "In Progress",
                               "fontFamily": "$font-sans",
                               "fontSize": 14,
                               "fontWeight": "600"
                             },
                             {
-                              "id": "AOpHZ",
+                              "id": "orPk5",
                               "type": "ref",
                               "ref": "bc4CF",
                               "name": "Cnt",
@@ -11174,7 +11184,7 @@
                         },
                         {
                           "type": "icon",
-                          "id": "R6hYbi",
+                          "id": "ukjKc",
                           "name": "Plus",
                           "width": 16,
                           "height": 16,
@@ -11279,41 +11289,46 @@
                   "name": "Col Review / QA",
                   "width": "fill_container",
                   "height": "fill_container",
-                  "fill": "$surface-raised",
                   "cornerRadius": "$radius-lg",
-                  "stroke": "$border",
-                  "strokeWidth": 1,
                   "layout": "vertical",
                   "gap": 8,
-                  "padding": 8,
                   "children": [
                     {
                       "type": "frame",
-                      "id": "D0Ojg",
+                      "id": "GchyP",
                       "name": "Head",
                       "width": "fill_container",
+                      "fill": "$surface-raised",
+                      "cornerRadius": "$radius-pill",
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner",
+                      "padding": [
+                        6,
+                        "$radius-md"
+                      ],
                       "justifyContent": "space_between",
                       "alignItems": "center",
                       "children": [
                         {
                           "type": "frame",
-                          "id": "RVgl5",
+                          "id": "KiU2j",
                           "name": "L",
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "text",
-                              "id": "WAaX8",
+                              "id": "FlvPg",
                               "name": "T",
                               "fill": "$text",
-                              "content": "Review / QA",
+                              "content": "Review/QA",
                               "fontFamily": "$font-sans",
                               "fontSize": 14,
                               "fontWeight": "600"
                             },
                             {
-                              "id": "LYYuq",
+                              "id": "GqSSS",
                               "type": "ref",
                               "ref": "bc4CF",
                               "name": "Cnt",
@@ -11327,7 +11342,7 @@
                         },
                         {
                           "type": "icon",
-                          "id": "PnoBW",
+                          "id": "qoltY",
                           "name": "Plus",
                           "width": 16,
                           "height": 16,
@@ -11432,32 +11447,37 @@
                   "name": "Col Done",
                   "width": "fill_container",
                   "height": "fill_container",
-                  "fill": "$surface-raised",
                   "cornerRadius": "$radius-lg",
-                  "stroke": "$border",
-                  "strokeWidth": 1,
                   "layout": "vertical",
                   "gap": 8,
-                  "padding": 8,
                   "children": [
                     {
                       "type": "frame",
-                      "id": "bSsAu",
+                      "id": "AIFxR",
                       "name": "Head",
                       "width": "fill_container",
+                      "fill": "$surface-raised",
+                      "cornerRadius": "$radius-pill",
+                      "stroke": "$border",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner",
+                      "padding": [
+                        6,
+                        "$radius-md"
+                      ],
                       "justifyContent": "space_between",
                       "alignItems": "center",
                       "children": [
                         {
                           "type": "frame",
-                          "id": "S6IcmD",
+                          "id": "HgfYM",
                           "name": "L",
                           "gap": 8,
                           "alignItems": "center",
                           "children": [
                             {
                               "type": "text",
-                              "id": "Rzslu",
+                              "id": "VZSzQ",
                               "name": "T",
                               "fill": "$text",
                               "content": "Done",
@@ -11466,7 +11486,7 @@
                               "fontWeight": "600"
                             },
                             {
-                              "id": "m3QxNb",
+                              "id": "ZRnA7",
                               "type": "ref",
                               "ref": "bc4CF",
                               "name": "Cnt",
@@ -11480,7 +11500,7 @@
                         },
                         {
                           "type": "icon",
-                          "id": "Ic5bI",
+                          "id": "PgBif",
                           "name": "Plus",
                           "width": 16,
                           "height": 16,
