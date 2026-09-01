@@ -8,6 +8,10 @@
       {
         "include": "common/i18n/**/*.json",
         "watchAssets": true
+      },
+      {
+        "include": "infrastructure/mailer/templates/**/*.hbs",
+        "watchAssets": true
       }
     ]
   }

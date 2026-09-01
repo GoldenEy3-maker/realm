@@ -36,7 +36,7 @@ import { MailerService } from "./mailer.service";
             from: configService.get<string>("MAIL_FROM"),
           },
           template: {
-            dir: path.join(__dirname, "..", "..", "..", "resources", "mail", "templates"),
+            dir: path.join(__dirname, "templates"),
             adapter: new HandlebarsAdapter({ t: i18nService.hbsHelper }),
           },
         };
