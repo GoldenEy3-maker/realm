@@ -1,5 +1,8 @@
 import boundaries from "eslint-plugin-boundaries";
 
+const sliceTypes = ["features", "widgets", "entities", "pages"];
+const slicePublicApiPath = "{ui,server-fns,api,model,lib}/index.@(ts|tsx)";
+
 export const eslintBoundariesConfig = {
   plugins: {
     boundaries,
@@ -10,6 +13,8 @@ export const eslintBoundariesConfig = {
         alwaysTryTypes: true,
       },
     },
+    "boundaries/legacy-templates": false,
+    "boundaries/legacy-warnings": false,
     "boundaries/elements": [
       {
         type: "app",
@@ -38,77 +43,76 @@ export const eslintBoundariesConfig = {
     ],
   },
   rules: {
-    "boundaries/element-types": [
+    "boundaries/dependencies": [
       2,
       {
         default: "allow",
-        rules: [
+        policies: [
           {
-            from: "shared",
-            disallow: ["app", "pages", "features", "widgets", "entities"],
+            from: { element: { type: "shared" } },
+            disallow: {
+              to: { element: { type: ["app", "pages", "features", "widgets", "entities"] } },
+            },
             message:
-              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
+              "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
           },
           {
-            from: "entities",
-            disallow: ["app", "pages", "features", "widgets"],
+            from: { element: { type: "entities" } },
+            disallow: {
+              to: { element: { type: ["app", "pages", "features", "widgets"] } },
+            },
             message:
-              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
+              "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
           },
           {
-            from: "features",
-            disallow: ["app", "pages", "widgets"],
+            from: { element: { type: "features" } },
+            disallow: {
+              to: { element: { type: ["app", "pages", "widgets"] } },
+            },
             message:
-              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
+              "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
           },
           {
-            from: "widgets",
-            disallow: ["app", "pages"],
+            from: { element: { type: "widgets" } },
+            disallow: {
+              to: { element: { type: ["app", "pages"] } },
+            },
             message:
-              "Lower layer module (${file.type}) cannot import from upper layer module (${dependency.type})",
+              "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
           },
           {
-            from: "widgets",
-            disallow: ["widgets"],
+            from: { element: { type: "widgets" } },
+            disallow: {
+              to: { element: { type: "widgets" } },
+            },
+            message: "Cross-module dependencies are not allowed in the widgets layer",
+          },
+          {
+            from: { element: { type: "features" } },
+            disallow: {
+              to: { element: { type: "features" } },
+            },
+            message: "Cross-module dependencies are not allowed in the features layer",
+          },
+          {
+            from: { element: { type: "pages" } },
+            disallow: {
+              to: { element: { type: "pages" } },
+            },
+            message: "Cross-module dependencies are not allowed in the pages layer",
+          },
+          {
+            to: { element: { type: sliceTypes } },
+            disallow: {
+              to: {
+                element: {
+                  type: sliceTypes,
+                  fileInternalPath: `!(${slicePublicApiPath})`,
+                },
+              },
+            },
             message:
-              "Cross-module dependencies are not allowed in the widgets layer",
-          },
-          {
-            from: "features",
-            disallow: ["features"],
-            message:
-              "Cross-module dependencies are not allowed in the features layer",
-          },
-          {
-            from: "pages",
-            disallow: ["pages"],
-            message:
-              "Cross-module dependencies are not allowed in the pages layer",
-          },
-        ],
-      },
-    ],
-    "boundaries/entry-point": [
-      2,
-      {
-        default: "disallow",
-        message:
-          "Module (${file.type}) must be imported through segments of public API. Direct import from ${dependency.source} is not allowed",
-
-        rules: [
-          {
-            target: ["shared", "app"],
-            allow: "**",
-          },
-          {
-            target: ["features", "widgets", "entities", "pages"],
-            allow: [
-              "ui/index.(ts|tsx)",
-              "server-fns/index.(ts|tsx)",
-              "api/index.(ts|tsx)",
-              "model/index.(ts|tsx)",
-              "lib/index.(ts|tsx)",
-            ],
+              "{{ to.element.type }} must be imported through a public API segment. Direct import from {{ dependency.source }} is not allowed",
           },
         ],
       },

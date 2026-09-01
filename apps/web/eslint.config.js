@@ -65,5 +65,11 @@ export default defineConfig(
       ],
     },
   },
+  {
+    files: ["src/app/routes/**/*.{ts,tsx}"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
   eslintBoundariesConfig,
 );
