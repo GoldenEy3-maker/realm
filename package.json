@@ -9,11 +9,16 @@
     "format": "turbo format"
   },
   "dependencies": {
-    "turbo": "^2.7.2"
+    "turbo": "^2.10.12"
+  },
+  "overrides": {
+    "seroval": "1.6.4",
+    "path-to-regexp": "8.4.2",
+    "ws": "8.21.0"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "packageManager": "bun@1.3.3"
+  "packageManager": "bun@1.3.14"
 }

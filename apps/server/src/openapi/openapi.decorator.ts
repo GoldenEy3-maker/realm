@@ -4,11 +4,9 @@ import {
   ApiOperation,
   ApiResponseNoStatusOptions,
   getSchemaPath,
+  type ReferenceObject,
+  type SchemaObject,
 } from "@nestjs/swagger";
-import {
-  ReferenceObject,
-  SchemaObject,
-} from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 import { ErrorResponseDto, ResponseDto } from "../response/dto/response.dto";
 import { ResponseMessage } from "../response/response-message.decorator";
 

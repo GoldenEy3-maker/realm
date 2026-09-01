@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { TasksController } from "./tasks.controller";
 import { TasksService } from "./tasks.service";
+import { I18nService } from "nestjs-i18n";
 
 describe("TasksController", () => {
   let controller: TasksController;
@@ -16,6 +17,12 @@ describe("TasksController", () => {
         {
           provide: TasksService,
           useValue: mockTasksService,
+        },
+        {
+          provide: I18nService,
+          useValue: {
+            t: jest.fn((key: string) => key),
+          },
         },
       ],
     }).compile();

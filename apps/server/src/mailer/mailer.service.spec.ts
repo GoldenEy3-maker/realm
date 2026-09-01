@@ -2,6 +2,7 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { MailerService } from "./mailer.service";
 import { MailerService as NestMailerService } from "@nestjs-modules/mailer";
 import { ConfigService } from "@nestjs/config";
+import { I18nService } from "nestjs-i18n";
 
 describe("MailerService", () => {
   let service: MailerService;
@@ -20,6 +21,12 @@ describe("MailerService", () => {
           provide: ConfigService,
           useValue: {
             get: jest.fn(),
+          },
+        },
+        {
+          provide: I18nService,
+          useValue: {
+            t: jest.fn((key: string) => key),
           },
         },
       ],

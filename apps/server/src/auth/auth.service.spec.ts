@@ -6,6 +6,7 @@ import { RedisService } from "../redis/redis.service";
 import { UsersService } from "../users/users.service";
 import { MailerService } from "../mailer/mailer.service";
 import { ProfileService } from "../profile/profile.service";
+import { I18nService } from "nestjs-i18n";
 
 describe("AuthService", () => {
   let service: AuthService;
@@ -67,6 +68,12 @@ describe("AuthService", () => {
         {
           provide: ProfileService,
           useValue: mockProfileService,
+        },
+        {
+          provide: I18nService,
+          useValue: {
+            t: jest.fn((key: string) => key),
+          },
         },
       ],
     }).compile();
