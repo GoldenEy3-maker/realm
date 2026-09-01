@@ -1,4 +1,5 @@
 import { Transform } from "class-transformer";
+
 import { parseBoolean } from "../utils/parse-boolean.util";
 
 export function ParseBoolean(): PropertyDecorator {

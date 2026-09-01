@@ -1,22 +1,25 @@
-import { Module } from "@nestjs/common";
-import { ServeStaticModule } from "@nestjs/serve-static";
 import path, { join } from "node:path";
-import { UsersModule } from "./users/users.module";
-import { TypeOrmModule } from "@nestjs/typeorm";
+
+import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { validate } from "./env.validation";
-import { dataSourceOptions } from "./infrastructure/db/datasource";
-import { AuthModule } from "./auth/auth.module";
-import { RedisModule } from "./infrastructure/redis/redis.module";
-import { MailerModule } from "./infrastructure/mailer/mailer.module";
-import { ProfileModule } from "./profile/profile.module";
-import { TasksModule } from "./tasks/tasks.module";
-import { NestLensModule } from "nestlens";
-import { ThrottlerModule, seconds } from "@nestjs/throttler";
 import { APP_GUARD } from "@nestjs/core";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { seconds, ThrottlerModule } from "@nestjs/throttler";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { Request as ExpressRequest } from "express";
 import { AcceptLanguageResolver, I18nModule } from "nestjs-i18n";
-import { I18nThrottlerGuard } from "./common/throttler/i18n-throttler.guard";
+import { NestLensModule } from "nestlens";
+
+import { AuthModule } from "@/auth/auth.module";
+import { I18nThrottlerGuard } from "@/common/throttler/i18n-throttler.guard";
+import { dataSourceOptions } from "@/infrastructure/db/datasource";
+import { MailerModule } from "@/infrastructure/mailer/mailer.module";
+import { RedisModule } from "@/infrastructure/redis/redis.module";
+import { ProfileModule } from "@/profile/profile.module";
+import { TasksModule } from "@/tasks/tasks.module";
+import { UsersModule } from "@/users/users.module";
+
+import { validate } from "./env.validation";
 
 @Module({
   imports: [

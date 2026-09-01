@@ -1,7 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
+import { I18nService } from "nestjs-i18n";
+
 import { TasksController } from "./tasks.controller";
 import { TasksService } from "./tasks.service";
-import { I18nService } from "nestjs-i18n";
 
 describe("TasksController", () => {
   let controller: TasksController;

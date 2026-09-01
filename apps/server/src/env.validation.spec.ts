@@ -1,4 +1,5 @@
 import "reflect-metadata";
+
 import { Environment, validate } from "./env.validation";
 
 const validConfig = {

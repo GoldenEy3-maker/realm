@@ -1,4 +1,3 @@
-import { User } from "../../users/entities/user.entity";
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+
+import { User } from "@/users/entities/user.entity";
+
 import { ProfileResponseDto } from "../dto/profile-response.dto";
 
 @Entity({ name: "profiles" })

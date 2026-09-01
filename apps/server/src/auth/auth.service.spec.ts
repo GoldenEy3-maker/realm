@@ -1,12 +1,15 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { AuthService } from "./auth.service";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { RedisService } from "../infrastructure/redis/redis.service";
-import { UsersService } from "../users/users.service";
-import { MailerService } from "../infrastructure/mailer/mailer.service";
-import { ProfileService } from "../profile/profile.service";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
 import { I18nService } from "nestjs-i18n";
+
+import { MailerService } from "@/infrastructure/mailer/mailer.service";
+import { RedisService } from "@/infrastructure/redis/redis.service";
+import { ProfileService } from "@/profile/profile.service";
+import { UsersService } from "@/users/users.service";
+
+import { AuthService } from "./auth.service";
 
 describe("AuthService", () => {
   let service: AuthService;

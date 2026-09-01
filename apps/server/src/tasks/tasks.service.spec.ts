@@ -1,7 +1,9 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { TasksService } from "./tasks.service";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
+
 import { Task } from "./entities/task.entity";
+import { TasksService } from "./tasks.service";
 
 describe("TasksService", () => {
   let service: TasksService;

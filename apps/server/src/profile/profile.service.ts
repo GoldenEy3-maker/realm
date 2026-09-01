@@ -1,11 +1,13 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { UsersService } from "../users/users.service";
-import { ProfileResponseDto } from "./dto/profile-response.dto";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Profile } from "./entities/profile.entity";
-import { Repository } from "typeorm";
-import { CreateProfileDto } from "./dto/create-profile.dto";
 import { I18nService } from "nestjs-i18n";
+import { Repository } from "typeorm";
+
+import { UsersService } from "@/users/users.service";
+
+import { CreateProfileDto } from "./dto/create-profile.dto";
+import { ProfileResponseDto } from "./dto/profile-response.dto";
+import { Profile } from "./entities/profile.entity";
 
 @Injectable()
 export class ProfileService {

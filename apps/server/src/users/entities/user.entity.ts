@@ -1,3 +1,4 @@
+import { ValueOf } from "@repo/types/value-of";
 import {
   Column,
   CreateDateColumn,
@@ -6,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { ValueOf } from "@repo/types/value-of";
-import { Profile } from "../../profile/entities/profile.entity";
+
+import { Profile } from "@/profile/entities/profile.entity";
 
 export const UserStatus = {
   ONLINE: "online",

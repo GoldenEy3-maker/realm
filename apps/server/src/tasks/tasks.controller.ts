@@ -1,15 +1,17 @@
 import { Controller, Get, NotFoundException, Param } from "@nestjs/common";
-import { TasksService } from "./tasks.service";
-import { TaskResponseDto } from "./dto/task-response.dto";
 import {
   ApiExtraModels,
   ApiNotFoundResponse,
   ApiUnprocessableEntityResponse,
   getSchemaPath,
 } from "@nestjs/swagger";
-import { ParseIntPipe } from "../common/validation/parse-int.pipe";
-import { OpenApi } from "../common/openapi/openapi.decorator";
 import { I18nService } from "nestjs-i18n";
+
+import { OpenApi } from "@/common/openapi/openapi.decorator";
+import { ParseIntPipe } from "@/common/validation/parse-int.pipe";
+
+import { TaskResponseDto } from "./dto/task-response.dto";
+import { TasksService } from "./tasks.service";
 
 @Controller({ path: "tasks", version: "1" })
 @ApiExtraModels(TaskResponseDto)

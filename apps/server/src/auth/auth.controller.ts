@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Post, Req } from "@nestjs/common";
-import { AuthService } from "./auth.service";
 import {
   ApiExtraModels,
   ApiNotFoundResponse,
@@ -8,15 +7,18 @@ import {
   ApiUnprocessableEntityResponse,
   getSchemaPath,
 } from "@nestjs/swagger";
-import { SendVerificationCodeDto } from "./dto/send-verification-code.dto";
-import { VerifyCodeDto } from "./dto/verify-code.dto";
-import { AuthResponseDto } from "./dto/auth-response.dto";
-import type { AuthenticatedRequest } from "./types/authenticated-request.type";
-import { SessionResponseDto } from "./dto/session-response.dto";
-import { RefreshTokensDto } from "./dto/refresh-tokens.dto";
 import { Throttle } from "@nestjs/throttler";
+
+import { OpenApi } from "@/common/openapi/openapi.decorator";
+
 import { Auth } from "./auth.decorator";
-import { OpenApi } from "../common/openapi/openapi.decorator";
+import { AuthService } from "./auth.service";
+import { AuthResponseDto } from "./dto/auth-response.dto";
+import { RefreshTokensDto } from "./dto/refresh-tokens.dto";
+import { SendVerificationCodeDto } from "./dto/send-verification-code.dto";
+import { SessionResponseDto } from "./dto/session-response.dto";
+import { VerifyCodeDto } from "./dto/verify-code.dto";
+import type { AuthenticatedRequest } from "./types/authenticated-request.type";
 
 @Controller({ path: "auth", version: "1" })
 @ApiExtraModels(AuthResponseDto, SessionResponseDto)

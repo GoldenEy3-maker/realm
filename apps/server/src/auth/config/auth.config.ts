@@ -1,5 +1,6 @@
 import { registerAs } from "@nestjs/config";
-import { JwtExpiresInStringValue } from "../../common/types/jwt-expires-in-string-value.type";
+
+import type { JwtExpiresInStringValue } from "@/common/types/jwt-expires-in-string-value.type";
 
 export interface VerificationCodeConfig {
   maxAttempts: number;

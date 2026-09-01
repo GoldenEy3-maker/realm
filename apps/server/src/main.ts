@@ -1,15 +1,17 @@
-import { NestFactory, Reflector } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { NestExpressApplication } from "@nestjs/platform-express";
-import { ResponseInterceptor } from "./common/response/response.interceptor";
-import { HttpExceptionFilter } from "./common/response/http-exception.filter";
-import { OpenApiReference } from "./common/openapi/openapi.reference";
 import { RequestMethod, VERSION_NEUTRAL, VersioningType } from "@nestjs/common";
-import { ValidationPipe } from "./common/validation/validation.pipe";
+import { NestFactory, Reflector } from "@nestjs/core";
+import type { NestExpressApplication } from "@nestjs/platform-express";
 import helmet from "helmet";
-import { HelmetConfig } from "./helmet.config";
 import { I18nMiddleware } from "nestjs-i18n";
 import { NestLensLogger } from "nestlens";
+
+import { OpenApiReference } from "@/common/openapi/openapi.reference";
+import { HttpExceptionFilter } from "@/common/response/http-exception.filter";
+import { ResponseInterceptor } from "@/common/response/response.interceptor";
+import { ValidationPipe } from "@/common/validation/validation.pipe";
+
+import { AppModule } from "./app.module";
+import { HelmetConfig } from "./helmet.config";
 
 async function bootstrap() {
   const corsOrigins = process.env.AVAILABLE_CORS_ORIGINS?.split(",") ?? [];

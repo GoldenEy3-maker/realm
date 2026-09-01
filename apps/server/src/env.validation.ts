@@ -1,6 +1,7 @@
 import { plainToInstance } from "class-transformer";
 import { IsBoolean, IsEnum, IsNumber, IsString, MinLength, validateSync } from "class-validator";
-import { ParseBoolean } from "./common/decorators/parse-boolean.decorator";
+
+import { ParseBoolean } from "@/common/decorators/parse-boolean.decorator";
 
 export enum Environment {
   Development = "development",

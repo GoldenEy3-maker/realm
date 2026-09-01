@@ -1,8 +1,10 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { MailerService } from "./mailer.service";
-import { MailerService as NestMailerService } from "@nestjs-modules/mailer";
 import { ConfigService } from "@nestjs/config";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
+import { MailerService as NestMailerService } from "@nestjs-modules/mailer";
 import { I18nService } from "nestjs-i18n";
+
+import { MailerService } from "./mailer.service";
 
 describe("MailerService", () => {
   let service: MailerService;

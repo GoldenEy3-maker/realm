@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+
 import { ValidationErrors } from "../../validation/validation-errors.interface";
 
 export class BaseResponseMetaDto {

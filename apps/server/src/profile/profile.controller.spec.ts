@@ -1,7 +1,10 @@
-import { Test, TestingModule } from "@nestjs/testing";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
+
+import { AuthGuard } from "@/auth/auth.guard";
+
 import { ProfileController } from "./profile.controller";
 import { ProfileService } from "./profile.service";
-import { AuthGuard } from "../auth/auth.guard";
 
 describe("ProfileController", () => {
   let controller: ProfileController;

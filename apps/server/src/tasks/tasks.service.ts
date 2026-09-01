@@ -1,8 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { Repository } from "typeorm";
-import { Task } from "./entities/task.entity";
-import { TaskResponseDto } from "./dto/task-response.dto";
 import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+
+import { TaskResponseDto } from "./dto/task-response.dto";
+import { Task } from "./entities/task.entity";
 
 @Injectable()
 export class TasksService {

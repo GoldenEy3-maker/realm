@@ -1,11 +1,13 @@
 import { Module } from "@nestjs/common";
-import { MailerModule as NestMailerModule } from "@nestjs-modules/mailer";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import { MailerService } from "./mailer.service";
-import { Environment } from "../../env.validation";
-import path from "path";
+import { MailerModule as NestMailerModule } from "@nestjs-modules/mailer";
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/adapters/handlebars.adapter";
 import { I18nService } from "nestjs-i18n";
+import path from "path";
+
+import { Environment } from "@/env.validation";
+
+import { MailerService } from "./mailer.service";
 
 @Module({
   imports: [

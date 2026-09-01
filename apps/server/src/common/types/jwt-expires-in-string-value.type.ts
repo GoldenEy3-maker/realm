@@ -1,3 +1,3 @@
-import { JwtSignOptions } from "@nestjs/jwt";
+import type { JwtSignOptions } from "@nestjs/jwt";
 
 export type JwtExpiresInStringValue = Exclude<JwtSignOptions["expiresIn"], number>;

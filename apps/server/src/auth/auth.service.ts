@@ -1,17 +1,19 @@
 import { Injectable, Logger, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { RedisService } from "../infrastructure/redis/redis.service";
-import { UsersService } from "../users/users.service";
-import { generateVerificationCode } from "./utils/generate-code.util";
+import { I18nService } from "nestjs-i18n";
+
+import { MailerService } from "@/infrastructure/mailer/mailer.service";
+import { RedisService } from "@/infrastructure/redis/redis.service";
+import { ProfileService } from "@/profile/profile.service";
+import { User } from "@/users/entities/user.entity";
+import { UsersService } from "@/users/users.service";
+
 import { JwtConfig, VerificationCodeConfig } from "./config/auth.config";
 import { AuthResponseDto } from "./dto/auth-response.dto";
-import { User } from "../users/entities/user.entity";
-import { MailerService } from "../infrastructure/mailer/mailer.service";
-import { ProfileService } from "../profile/profile.service";
-import { generateUniqueUsername } from "./utils/generate-unique-username.util";
 import { SessionResponseDto } from "./dto/session-response.dto";
-import { I18nService } from "nestjs-i18n";
+import { generateVerificationCode } from "./utils/generate-code.util";
+import { generateUniqueUsername } from "./utils/generate-unique-username.util";
 
 export interface AccessTokenPayload {
   sub: number;

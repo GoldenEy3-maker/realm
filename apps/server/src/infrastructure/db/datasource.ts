@@ -1,7 +1,9 @@
-import { DataSource, DataSourceOptions } from "typeorm";
-import { config } from "dotenv";
 import { ConfigService } from "@nestjs/config";
-import { Environment } from "../../env.validation";
+import { config } from "dotenv";
+import type { DataSourceOptions } from "typeorm";
+import { DataSource } from "typeorm";
+
+import { Environment } from "@/env.validation";
 
 config();
 

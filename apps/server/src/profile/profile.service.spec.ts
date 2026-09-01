@@ -1,9 +1,12 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { ProfileService } from "./profile.service";
+import type { TestingModule } from "@nestjs/testing";
+import { Test } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
-import { Profile } from "./entities/profile.entity";
-import { UsersService } from "../users/users.service";
 import { I18nService } from "nestjs-i18n";
+
+import { UsersService } from "@/users/users.service";
+
+import { Profile } from "./entities/profile.entity";
+import { ProfileService } from "./profile.service";
 
 describe("ProfileService", () => {
   let service: ProfileService;

@@ -1,4 +1,5 @@
-import { AccessTokenPayload } from "../auth.service";
-import { Request } from "express";
+import type { Request } from "express";
+
+import type { AccessTokenPayload } from "../auth.service";
 
 export type AuthenticatedRequest = Request & { user: AccessTokenPayload };

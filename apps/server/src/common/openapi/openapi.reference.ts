@@ -1,11 +1,15 @@
-import { NestExpressApplication } from "@nestjs/platform-express";
-import { DocumentBuilder, OpenAPIObject, SwaggerModule } from "@nestjs/swagger";
-import { apiReference } from "@scalar/nestjs-api-reference";
 import { mkdir, stat, writeFile } from "node:fs/promises";
-import { UsersModule } from "../../users/users.module";
-import { AuthModule } from "../../auth/auth.module";
-import { ProfileModule } from "../../profile/profile.module";
-import { TasksModule } from "../../tasks/tasks.module";
+
+import type { NestExpressApplication } from "@nestjs/platform-express";
+import type { OpenAPIObject } from "@nestjs/swagger";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { apiReference } from "@scalar/nestjs-api-reference";
+
+import { AuthModule } from "@/auth/auth.module";
+import { ProfileModule } from "@/profile/profile.module";
+import { TasksModule } from "@/tasks/tasks.module";
+import { UsersModule } from "@/users/users.module";
+
 import { ErrorResponseDto, ResponseDto } from "../response/dto/response.dto";
 
 export class OpenApiReference {
