@@ -41,8 +41,8 @@ export const authSendEmailCodeServerFn = createServerFn({ method: "POST" })
 
       return true;
     } catch (error) {
-      if (error instanceof Error) throw new Error(error.message);
+      if (error instanceof Error) throw error;
 
-      throw new Error(CommonUIMessages.UNKNOWN_ERROR);
+      throw new Error(CommonUIMessages.UNKNOWN_ERROR, { cause: error });
     }
   });

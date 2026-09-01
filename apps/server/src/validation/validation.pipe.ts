@@ -19,7 +19,7 @@ export class ValidationPipe implements PipeTransform<any> {
     const i18n = I18nContext.current();
 
     const object = plainToInstance<unknown, unknown>(metatype, value);
-    const errors = (await i18n?.validate(object as object)) ?? (await validate(object as object));
+    const errors = (await i18n?.validate(object)) ?? (await validate(object as object));
 
     if (errors.length > 0) {
       const errorsObject = errors.reduce((acc, error) => {

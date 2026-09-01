@@ -37,10 +37,10 @@ export class AuthService {
   ) {}
 
   async generateAndSendVerificationCode(email: string): Promise<boolean> {
-    let user = await this.usersService.findOneByEmail(email);
+    const user = await this.usersService.findOneByEmail(email);
 
     if (!user) {
-      user = await this.registerUser(email);
+      await this.registerUser(email);
     }
 
     const verificationCodeConfig =
@@ -123,10 +123,8 @@ export class AuthService {
   async refreshTokens(refreshToken: string): Promise<AuthResponseDto> {
     const jwtConfig = this.configService.getOrThrow<JwtConfig>("auth.jwt");
 
-    let payload: RefreshTokenPayload | null = null;
-
     try {
-      payload = await this.jwtService.verifyAsync<RefreshTokenPayload>(refreshToken, {
+      const payload = await this.jwtService.verifyAsync<RefreshTokenPayload>(refreshToken, {
         secret: jwtConfig.secret,
       });
 

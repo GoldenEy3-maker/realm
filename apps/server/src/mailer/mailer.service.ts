@@ -29,7 +29,7 @@ export class MailerService {
       this.logger.log(`Verification code sent to ${email}`);
     } catch (error) {
       this.logger.error(`Failed to send email to ${email}`, error);
-      throw new Error(this.i18n.t("mailer.failedToSendVerificationEmail"));
+      throw new Error(this.i18n.t("mailer.failedToSendVerificationEmail"), { cause: error });
     }
   }
 }
