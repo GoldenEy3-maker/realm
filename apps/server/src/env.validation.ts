@@ -1,6 +1,6 @@
 import { plainToInstance } from "class-transformer";
 import { IsBoolean, IsEnum, IsNumber, IsString, MinLength, validateSync } from "class-validator";
-import { parseBoolean } from "./common/utils/parse-boolean.util";
+import { ParseBoolean } from "./common/decorators/parse-boolean.decorator";
 
 export enum Environment {
   Development = "development",
@@ -46,6 +46,7 @@ class EnvironmentVariables {
   @IsNumber()
   MAIL_PORT: number;
 
+  @ParseBoolean()
   @IsBoolean()
   MAIL_SECURE: boolean;
 
@@ -66,12 +67,7 @@ class EnvironmentVariables {
 }
 
 export function validate(config: Record<string, unknown>) {
-  const processedConfig = {
-    ...config,
-    MAIL_SECURE: parseBoolean(config.MAIL_SECURE),
-  };
-
-  const validatedConfig = plainToInstance(EnvironmentVariables, processedConfig, {
+  const validatedConfig = plainToInstance(EnvironmentVariables, config, {
     enableImplicitConversion: true,
   });
 
