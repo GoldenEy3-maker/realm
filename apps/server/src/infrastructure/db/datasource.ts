@@ -1,7 +1,7 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import { config } from "dotenv";
 import { ConfigService } from "@nestjs/config";
-import { Environment } from "../env.validation";
+import { Environment } from "../../env.validation";
 
 config();
 
@@ -15,7 +15,7 @@ export const dataSourceOptions: DataSourceOptions = {
   password: configService.get<string>("DB_PASSWORD"),
   database: configService.get<string>("DB_NAME"),
   entities: ["dist/**/*.entity.js"],
-  migrations: ["dist/db/migrations/*.js"],
+  migrations: ["dist/infrastructure/db/migrations/*.js"],
   migrationsTableName: "migrations",
   migrationsRun: false,
   synchronize: configService.get<Environment>("NODE_ENV") === Environment.Development,

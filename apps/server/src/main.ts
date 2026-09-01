@@ -1,11 +1,11 @@
 import { NestFactory, Reflector } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { ResponseInterceptor } from "./response/response.interceptor";
-import { HttpExceptionFilter } from "./response/http-exception.filter";
-import { OpenApiReference } from "./openapi/openapi.reference";
+import { ResponseInterceptor } from "./common/response/response.interceptor";
+import { HttpExceptionFilter } from "./common/response/http-exception.filter";
+import { OpenApiReference } from "./common/openapi/openapi.reference";
 import { RequestMethod, VERSION_NEUTRAL, VersioningType } from "@nestjs/common";
-import { ValidationPipe } from "./validation/validation.pipe";
+import { ValidationPipe } from "./common/validation/validation.pipe";
 import helmet from "helmet";
 import { HelmetConfig } from "./helmet.config";
 import { I18nMiddleware } from "nestjs-i18n";

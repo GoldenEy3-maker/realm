@@ -2,9 +2,9 @@ import { Test, TestingModule } from "@nestjs/testing";
 import { AuthService } from "./auth.service";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { RedisService } from "../redis/redis.service";
+import { RedisService } from "../infrastructure/redis/redis.service";
 import { UsersService } from "../users/users.service";
-import { MailerService } from "../mailer/mailer.service";
+import { MailerService } from "../infrastructure/mailer/mailer.service";
 import { ProfileService } from "../profile/profile.service";
 import { I18nService } from "nestjs-i18n";
 

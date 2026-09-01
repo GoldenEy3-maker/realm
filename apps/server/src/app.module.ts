@@ -5,10 +5,10 @@ import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
 import { validate } from "./env.validation";
-import { dataSourceOptions } from "./db/datasource";
+import { dataSourceOptions } from "./infrastructure/db/datasource";
 import { AuthModule } from "./auth/auth.module";
-import { RedisModule } from "./redis/redis.module";
-import { MailerModule } from "./mailer/mailer.module";
+import { RedisModule } from "./infrastructure/redis/redis.module";
+import { MailerModule } from "./infrastructure/mailer/mailer.module";
 import { ProfileModule } from "./profile/profile.module";
 import { TasksModule } from "./tasks/tasks.module";
 import { NestLensModule } from "nestlens";
@@ -16,7 +16,7 @@ import { ThrottlerModule, seconds } from "@nestjs/throttler";
 import { APP_GUARD } from "@nestjs/core";
 import { Request as ExpressRequest } from "express";
 import { AcceptLanguageResolver, I18nModule } from "nestjs-i18n";
-import { I18nThrottlerGuard } from "./throttler/i18n-throttler.guard";
+import { I18nThrottlerGuard } from "./common/throttler/i18n-throttler.guard";
 
 @Module({
   imports: [
@@ -45,7 +45,7 @@ import { I18nThrottlerGuard } from "./throttler/i18n-throttler.guard";
     I18nModule.forRoot({
       fallbackLanguage: "en",
       loaderOptions: {
-        path: path.join(__dirname, "/i18n/"),
+        path: path.join(__dirname, "common", "i18n"),
         watch: true,
       },
       resolvers: [AcceptLanguageResolver],

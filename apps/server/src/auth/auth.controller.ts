@@ -16,7 +16,7 @@ import { SessionResponseDto } from "./dto/session-response.dto";
 import { RefreshTokensDto } from "./dto/refresh-tokens.dto";
 import { Throttle } from "@nestjs/throttler";
 import { Auth } from "./auth.decorator";
-import { OpenApi } from "../openapi/openapi.decorator";
+import { OpenApi } from "../common/openapi/openapi.decorator";
 
 @Controller({ path: "auth", version: "1" })
 @ApiExtraModels(AuthResponseDto, SessionResponseDto)

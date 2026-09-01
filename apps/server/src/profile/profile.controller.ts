@@ -9,7 +9,7 @@ import {
 } from "@nestjs/swagger";
 import { ProfileResponseDto } from "./dto/profile-response.dto";
 import { Auth } from "../auth/auth.decorator";
-import { OpenApi } from "../openapi/openapi.decorator";
+import { OpenApi } from "../common/openapi/openapi.decorator";
 
 @Controller({ path: "profile", version: "1" })
 @ApiExtraModels(ProfileResponseDto)

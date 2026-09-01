@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MailerModule as NestMailerModule } from "@nestjs-modules/mailer";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MailerService } from "./mailer.service";
-import { Environment } from "../env.validation";
+import { Environment } from "../../env.validation";
 import path from "path";
 import { HandlebarsAdapter } from "@nestjs-modules/mailer/adapters/handlebars.adapter";
 import { I18nService } from "nestjs-i18n";
@@ -34,7 +34,7 @@ import { I18nService } from "nestjs-i18n";
             from: configService.get<string>("MAIL_FROM"),
           },
           template: {
-            dir: path.join(__dirname, "..", "..", "resources", "mail", "templates"),
+            dir: path.join(__dirname, "..", "..", "..", "resources", "mail", "templates"),
             adapter: new HandlebarsAdapter({ t: i18nService.hbsHelper }),
           },
         };

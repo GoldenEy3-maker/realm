@@ -2,8 +2,8 @@ import { Module } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
 import { UsersModule } from "../users/users.module";
-import { RedisModule } from "../redis/redis.module";
-import { MailerModule } from "../mailer/mailer.module";
+import { RedisModule } from "../infrastructure/redis/redis.module";
+import { MailerModule } from "../infrastructure/mailer/mailer.module";
 import { ProfileModule } from "../profile/profile.module";
 import { AuthGuardModule } from "./auth-guard.module";
 

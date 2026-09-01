@@ -7,8 +7,8 @@ import {
   ApiUnprocessableEntityResponse,
   getSchemaPath,
 } from "@nestjs/swagger";
-import { ParseIntPipe } from "../validation/parse-int.pipe";
-import { OpenApi } from "../openapi/openapi.decorator";
+import { ParseIntPipe } from "../common/validation/parse-int.pipe";
+import { OpenApi } from "../common/openapi/openapi.decorator";
 import { I18nService } from "nestjs-i18n";
 
 @Controller({ path: "tasks", version: "1" })
