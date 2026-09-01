@@ -1,35 +1,32 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { MailerService as NestMailerService } from "@nestjs-modules/mailer";
-import { I18nService } from "nestjs-i18n";
+
+export interface SendMailOptions {
+  to: string;
+  subject: string;
+  template: string;
+  context: Record<string, unknown>;
+}
 
 @Injectable()
 export class MailerService {
   private readonly logger = new Logger(MailerService.name);
 
-  constructor(
-    private readonly mailerService: NestMailerService,
-    private readonly i18n: I18nService,
-  ) {}
+  constructor(private readonly mailerService: NestMailerService) {}
 
-  async sendVerificationCode(email: string, code: string): Promise<void> {
+  async send(mail: SendMailOptions): Promise<void> {
     try {
       await this.mailerService.sendMail({
-        to: email,
-        subject: this.i18n.t("mailer.verificationCodeSubject"),
-        template: "verification-code",
-        context: {
-          code,
-          emailVerification: this.i18n.t("mailer.emailVerification"),
-          verificationCodeText: this.i18n.t("mailer.verificationCodeText"),
-          codeExpiration: this.i18n.t("mailer.codeExpiration"),
-          ignoreIfNotRequested: this.i18n.t("mailer.ignoreIfNotRequested"),
-        },
+        to: mail.to,
+        subject: mail.subject,
+        template: mail.template,
+        context: mail.context,
       });
 
-      this.logger.log(`Verification code sent to ${email}`);
+      this.logger.log(`Email sent to ${mail.to}`);
     } catch (error) {
-      this.logger.error(`Failed to send email to ${email}`, error);
-      throw new Error(this.i18n.t("mailer.failedToSendVerificationEmail"), { cause: error });
+      this.logger.error(`Failed to send email to ${mail.to}`, error);
+      throw error;
     }
   }
 }

@@ -1,35 +1,24 @@
-import { ConfigService } from "@nestjs/config";
 import type { TestingModule } from "@nestjs/testing";
 import { Test } from "@nestjs/testing";
 import { MailerService as NestMailerService } from "@nestjs-modules/mailer";
-import { I18nService } from "nestjs-i18n";
 
 import { MailerService } from "./mailer.service";
 
 describe("MailerService", () => {
   let service: MailerService;
+  let nestMailerService: { sendMail: jest.Mock };
 
   beforeEach(async () => {
+    nestMailerService = {
+      sendMail: jest.fn(),
+    };
+
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         MailerService,
         {
           provide: NestMailerService,
-          useValue: {
-            sendMail: jest.fn(),
-          },
-        },
-        {
-          provide: ConfigService,
-          useValue: {
-            get: jest.fn(),
-          },
-        },
-        {
-          provide: I18nService,
-          useValue: {
-            t: jest.fn((key: string) => key),
-          },
+          useValue: nestMailerService,
         },
       ],
     }).compile();
@@ -37,7 +26,29 @@ describe("MailerService", () => {
     service = module.get<MailerService>(MailerService);
   });
 
-  it("should be defined", () => {
-    expect(service).toBeDefined();
+  it("sends mail through the transport", async () => {
+    const mail = {
+      to: "user@example.com",
+      subject: "Hello",
+      template: "welcome",
+      context: { name: "User" },
+    };
+
+    await service.send(mail);
+
+    expect(nestMailerService.sendMail).toHaveBeenCalledWith(mail);
+  });
+
+  it("rethrows transport errors", async () => {
+    nestMailerService.sendMail.mockRejectedValue(new Error("SMTP down"));
+
+    await expect(
+      service.send({
+        to: "user@example.com",
+        subject: "Hello",
+        template: "welcome",
+        context: {},
+      }),
+    ).rejects.toThrow("SMTP down");
   });
 });

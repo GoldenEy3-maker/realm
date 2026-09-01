@@ -8,10 +8,11 @@ import { UsersModule } from "@/users/users.module";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { AuthGuardModule } from "./auth-guard.module";
+import { VerificationCodeMailer } from "./mail/verification-code.mailer";
 
 @Module({
   imports: [AuthGuardModule, UsersModule, ProfileModule, RedisModule, MailerModule],
-  providers: [AuthService],
+  providers: [AuthService, VerificationCodeMailer],
   controllers: [AuthController],
 })
 export class AuthModule {}

@@ -4,12 +4,12 @@ import type { TestingModule } from "@nestjs/testing";
 import { Test } from "@nestjs/testing";
 import { I18nService } from "nestjs-i18n";
 
-import { MailerService } from "@/infrastructure/mailer/mailer.service";
 import { RedisService } from "@/infrastructure/redis/redis.service";
 import { ProfileService } from "@/profile/profile.service";
 import { UsersService } from "@/users/users.service";
 
 import { AuthService } from "./auth.service";
+import { VerificationCodeMailer } from "./mail/verification-code.mailer";
 
 describe("AuthService", () => {
   let service: AuthService;
@@ -35,8 +35,8 @@ describe("AuthService", () => {
     create: jest.fn(),
   };
 
-  const mockMailerService = {
-    sendMail: jest.fn(),
+  const mockVerificationCodeMailer = {
+    send: jest.fn(),
   };
 
   const mockProfileService = {
@@ -65,8 +65,8 @@ describe("AuthService", () => {
           useValue: mockUsersService,
         },
         {
-          provide: MailerService,
-          useValue: mockMailerService,
+          provide: VerificationCodeMailer,
+          useValue: mockVerificationCodeMailer,
         },
         {
           provide: ProfileService,

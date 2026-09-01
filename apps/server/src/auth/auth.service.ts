@@ -3,7 +3,6 @@ import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { I18nService } from "nestjs-i18n";
 
-import { MailerService } from "@/infrastructure/mailer/mailer.service";
 import { RedisService } from "@/infrastructure/redis/redis.service";
 import { ProfileService } from "@/profile/profile.service";
 import { User } from "@/users/entities/user.entity";
@@ -12,6 +11,7 @@ import { UsersService } from "@/users/users.service";
 import { JwtConfig, VerificationCodeConfig } from "./config/auth.config";
 import { AuthResponseDto } from "./dto/auth-response.dto";
 import { SessionResponseDto } from "./dto/session-response.dto";
+import { VerificationCodeMailer } from "./mail/verification-code.mailer";
 import { generateVerificationCode } from "./utils/generate-code.util";
 import { generateUniqueUsername } from "./utils/generate-unique-username.util";
 
@@ -34,7 +34,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly i18n: I18nService,
     private readonly usersService: UsersService,
-    private readonly mailerService: MailerService,
+    private readonly verificationCodeMailer: VerificationCodeMailer,
     private readonly profileService: ProfileService,
   ) {}
 
@@ -59,7 +59,7 @@ export class AuthService {
       verificationCodeConfig.expirationTime,
     );
 
-    await this.mailerService.sendVerificationCode(email, code);
+    await this.verificationCodeMailer.send(email, code);
 
     return true;
   }
