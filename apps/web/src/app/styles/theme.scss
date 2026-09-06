@@ -1,0 +1,80 @@
+@layer base {
+  :root {
+    --white: oklch(100% 0 0deg);
+    --black: oklch(0% 0 0deg);
+    --snow: oklch(99.1% 0 0deg);
+    --eclipse: oklch(21.03% 0.0059 285.89deg);
+
+    --spacing: 4px;
+    --spacing-sm: calc(var(--spacing) * 0.5);
+    --spacing-md: var(--spacing);
+    --spacing-lg: calc(var(--spacing) * 1.5);
+    --spacing-xl: calc(var(--spacing) * 2);
+    --spacing-2xl: calc(var(--spacing) * 3);
+    --spacing-3xl: calc(var(--spacing) * 4);
+    --spacing-4xl: calc(var(--spacing) * 5);
+
+    --rounded: 8px;
+    --rounded-sm: calc(var(--rounded) * 0.5);
+    --rounded-md: var(--rounded);
+    --rounded-lg: calc(var(--rounded) * 1.5);
+    --rounded-xl: calc(var(--rounded) * 2);
+    --rounded-2xl: calc(var(--rounded) * 3);
+    --rounded-3xl: calc(var(--rounded) * 4);
+    --rounded-full: 99999px;
+
+    --text: 16px;
+    --text-xs: calc(var(--text) * 0.75);
+    --text-sm: calc(var(--text) * 0.875);
+    --text-md: var(--text);
+    --text-lg: calc(var(--text) * 1.125);
+    --text-xl: calc(var(--text) * 1.25);
+    --text-2xl: calc(var(--text) * 1.5);
+
+    --font-sans:
+      "Geist Variable", ui-sans-serif, system-ui, -apple-system, blinkmacsystemfont, "Segoe UI",
+      roboto, "Helvetica Neue", arial, "Noto Sans", "Liberation Sans", ubuntu, cantarell,
+      sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --cursor-interactive: pointer;
+    --cursor-disabled: not-allowed;
+
+    --disabled-opacity: 0.5;
+
+    --ease-smooth: ease;
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+
+    --duration: 200ms;
+    --duration-sm: calc(var(--duration) * 0.5);
+    --duration-md: var(--duration);
+    --duration-lg: calc(var(--duration) * 1.5);
+    --duration-xl: calc(var(--duration) * 2);
+
+    --ring: oklch(64.03% 0.09 280.34deg);
+    --ring-offset: 3px;
+    --ring-shadow: 0 0 0 var(--ring-offset) var(--ring);
+
+    --background: oklch(18% 0 0deg);
+    --foreground: var(--snow);
+
+    --primary: oklch(55.07% 0.2117 280.34deg);
+    --primary-foreground: var(--snow);
+    --primary-hover: color-mix(in oklab, var(--primary) 90%, var(--primary-foreground) 10%);
+
+    --primary-soft-foreground: oklch(66.07% 0.1166 280.34deg);
+
+    --secondary: oklch(25% 0 0deg);
+    --secondary-foreground: var(--snow);
+    --secondary-hover: color-mix(in oklab, var(--secondary) 96%, var(--secondary-foreground) 4%);
+  }
+
+  [data-theme="light"] {
+    --ring: oklch(64.03% 0.09 280.34deg);
+
+    --background: oklch(97.02% 0 0deg);
+    --foreground: var(--eclipse);
+
+    --primary: oklch(55.07% 0.2117 280.34deg);
+    --primary-foreground: var(--snow);
+  }
+}

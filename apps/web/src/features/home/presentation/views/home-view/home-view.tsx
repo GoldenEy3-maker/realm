@@ -10,7 +10,8 @@ export function HomeView() {
     <div>
       <h1>HomeView</h1>
       <p>{helloUserName({ username: "123" })}</p>
-      <Button className={styles.Button}>Test Button</Button>
+      <Button>Test Button</Button>
+      <Button>Test Button</Button>
       <SubComp className={styles.SubComp}>SubComp</SubComp>
       <ProductCard className={styles.ProductCard}>123</ProductCard>
     </div>

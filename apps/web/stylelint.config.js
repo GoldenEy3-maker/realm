@@ -25,7 +25,7 @@ const config = {
           `Expected class selector "${selector}" to be PascalCase with optional variant suffix (e.g., .Root_lg, .Root_ghost-foreground)`,
       },
     ],
-    // 'lower' and 'upper' options are allowed but cuz we use custom functions as camelCase, they will be marked as error for any option
+    // 'lower' and 'upper' options are allowed but cuz we use custom functions as kebab-case, they will be marked as error for any option
     'function-name-case': null,
     'at-rule-empty-line-before': [
       'always',
@@ -35,27 +35,27 @@ const config = {
       },
     ],
     'keyframes-name-pattern': [
-      '^[a-z][a-zA-Z0-9]*$',
+      '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
       {
-        message: 'Expected keyframes name to be camelCase',
+        message: 'Expected keyframes name to be kebab-case',
       },
     ],
     'scss/at-mixin-pattern': [
-      '^[a-z][a-zA-Z0-9]*$',
+      '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
       {
-        message: 'Expected mixin name to be camelCase',
+        message: 'Expected mixin name to be kebab-case',
       },
     ],
     'scss/at-function-pattern': [
-      '^[a-z][a-zA-Z0-9]*$',
+      '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
       {
-        message: 'Expected function name to be camelCase',
+        message: 'Expected function name to be kebab-case',
       },
     ],
     'scss/dollar-variable-pattern': [
-      '^[a-z][a-zA-Z0-9]*$',
+      '^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$',
       {
-        message: 'Expected variable name to be camelCase',
+        message: 'Expected variable name to be kebab-case',
       },
     ],
     // If need to use this rule, then need custom configuration of prettier to prevent wrapping lines in calc function

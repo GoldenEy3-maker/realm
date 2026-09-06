@@ -1,3 +1,5 @@
+import path from "node:path";
+
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { devtools } from "@tanstack/devtools-vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
@@ -6,6 +8,14 @@ import { defineConfig } from "vite";
 
 const config = defineConfig({
   resolve: { tsconfigPaths: true },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        loadPaths: [path.join(import.meta.dirname, "src", "app", "styles")],
+        additionalData: '@use "helpers" as *;',
+      },
+    },
+  },
   plugins: [
     paraglideVitePlugin({
       project: "./project.inlang",

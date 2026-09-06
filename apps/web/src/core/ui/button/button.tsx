@@ -1,13 +1,34 @@
+import type { ButtonProps as ButtonPrimitiveProps } from "react-aria-components/Button";
+import { Button as ButtonPromitive } from "react-aria-components/Button";
+
 import { cn } from "@/core/lib/cn";
 
 import styles from "./button.module.scss";
 
-interface ButtonProps extends React.ComponentProps<"button"> {}
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "danger" | "danger-soft";
 
-export function Button({ children, className, ...props }: ButtonProps) {
+type ButtonSize = "sm" | "md" | "lg";
+
+interface ButtonProps extends ButtonPrimitiveProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  onlyIcon?: boolean;
+}
+
+export function Button({
+  className,
+  variant = "primary",
+  size = "md",
+  onlyIcon = false,
+  ...props
+}: ButtonProps) {
   return (
-    <button {...props} className={cn(styles.Root, className)}>
-      {children}
-    </button>
+    <ButtonPromitive
+      {...props}
+      data-variant={variant}
+      data-size={size}
+      data-only-icon={onlyIcon}
+      className={cn(styles.Root, className)}
+    />
   );
 }

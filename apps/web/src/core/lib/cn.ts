@@ -1,5 +1,5 @@
 import classNames from "classnames";
 
-export function cn(...classes: (string | undefined)[]) {
+export function cn(...classes: classNames.ArgumentArray) {
   return classNames(...classes);
 }

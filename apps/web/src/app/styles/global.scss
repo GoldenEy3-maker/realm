@@ -1,9 +1,17 @@
 @use "reset";
 
+@use "theme";
+
 @layer vendor, base, core, domains-ui, features-ui, features-views;
 
 @layer base {
   #app {
     isolation: isolate;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--foreground);
+    background-color: var(--background);
   }
 }

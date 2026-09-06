@@ -1,0 +1,27 @@
+@mixin hoverable-cursor {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+@mixin reduced-motion-transition($values...) {
+  transition: $values;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+@mixin no-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin status-pending {
+  pointer-events: none;
+}
+
+@mixin status-disabled {
+  pointer-events: none;
+  cursor: var(--cursor-disabled);
+  opacity: var(--disabled-opacity);
+}

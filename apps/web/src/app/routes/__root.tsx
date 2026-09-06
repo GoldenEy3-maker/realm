@@ -1,3 +1,4 @@
+import "@fontsource-variable/geist";
 import "../styles/global.scss";
 
 import { TanStackDevtools } from "@tanstack/react-devtools";
