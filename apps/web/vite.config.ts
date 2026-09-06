@@ -1,30 +1,26 @@
-import eslintPlugin from "@nabla/vite-plugin-eslint";
-import babel from "@rolldown/plugin-babel";
-import tailwindcss from "@tailwindcss/vite";
+import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import { devtools } from "@tanstack/devtools-vite";
-import { tanstackStart } from "@tanstack/react-start/plugin/vite";
-import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import viteReact from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-export default defineConfig({
-  resolve: {
-    tsconfigPaths: true,
-  },
+const config = defineConfig({
+  resolve: { tsconfigPaths: true },
   plugins: [
+    paraglideVitePlugin({
+      project: "./project.inlang",
+      outdir: "./src/core/i18n",
+      emitTsDeclarations: true,
+    }),
     devtools(),
-    eslintPlugin(),
-    tailwindcss(),
-    tanstackStart({
-      srcDirectory: "./src/app",
-      router: {
-        entry: "./router.tsx",
-        routesDirectory: "./routes",
-        generatedRouteTree: "./route-tree.gen.ts",
-      },
+    tanstackRouter({
+      target: "react",
+      autoCodeSplitting: true,
+      routesDirectory: "./src/app/routes",
+      generatedRouteTree: "./src/app/routeTree.gen.ts",
     }),
-    react(),
-    babel({
-      presets: [reactCompilerPreset()],
-    }),
+    viteReact(),
   ],
 });
+
+export default config;

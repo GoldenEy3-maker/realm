@@ -10,14 +10,16 @@ import { HttpExceptionFilter } from "@/common/response/http-exception.filter";
 import { ResponseInterceptor } from "@/common/response/response.interceptor";
 import { ValidationPipe } from "@/common/validation/validation.pipe";
 
-import { AppModule } from "./app.module";
+import { AppModule, nestLensEnabled } from "./app.module";
 import { HelmetConfig } from "./helmet.config";
 
 async function bootstrap() {
   const corsOrigins = process.env.AVAILABLE_CORS_ORIGINS?.split(",") ?? [];
   const isProduction = process.env.NODE_ENV === "production";
 
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    bufferLogs: nestLensEnabled,
+  });
 
   const reflector = app.get(Reflector);
 
@@ -26,11 +28,13 @@ async function bootstrap() {
   app.enableCors({ origin: corsOrigins });
 
   app.setGlobalPrefix("api", {
-    exclude: [
-      { path: "nestlens", method: RequestMethod.ALL },
-      { path: "nestlens/(.*)", method: RequestMethod.ALL },
-      { path: "__nestlens__/(.*)", method: RequestMethod.ALL },
-    ],
+    exclude: nestLensEnabled
+      ? [
+          { path: "nestlens", method: RequestMethod.ALL },
+          { path: "nestlens/{*path}", method: RequestMethod.ALL },
+          { path: "__nestlens__/{*path}", method: RequestMethod.ALL },
+        ]
+      : [],
   });
 
   app.enableVersioning({
@@ -48,8 +52,9 @@ async function bootstrap() {
 
   await new OpenApiReference().setup(app);
 
-  const logger = app.get(NestLensLogger);
-  app.useLogger(logger);
+  if (nestLensEnabled) {
+    app.useLogger(app.get(NestLensLogger));
+  }
 
   await app.listen(process.env.PORT ?? 3000);
 }

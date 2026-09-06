@@ -1,7 +1,8 @@
 import boundaries from "eslint-plugin-boundaries";
 
-const sliceTypes = ["features", "widgets", "entities", "pages"];
-const slicePublicApiPath = "{ui,server-fns,api,model,lib}/index.@(ts|tsx)";
+const sliceTypes = ["domains", "features"];
+const slicePublicApiPath =
+  "{data/data-sources,data/models/data/repositories,domain/entities,domain/usecases,domain/repositories,presentation/store,presentation/views/**,presentation/ui/**,presentation/container,di}/index.@(ts|tsx)";
 
 export const eslintBoundariesConfig = {
   plugins: {
@@ -21,24 +22,16 @@ export const eslintBoundariesConfig = {
         pattern: "./src/app",
       },
       {
-        type: "pages",
-        pattern: "./src/pages/*",
+        type: "core",
+        pattern: "./src/core/*",
       },
       {
-        type: "widgets",
-        pattern: "./src/widgets/*",
+        type: "domains",
+        pattern: "./src/domains/*",
       },
       {
         type: "features",
         pattern: "./src/features/*",
-      },
-      {
-        type: "entities",
-        pattern: "./src/entities/*",
-      },
-      {
-        type: "shared",
-        pattern: "./src/shared",
       },
     ],
   },
@@ -49,17 +42,17 @@ export const eslintBoundariesConfig = {
         default: "allow",
         policies: [
           {
-            from: { element: { type: "shared" } },
+            from: { element: { type: "core" } },
             disallow: {
-              to: { element: { type: ["app", "pages", "features", "widgets", "entities"] } },
+              to: { element: { type: ["app", "domains", "features"] } },
             },
             message:
               "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
           },
           {
-            from: { element: { type: "entities" } },
+            from: { element: { type: "domains" } },
             disallow: {
-              to: { element: { type: ["app", "pages", "features", "widgets"] } },
+              to: { element: { type: ["app", "features"] } },
             },
             message:
               "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
@@ -67,39 +60,17 @@ export const eslintBoundariesConfig = {
           {
             from: { element: { type: "features" } },
             disallow: {
-              to: { element: { type: ["app", "pages", "widgets"] } },
+              to: { element: { type: ["app"] } },
             },
             message:
               "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
-          },
-          {
-            from: { element: { type: "widgets" } },
-            disallow: {
-              to: { element: { type: ["app", "pages"] } },
-            },
-            message:
-              "Lower layer ({{ from.element.type }}) cannot import from upper layer ({{ to.element.type }})",
-          },
-          {
-            from: { element: { type: "widgets" } },
-            disallow: {
-              to: { element: { type: "widgets" } },
-            },
-            message: "Cross-module dependencies are not allowed in the widgets layer",
           },
           {
             from: { element: { type: "features" } },
             disallow: {
               to: { element: { type: "features" } },
             },
-            message: "Cross-module dependencies are not allowed in the features layer",
-          },
-          {
-            from: { element: { type: "pages" } },
-            disallow: {
-              to: { element: { type: "pages" } },
-            },
-            message: "Cross-module dependencies are not allowed in the pages layer",
+            message: "Cross-module dependencies are not allowed in the widgets layer",
           },
           {
             to: { element: { type: sliceTypes } },

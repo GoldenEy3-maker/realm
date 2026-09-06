@@ -1,0 +1,9 @@
+@use "reset";
+
+@layer vendor, base, core, domains-ui, features-ui, features-views;
+
+@layer base {
+  #app {
+    isolation: isolate;
+  }
+}

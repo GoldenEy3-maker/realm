@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
+    "start": "turbo start",
     "test": "turbo test",
-    "format": "turbo format"
+    "format": "turbo format",
+    "lint": "turbo lint"
   },
   "dependencies": {
     "turbo": "^2.10.12"

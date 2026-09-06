@@ -19,12 +19,14 @@ import { ProfileModule } from "@/profile/profile.module";
 import { TasksModule } from "@/tasks/tasks.module";
 import { UsersModule } from "@/users/users.module";
 
-import { validate } from "./env.validation";
+import { Environment, validate } from "./env.validation";
+
+export const nestLensEnabled = process.env.NODE_ENV !== Environment.Production;
 
 @Module({
   imports: [
     NestLensModule.forRoot({
-      enabled: process.env.NODE_ENV !== "production",
+      enabled: nestLensEnabled,
       rateLimit: false,
     }),
     ServeStaticModule.forRoot({
