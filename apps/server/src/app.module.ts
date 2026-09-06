@@ -8,7 +8,6 @@ import { seconds, ThrottlerModule } from "@nestjs/throttler";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Request as ExpressRequest } from "express";
 import { AcceptLanguageResolver, I18nModule } from "nestjs-i18n";
-import { NestLensModule } from "nestlens";
 
 import { AuthModule } from "@/auth/auth.module";
 import { I18nThrottlerGuard } from "@/common/throttler/i18n-throttler.guard";
@@ -20,15 +19,11 @@ import { TasksModule } from "@/tasks/tasks.module";
 import { UsersModule } from "@/users/users.module";
 
 import { Environment, validate } from "./env.validation";
-
-export const nestLensEnabled = process.env.NODE_ENV !== Environment.Production;
+import { createNestlensModuleForRoot, nestLensEnabled } from "./infrastructure/nestlens";
 
 @Module({
   imports: [
-    NestLensModule.forRoot({
-      enabled: nestLensEnabled,
-      rateLimit: false,
-    }),
+    createNestlensModuleForRoot(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "public"),
     }),
@@ -40,18 +35,22 @@ export const nestLensEnabled = process.env.NODE_ENV !== Environment.Production;
       {
         name: "default",
         ttl: seconds(60),
-        limit: 20,
+        limit: 100,
         skipIf(context) {
-          const ctx = context.switchToHttp();
-          return ctx.getRequest<ExpressRequest>().url.includes("nestlens");
+          if (nestLensEnabled) {
+            const ctx = context.switchToHttp();
+            return ctx.getRequest<ExpressRequest>().url.includes("nestlens");
+          }
+
+          return false;
         },
       },
     ]),
     I18nModule.forRoot({
-      fallbackLanguage: "en",
+      fallbackLanguage: "ru",
       loaderOptions: {
         path: path.join(__dirname, "common", "i18n"),
-        watch: true,
+        watch: process.env.NODE_ENV === Environment.Development,
       },
       resolvers: [AcceptLanguageResolver],
     }),

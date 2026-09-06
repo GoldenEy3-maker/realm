@@ -12,11 +12,11 @@ export interface SendMailOptions {
 export class MailerService {
   private readonly logger = new Logger(MailerService.name);
 
-  constructor(private readonly mailerService: NestMailerService) {}
+  constructor(private readonly nestMailerService: NestMailerService) {}
 
   async send(mail: SendMailOptions): Promise<void> {
     try {
-      await this.mailerService.sendMail({
+      await this.nestMailerService.sendMail({
         to: mail.to,
         subject: mail.subject,
         template: mail.template,

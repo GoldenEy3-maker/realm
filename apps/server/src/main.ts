@@ -10,8 +10,9 @@ import { HttpExceptionFilter } from "@/common/response/http-exception.filter";
 import { ResponseInterceptor } from "@/common/response/response.interceptor";
 import { ValidationPipe } from "@/common/validation/validation.pipe";
 
-import { AppModule, nestLensEnabled } from "./app.module";
+import { AppModule } from "./app.module";
 import { HelmetConfig } from "./helmet.config";
+import { nestLensEnabled } from "./infrastructure/nestlens";
 
 async function bootstrap() {
   const corsOrigins = process.env.AVAILABLE_CORS_ORIGINS?.split(",") ?? [];

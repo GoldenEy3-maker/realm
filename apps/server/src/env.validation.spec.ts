@@ -31,8 +31,13 @@ describe("validate", () => {
     expect(validate({ ...validConfig, MAIL_SECURE: "true" }).MAIL_SECURE).toBe(true);
   });
 
-  it("keeps boolean MAIL_SECURE values", () => {
-    expect(validate({ ...validConfig, MAIL_SECURE: true }).MAIL_SECURE).toBe(true);
-    expect(validate({ ...validConfig, MAIL_SECURE: false }).MAIL_SECURE).toBe(false);
+  it("parses PORT '3000' as 3000", () => {
+    expect(validate({ ...validConfig, REDIS_PORT: "3000" }).REDIS_PORT).toBe(3000);
+  });
+
+  it("parses MAIL_FROM 'from@example.com' as 'from@example.com'", () => {
+    expect(validate({ ...validConfig, MAIL_FROM: "from@example.com" }).MAIL_FROM).toBe(
+      "from@example.com",
+    );
   });
 });

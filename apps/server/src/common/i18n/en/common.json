@@ -1,6 +1,0 @@
-{
-  "userNotFound": "User not found",
-  "taskNotFound": "Task not found",
-  "internalServerError": "Internal server error",
-  "tooManyRequests": "Too many requests, please try again later"
-}
