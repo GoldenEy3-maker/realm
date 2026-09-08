@@ -12,14 +12,14 @@ type ButtonSize = "sm" | "md" | "lg";
 interface ButtonProps extends ButtonPrimitiveProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  onlyIcon?: boolean;
+  isIconOnly?: boolean;
 }
 
 export function Button({
   className,
   variant = "primary",
   size = "md",
-  onlyIcon = false,
+  isIconOnly = false,
   ...props
 }: ButtonProps) {
   return (
@@ -27,7 +27,7 @@ export function Button({
       {...props}
       data-variant={variant}
       data-size={size}
-      data-only-icon={onlyIcon}
+      data-icon-only={isIconOnly}
       className={cn(styles.Root, className)}
     />
   );

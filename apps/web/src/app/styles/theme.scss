@@ -50,22 +50,39 @@
     --duration-lg: calc(var(--duration) * 1.5);
     --duration-xl: calc(var(--duration) * 2);
 
-    --ring: oklch(64.03% 0.09 280.34deg);
+    --ring: oklch(65.5% 0.0975 263.37deg);
     --ring-offset: 3px;
     --ring-shadow: 0 0 0 var(--ring-offset) var(--ring);
+
+    --border: oklch(46.4% 0.004 286.32deg);
 
     --background: oklch(18% 0 0deg);
     --foreground: var(--snow);
 
-    --primary: oklch(55.07% 0.2117 280.34deg);
+    --primary: oklch(53.12% 0.2087 264.27deg);
     --primary-foreground: var(--snow);
     --primary-hover: color-mix(in oklab, var(--primary) 90%, var(--primary-foreground) 10%);
 
-    --primary-soft-foreground: oklch(66.07% 0.1166 280.34deg);
+    --primary-soft-foreground: color-mix(
+      in oklab,
+      var(--primary) 80%,
+      var(--primary-foreground) 30%
+    );
 
     --secondary: oklch(25% 0 0deg);
     --secondary-foreground: var(--snow);
     --secondary-hover: color-mix(in oklab, var(--secondary) 96%, var(--secondary-foreground) 4%);
+
+    --danger: oklch(51% 0.1712 29.54deg);
+    --danger-foreground: var(--snow);
+    --danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
+    --danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
+    --danger-soft-hover: color-mix(
+      in oklab,
+      var(--danger-soft) 90%,
+      var(--danger-soft-foreground) 10%
+    );
+    --danger-soft-foreground: color-mix(in oklab, var(--danger) 80%, var(--danger-foreground) 30%);
   }
 
   [data-theme="light"] {

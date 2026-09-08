@@ -4,7 +4,7 @@
   }
 }
 
-@mixin reduced-motion-transition($values...) {
+@mixin transition-with-reduce-motion($values...) {
   transition: $values;
 
   @media (prefers-reduced-motion: reduce) {
