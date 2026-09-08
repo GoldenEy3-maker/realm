@@ -2,8 +2,12 @@ import { cn } from "@/core/lib/cn";
 
 import styles from "./flex-container.module.scss";
 
-interface FlexContainerProps extends React.ComponentProps<"div"> {}
+type FlexContainerDirection = "row" | "column";
 
-export function FlexContainer({ className, ...props }: FlexContainerProps) {
-  return <div {...props} className={cn(styles.Root, className)} />;
+interface FlexContainerProps extends React.ComponentProps<"div"> {
+  direction?: FlexContainerDirection;
+}
+
+export function FlexContainer({ className, direction = "row", ...props }: FlexContainerProps) {
+  return <div {...props} data-direction={direction} className={cn(styles.Root, className)} />;
 }

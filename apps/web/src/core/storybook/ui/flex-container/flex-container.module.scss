@@ -3,4 +3,12 @@
   flex-wrap: wrap;
   gap: var(--spacing-xl);
   align-items: center;
+
+  &[data-direction="column"] {
+    flex-direction: column;
+  }
+
+  &[data-direction="row"] {
+    flex-direction: row;
+  }
 }

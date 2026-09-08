@@ -16,6 +16,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+@mixin focus-invalid-ring {
+  &:focus,
+  &:focus-visible,
+  &[data-focused="true"],
+  &[data-focus-visible="true"],
+  &:focus-within,
+  &[data-focus-within="true"] {
+    --ring: var(--danger);
+  }
+}
+
 @mixin status-pending {
   pointer-events: none;
 }

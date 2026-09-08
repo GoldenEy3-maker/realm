@@ -83,6 +83,12 @@
       var(--danger-soft-foreground) 10%
     );
     --danger-soft-foreground: color-mix(in oklab, var(--danger) 80%, var(--danger-foreground) 30%);
+
+    --muted: oklch(60% 0 0deg);
+
+    --field-background: oklch(21% 0 0deg);
+    --field-foreground: var(--snow);
+    --field-hover: color-mix(in oklab, var(--field-background) 97%, var(--field-foreground) 3%);
   }
 
   [data-theme="light"] {
@@ -93,5 +99,10 @@
 
     --primary: oklch(55.07% 0.2117 280.34deg);
     --primary-foreground: var(--snow);
+
+    --field-background: oklch(100% 0 0deg);
+    --field-foreground: var(--eclipse);
+    --field-shadow:
+      0 2px 4px 0 rgb(0 0 0 / 4%), 0 1px 2px 0 rgb(0 0 0 / 6%), 0 0 1px 0 rgb(0 0 0 / 6%);
   }
 }

@@ -1,0 +1,64 @@
+.Root {
+  --input-bg: transparent;
+  --input-bg-hover: var(--input-bg);
+  --input-fg: currentcolor;
+
+  height: calc(var(--spacing) * 10);
+  padding-inline: var(--spacing-2xl);
+  border: 1px solid transparent;
+  border-radius: var(--rounded-lg);
+
+  font-size: var(--text-md);
+  color: var(--input-fg);
+
+  background-color: var(--input-bg);
+
+  &::placeholder {
+    color: var(--muted);
+  }
+
+  &[data-variant="primary"] {
+    --input-bg: var(--field-background);
+    --input-bg-hover: var(--field-hover);
+    --input-fg: var(--field-foreground);
+
+    box-shadow: var(--field-shadow, none);
+  }
+
+  &[data-variant="secondary"] {
+    --input-bg: var(--secondary);
+    --input-bg-hover: var(--secondary-hover);
+    --input-fg: var(--secondary-foreground);
+  }
+
+  &:focus,
+  &[data-focused="true"] {
+    outline: none;
+    box-shadow: var(--ring-shadow);
+  }
+
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @include status-disabled;
+  }
+
+  &[data-invalid="true"] {
+    border-color: var(--danger);
+
+    @include focus-invalid-ring;
+  }
+
+  @include hoverable-cursor {
+    &:hover:not(:focus, :focus-visible),
+    &[data-hovered="true"]:not([data-focused="true"], [data-focus-visible="true"]) {
+      background-color: var(--input-bg-hover);
+    }
+  }
+
+  @include transition-with-reduce-motion(
+    border-color var(--duration-sm) var(--ease-smooth),
+    background-color var(--duration-sm) var(--ease-smooth),
+    box-shadow var(--duration-sm) var(--ease-smooth)
+  );
+}

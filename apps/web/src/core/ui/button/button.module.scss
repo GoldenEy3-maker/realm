@@ -36,27 +36,6 @@
     height: calc(var(--spacing) * 4);
   }
 
-  &:disabled,
-  &[aria-disabled="true"] {
-    @include status-disabled;
-  }
-
-  &[data-pending="true"] {
-    @include status-pending;
-  }
-
-  &:active,
-  &[data-pressed="true"] {
-    transform: scale(0.95);
-    background-color: var(--button-bg-pressed);
-  }
-
-  &:focus-visible:not(:focus),
-  &[data-focus-visible="true"] {
-    outline: none;
-    box-shadow: var(--ring-shadow);
-  }
-
   &[data-variant="primary"] {
     --button-bg: var(--primary);
     --button-bg-hover: var(--primary-hover);
@@ -133,6 +112,27 @@
 
   &[data-icon-only="true"] {
     padding: 0;
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    @include status-disabled;
+  }
+
+  &[data-pending="true"] {
+    @include status-pending;
+  }
+
+  &:active,
+  &[data-pressed="true"] {
+    transform: scale(0.95);
+    background-color: var(--button-bg-pressed);
+  }
+
+  &:focus-visible:not(:focus),
+  &[data-focus-visible="true"] {
+    outline: none;
+    box-shadow: var(--ring-shadow);
   }
 
   @include hoverable-cursor {
