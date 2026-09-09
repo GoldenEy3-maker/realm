@@ -99,22 +99,22 @@ export const IconOnly: Story = {
   render: (props) => {
     return (
       <FlexContainer>
-        <Button {...props} variant="primary" aria-label="Edit" isIconOnly>
+        <Button {...props} aria-label="Edit" isIconOnly variant="primary">
           <Pencil />
         </Button>
-        <Button {...props} variant="secondary" aria-label="Edit" isIconOnly>
+        <Button {...props} aria-label="Edit" isIconOnly variant="secondary">
           <Pencil />
         </Button>
-        <Button {...props} variant="outline" aria-label="More Options" isIconOnly>
+        <Button {...props} aria-label="More Options" isIconOnly variant="outline">
           <Ellipsis />
         </Button>
-        <Button {...props} variant="ghost" aria-label="Close" isIconOnly>
+        <Button {...props} aria-label="Close" isIconOnly variant="ghost">
           <Xmark />
         </Button>
-        <Button {...props} variant="danger" aria-label="Delete" isIconOnly>
+        <Button {...props} aria-label="Delete" isIconOnly variant="danger">
           <TrashBin />
         </Button>
-        <Button {...props} variant="danger-soft" aria-label="Delete" isIconOnly>
+        <Button {...props} aria-label="Delete" isIconOnly variant="danger-soft">
           <TrashBin />
         </Button>
       </FlexContainer>

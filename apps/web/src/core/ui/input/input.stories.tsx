@@ -29,8 +29,8 @@ export const Default: Story = {
   render: (props) => {
     return (
       <FlexContainer direction="column">
-        <Input {...props} variant="primary" placeholder="Primary placeholder" />
-        <Input {...props} variant="secondary" placeholder="Secondary placeholder" />
+        <Input {...props} placeholder="Primary placeholder" variant="primary" />
+        <Input {...props} placeholder="Secondary placeholder" variant="secondary" />
       </FlexContainer>
     );
   },

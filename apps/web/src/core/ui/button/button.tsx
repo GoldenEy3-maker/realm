@@ -25,10 +25,10 @@ export function Button({
   return (
     <ButtonPromitive
       {...props}
-      data-variant={variant}
-      data-size={size}
-      data-icon-only={isIconOnly}
       className={cn(styles.Root, className)}
+      data-icon-only={isIconOnly}
+      data-size={size}
+      data-variant={variant}
     />
   );
 }

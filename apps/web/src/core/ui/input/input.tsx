@@ -13,6 +13,6 @@ interface InputProps extends InputPrimitiveProps {
 
 export function Input({ className, variant = "primary", ...props }: InputProps) {
   return (
-    <InputPrimitive {...props} data-variant={variant} className={cn(styles.Root, className)} />
+    <InputPrimitive {...props} className={cn(styles.Root, className)} data-variant={variant} />
   );
 }

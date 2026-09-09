@@ -55,6 +55,7 @@ export default defineConfig([
   {
     files: ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
     rules: {
+      "react/jsx-sort-props": "error",
       "@typescript-eslint/array-type": ["error", { default: "array", readonly: "array" }],
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",

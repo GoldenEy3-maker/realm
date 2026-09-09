@@ -9,5 +9,5 @@ interface FlexContainerProps extends React.ComponentProps<"div"> {
 }
 
 export function FlexContainer({ className, direction = "row", ...props }: FlexContainerProps) {
-  return <div {...props} data-direction={direction} className={cn(styles.Root, className)} />;
+  return <div {...props} className={cn(styles.Root, className)} data-direction={direction} />;
 }
