@@ -1,3 +1,9 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+**/storybook-static
+__generated__
+*.module.scss.d.ts
+*.module.scss.d.ts.map
+project.inlang
+routeTree.gen.ts

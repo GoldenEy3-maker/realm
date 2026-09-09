@@ -44,6 +44,7 @@
     "typograf": "^7.8.0"
   },
   "devDependencies": {
+    "@repo/prettier": "workspace:*",
     "@inlang/cli": "^3.0.0",
     "@inlang/paraglide-js": "^2.25.0",
     "@storybook/addon-a11y": "^10.6.0",

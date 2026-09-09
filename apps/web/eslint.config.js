@@ -26,6 +26,7 @@ export default defineConfig([
     "eslint.boundaries.js",
     "postcss.config.js",
     "stylelint.config.js",
+    "**/storybook-static",
     "**/core/i18n/",
   ]),
   ...tanstackConfig,

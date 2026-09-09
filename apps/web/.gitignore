@@ -13,3 +13,5 @@ storybook-static
 __unconfig*
 todos.json
 __generated__
+*.module.scss.d.ts
+*.module.scss.d.ts.map

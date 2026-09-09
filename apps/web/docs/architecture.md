@@ -1,23 +1,28 @@
 <!-- 4f1cd911-e07c-4ce5-979e-a0f6df482ecf -->
+
 ---
+
 todos:
-  - id: "bootstrap-composition"
-    content: "Свести SPA bootstrap: createAppDeps() + Router context + React AppDepsProvider/срезовые провайдеры, без locator"
-    status: pending
-  - id: "core-http-query"
-    content: "core: HttpClient, TokenStorage, QueryClient, Deps context primitives — без знания доменов"
-    status: pending
-  - id: "domain-auth-feature-signin"
-    content: "domains/auth (data/di/domain, use cases на каждый метод) + features/sign-in (store factory, query factories, container, views). Роут только инжектит store и монтирует container"
-    status: pending
-  - id: "domain-tasks-feature-list"
-    content: "domains/tasks: только remote data-source + repo impl + ListTasksUseCase; features/task-list container; protected loader через GetSessionUseCase"
-    status: pending
-  - id: "eslint-boundaries"
-    content: "ESLint boundaries: внешние слои + внутренние (presentation↛data, container↛views наоборот ок, views↛container/di/data); только barrel-импорты"
-    status: pending
-isProject: false
+
+- id: "bootstrap-composition"
+  content: "Свести SPA bootstrap: createAppDeps() + Router context + React AppDepsProvider/срезовые провайдеры, без locator"
+  status: pending
+- id: "core-http-query"
+  content: "core: HttpClient, TokenStorage, QueryClient, Deps context primitives — без знания доменов"
+  status: pending
+- id: "domain-auth-feature-signin"
+  content: "domains/auth (data/di/domain, use cases на каждый метод) + features/sign-in (store factory, query factories, container, views). Роут только инжектит store и монтирует container"
+  status: pending
+- id: "domain-tasks-feature-list"
+  content: "domains/tasks: только remote data-source + repo impl + ListTasksUseCase; features/task-list container; protected loader через GetSessionUseCase"
+  status: pending
+- id: "eslint-boundaries"
+  content: "ESLint boundaries: внешние слои + внутренние (presentation↛data, container↛views наоборот ок, views↛container/di/data); только barrel-импорты"
+  status: pending
+  isProject: false
+
 ---
+
 # Архитектура фронта: слои среза, use cases, Context, container
 
 Проектируем **крупную** систему: слои и use cases не экономим «на потом». `apps/web` — пустой TanStack Router SPA. Снаружи `app` / `core` / `domains` / `features`. Внутри среза — `data` / `di` / `domain` / `presentation` (можно добавить mapper, constants, config, **container**).
@@ -169,9 +174,9 @@ export function useAuthDeps() {
 
 ```ts
 export function createTaskDeps(http: HttpClient): TaskDeps {
-  const remote = new TasksRemoteDataSource(http)
-  const repo = new TasksRepositoryImpl(remote)
-  return { listTasks: new ListTasksUseCase(repo), getTask: new GetTaskUseCase(repo) }
+  const remote = new TasksRemoteDataSource(http);
+  const repo = new TasksRepositoryImpl(remote);
+  return { listTasks: new ListTasksUseCase(repo), getTask: new GetTaskUseCase(repo) };
 }
 ```
 
@@ -214,9 +219,9 @@ Loader:
 beforeLoad: async ({ context, location }) => {
   const session = await context.queryClient.ensureQueryData(
     sessionQuery(context.deps.auth.getSession),
-  )
-  if (!session) throw redirect({ to: '/auth', search: { redirect: location.href } })
-}
+  );
+  if (!session) throw redirect({ to: "/auth", search: { redirect: location.href } });
+};
 ```
 
 ## Пример: auth + sign-in
@@ -254,15 +259,15 @@ features/sign-in/
 
 ```ts
 export interface AuthRepository {
-  sendCode(email: string): Promise<void>
-  verifyCode(email: string, code: string): Promise<Tokens>
-  getSession(): Promise<Session | null>
+  sendCode(email: string): Promise<void>;
+  verifyCode(email: string, code: string): Promise<Tokens>;
+  getSession(): Promise<Session | null>;
 }
 
 export class VerifyCodeUseCase {
   constructor(private readonly authRepository: AuthRepository) {}
   execute(email: string, code: string) {
-    return this.authRepository.verifyCode(email, code)
+    return this.authRepository.verifyCode(email, code);
   }
 }
 ```
@@ -281,10 +286,10 @@ export class AuthRepositoryImpl implements AuthRepository {
   ) {}
 
   async verifyCode(email: string, code: string): Promise<Tokens> {
-    const dto = await this.remote.verifyCode({ email, code })
-    const tokens = Tokens.fromDto(dto)
-    await this.local.saveTokens(dto)
-    return tokens
+    const dto = await this.remote.verifyCode({ email, code });
+    const tokens = Tokens.fromDto(dto);
+    await this.local.saveTokens(dto);
+    return tokens;
   }
 }
 ```
@@ -295,38 +300,36 @@ Tasks: `TasksRepositoryImpl` держит только `TasksRemoteDataSource` �
 
 ```ts
 export function createSignInStore() {
-  return new SignInStore()
+  return new SignInStore();
 }
 
 export const sendCodeMutationOptions = (sendCode: SendCodeUseCase, store: SignInStore) =>
   mutationOptions({
     mutationFn: (email: string) => sendCode.execute(email),
     onSuccess: (_, email) => store.goToCode(email),
-  })
+  });
 ```
 
 ```tsx
 // presentation/container/sign-in-container.tsx
 export function SignInContainer({ store }: { store: SignInStore }) {
-  const { sendCode, verifyCode } = useAuthDeps()
-  const queryClient = useQueryClient()
-  const sendCodeMutation = useMutation(sendCodeMutationOptions(sendCode, store))
-  const verifyMutation = useMutation(verifyCodeMutationOptions(verifyCode, queryClient))
+  const { sendCode, verifyCode } = useAuthDeps();
+  const queryClient = useQueryClient();
+  const sendCodeMutation = useMutation(sendCodeMutationOptions(sendCode, store));
+  const verifyMutation = useMutation(verifyCodeMutationOptions(verifyCode, queryClient));
 
   return (
-    <SignInForm
-      store={store}
-      sendCodeMutation={sendCodeMutation}
-      verifyMutation={verifyMutation}
-    />
-  )
+    <SignInForm store={store} sendCodeMutation={sendCodeMutation} verifyMutation={verifyMutation} />
+  );
 }
 
 // presentation/views/sign-in-form.tsx
 export function SignInForm({ store, sendCodeMutation, verifyMutation }: SignInFormProps) {
-  return store.stage === 'email'
-    ? <EmailStep store={store} mutation={sendCodeMutation} />
-    : <CodeStep store={store} mutation={verifyMutation} />
+  return store.stage === "email" ? (
+    <EmailStep store={store} mutation={sendCodeMutation} />
+  ) : (
+    <CodeStep store={store} mutation={verifyMutation} />
+  );
 }
 ```
 
@@ -335,8 +338,8 @@ export function SignInForm({ store, sendCodeMutation, verifyMutation }: SignInFo
 ```tsx
 // app/routes/auth.tsx
 function AuthRoute() {
-  const [store] = useState(() => createSignInStore())
-  return <SignInContainer store={store} />
+  const [store] = useState(() => createSignInStore());
+  return <SignInContainer store={store} />;
 }
 ```
 
