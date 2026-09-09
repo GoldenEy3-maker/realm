@@ -1,3 +1,5 @@
+@use "helpers" as *;
+
 .Root {
   --input-bg: transparent;
   --input-bg-hover: var(--input-bg);

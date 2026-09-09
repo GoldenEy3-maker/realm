@@ -12,7 +12,6 @@ const config = defineConfig({
     preprocessorOptions: {
       scss: {
         loadPaths: [path.join(import.meta.dirname, "src", "app", "styles")],
-        additionalData: '@use "helpers" as *;',
       },
     },
   },

@@ -21,7 +21,6 @@ const config: StorybookConfig = {
         preprocessorOptions: {
           scss: {
             loadPaths: [path.resolve(import.meta.dirname, "../src/app/styles")],
-            additionalData: '@use "helpers" as *;',
           },
         },
       },

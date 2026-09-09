@@ -6,12 +6,16 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "start": "turbo start",
+    "prod": "bun scripts/prod.ts",
     "test": "turbo test",
     "format": "turbo format",
     "lint": "turbo lint"
   },
   "dependencies": {
     "turbo": "^2.10.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.1"
   },
   "overrides": {
     "seroval": "1.6.4",

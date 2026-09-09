@@ -28,14 +28,12 @@ class OpenApiGenerator {
     await this.saveOpenApi(codeWithConstEnums);
   }
 
-  private async waitForBackend(maxRetries = 30, retryDelay = 1000) {
+  private async waitForBackend(maxRetries = 60, retryDelay = 1000) {
     console.log("⏳ Waiting for backend to be ready...");
 
     for (let i = 0; i < maxRetries; i++) {
       try {
-        const response = await fetch(this.options.openapiUrl, {
-          method: "HEAD",
-        });
+        const response = await fetch(this.options.openapiUrl);
 
         if (response.ok) {
           console.log("🔥 Backend is ready!");

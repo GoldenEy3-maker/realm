@@ -1,3 +1,5 @@
+@use "helpers" as *;
+
 .Root {
   --button-bg: transparent;
   --button-bg-hover: var(--button-bg);
