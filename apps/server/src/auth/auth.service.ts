@@ -1,4 +1,4 @@
-import { Injectable, Logger, NotFoundException, UnauthorizedException } from "@nestjs/common";
+import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { I18nService } from "nestjs-i18n";
@@ -26,8 +26,6 @@ export interface RefreshTokenPayload {
 
 @Injectable()
 export class AuthService {
-  private readonly logger = new Logger(AuthService.name);
-
   constructor(
     private readonly configService: ConfigService,
     private readonly redisService: RedisService,
@@ -39,12 +37,6 @@ export class AuthService {
   ) {}
 
   async generateAndSendVerificationCode(email: string): Promise<boolean> {
-    const user = await this.usersService.findOneByEmail(email);
-
-    if (!user) {
-      await this.registerUser(email);
-    }
-
     const verificationCodeConfig =
       this.configService.getOrThrow<VerificationCodeConfig>("auth.verificationCode");
 
@@ -54,7 +46,6 @@ export class AuthService {
       `${verificationCodeConfig.redisStorageKey}:${email}`,
       {
         code,
-        attempts: "0",
       },
       verificationCodeConfig.expirationTime,
     );
@@ -65,12 +56,6 @@ export class AuthService {
   }
 
   async verifyCodeAndGenerateTokens(email: string, code: string): Promise<AuthResponseDto> {
-    const user = await this.usersService.findOneByEmail(email);
-
-    if (!user) {
-      throw new NotFoundException(this.i18n.t("common.userNotFound"));
-    }
-
     const verificationCodeConfig =
       this.configService.getOrThrow<VerificationCodeConfig>("auth.verificationCode");
 
@@ -79,30 +64,13 @@ export class AuthService {
       "code",
     );
 
-    const attempts = await this.redisService.hget(
-      `${verificationCodeConfig.redisStorageKey}:${email}`,
-      "attempts",
-    );
-
-    if (attempts && parseInt(attempts) >= verificationCodeConfig.maxAttempts) {
-      throw new UnauthorizedException(this.i18n.t("auth.maxAttemptsReached"));
-    }
-
     if (!storedCode || storedCode !== code) {
-      await this.redisService.hincrby(
-        `${verificationCodeConfig.redisStorageKey}:${email}`,
-        "attempts",
-        1,
-      );
-
       throw new UnauthorizedException(this.i18n.t("auth.invalidOrExpiredVerificationCode"));
     }
 
-    await this.redisService.hdel(
-      `${verificationCodeConfig.redisStorageKey}:${email}`,
-      "code",
-      "attempts",
-    );
+    void this.redisService.hdel(`${verificationCodeConfig.redisStorageKey}:${email}`, "code");
+
+    const user = await this.getOrRegisterUser(email);
 
     return this.generateTokens(user.id, user.tokenVersion);
   }
@@ -172,6 +140,16 @@ export class AuthService {
   private async registerUser(email: string): Promise<User> {
     const user = await this.usersService.create({ email, username: generateUniqueUsername() });
     await this.profileService.create(user.id, { firstName: "Неизвестный" });
+    return user;
+  }
+
+  private async getOrRegisterUser(email: string): Promise<User> {
+    const user = await this.usersService.findOneByEmail(email);
+
+    if (!user) {
+      return this.registerUser(email);
+    }
+
     return user;
   }
 }

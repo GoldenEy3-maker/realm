@@ -13,15 +13,21 @@ import { UsersModule } from "@/users/users.module";
 import { ErrorResponseDto, ResponseDto } from "../response/dto/response.dto";
 
 export class OpenApiReference {
-  async setup(app: NestExpressApplication) {
-    const document = this.generateDocument(app);
+  private readonly specFileName = "openapi.json";
+  private readonly specFolderPath = `public/docs`;
 
-    await this.saveDocument(document);
+  async setup(app: NestExpressApplication) {
+    await this.generateAndSaveDocument(app);
 
     app.use(
       "/docs/api",
-      apiReference({ theme: "deepSpace", url: "api.json", hideClientButton: true }),
+      apiReference({ theme: "deepSpace", url: this.specFileName, hideClientButton: true }),
     );
+  }
+
+  private async generateAndSaveDocument(app: NestExpressApplication) {
+    const document = this.generateDocument(app);
+    await this.saveDocument(document);
   }
 
   private generateDocument(app: NestExpressApplication) {
@@ -71,11 +77,11 @@ export class OpenApiReference {
 
   private async saveDocument(document: OpenAPIObject) {
     try {
-      await stat("public/docs");
+      await stat(this.specFolderPath);
     } catch {
-      await mkdir("public/docs", { recursive: true });
+      await mkdir(this.specFolderPath, { recursive: true });
     }
 
-    await writeFile("public/docs/api.json", JSON.stringify(document));
+    await writeFile(`${this.specFolderPath}/${this.specFileName}`, JSON.stringify(document));
   }
 }

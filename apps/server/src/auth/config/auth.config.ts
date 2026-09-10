@@ -3,7 +3,6 @@ import { registerAs } from "@nestjs/config";
 import type { JwtExpiresInStringValue } from "@/common/types/jwt-expires-in-string-value.type";
 
 export interface VerificationCodeConfig {
-  maxAttempts: number;
   expirationTime: number;
   redisStorageKey: string;
   codeLength: number;
@@ -37,10 +36,6 @@ export const authConfig = registerAs<AuthConfig>(
          * The length of the verification code
          */
         codeLength: parseInt(process.env.AUTH_VERIFICATION_CODE_LENGTH || "6", 10),
-        /**
-         * The maximum number of attempts to enter the verification code
-         */
-        maxAttempts: parseInt(process.env.AUTH_VERIFICATION_CODE_MAX_ATTEMPTS || "3", 10),
       },
       jwt: {
         /**

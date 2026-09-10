@@ -40,13 +40,18 @@ export class AuthController {
   }
 
   @Post("verify-code")
+  @Throttle({ default: { limit: 3 } })
   @OpenApi({
     summary: "Verify code and get tokens",
     success: {
       data: { $ref: getSchemaPath(AuthResponseDto) },
       message: "Code verified successfully",
     },
-    exceptions: [ApiUnprocessableEntityResponse, ApiUnauthorizedResponse],
+    exceptions: [
+      ApiUnprocessableEntityResponse,
+      ApiUnauthorizedResponse,
+      ApiTooManyRequestsResponse,
+    ],
   })
   verifyCode(@Body() verifyCodeDto: VerifyCodeDto): Promise<AuthResponseDto> {
     return this.authService.verifyCodeAndGenerateTokens(verifyCodeDto.email, verifyCodeDto.code);

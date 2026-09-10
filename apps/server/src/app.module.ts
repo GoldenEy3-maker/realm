@@ -31,6 +31,7 @@ import { createNestlensModuleForRoot, nestLensEnabled } from "./infrastructure/n
       isGlobal: true,
       validate,
     }),
+    // TODO: need to enhance 429 status response with meta information about throttle like remaining attempts and retry-after
     ThrottlerModule.forRoot([
       {
         name: "default",
