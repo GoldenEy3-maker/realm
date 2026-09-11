@@ -5,7 +5,7 @@
   --input-bg-hover: var(--input-bg);
   --input-fg: currentcolor;
 
-  height: calc(var(--spacing) * 10);
+  block-size: calc(var(--spacing) * 10);
   padding-inline: var(--spacing-2xl);
   border: 1px solid transparent;
   border-radius: var(--rounded-lg);
@@ -35,6 +35,7 @@
 
   &:focus,
   &[data-focused="true"] {
+    background-color: var(--input-bg-hover);
     outline: none;
     box-shadow: var(--ring-shadow);
   }
@@ -56,6 +57,26 @@
     &[data-hovered="true"]:not([data-focused="true"], [data-focus-visible="true"]) {
       background-color: var(--input-bg-hover);
     }
+  }
+
+  /**
+    * Neutralize the browser's per-input autofill paint so the <input>
+    * doesn't draw a sharp-cornered yellow rectangle. Preserve the autofilled
+    * text and caret colors, and pin the background-color transition
+    * so the inset box-shadow trick doesn't flicker on state changes.
+  */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active,
+  &:autofill {
+    background-color: var(--input-bg-hover);
+    box-shadow: 0 0 0 1000px transparent inset;
+    caret-color: var(--input-fg);
+
+    transition: background-color 9999s ease-in-out 0s;
+
+    -webkit-text-fill-color: var(--input-fg);
   }
 
   @include transition-with-reduce-motion(

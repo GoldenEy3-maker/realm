@@ -1,0 +1,188 @@
+@use "helpers" as *;
+
+.Root {
+  --input-group-bg: transparent;
+  --input-group-bg-hovered: var(--input-group-bg);
+  --input-group-fg: currentcolor;
+
+  border: 1px solid transparent;
+  border-radius: var(--rounded-lg);
+
+  font-size: var(--text-sm);
+  color: var(--input-group-fg);
+
+  background-color: var(--input-group-bg);
+
+  &:has([data-slot="input-group-input"]) {
+    display: inline-flex;
+    align-items: center;
+    block-size: calc(var(--spacing) * 10);
+
+    &:has([data-slot="input-group-prefix"]) .Input {
+      padding-inline-start: 0;
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
+
+    &:has([data-slot="input-group-suffix"]) .Input {
+      padding-inline-end: 0;
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
+  }
+
+  &[data-variant="primary"] {
+    --input-group-bg: var(--field-background);
+    --input-group-bg-hover: var(--field-hover);
+    --input-group-fg: var(--field-foreground);
+
+    box-shadow: var(--field-shadow, none);
+  }
+
+  &[data-variant="secondary"] {
+    --input-group-bg: var(--secondary);
+    --input-group-bg-hover: var(--secondary-hover);
+    --input-group-fg: var(--secondary-foreground);
+  }
+
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @include status-disabled;
+  }
+
+  &:has(
+    [data-slot="input-group-input"]:focus,
+    [data-slot="input-group-input"][data-focused="true"]
+  ) {
+    background-color: var(--input-group-bg-hover);
+    outline: none;
+    box-shadow: var(--ring-shadow);
+  }
+
+  &[data-invalid="true"],
+  [data-invalid="true"] & {
+    @include focus-invalid-ring;
+
+    border-color: var(--danger);
+  }
+
+  @include hoverable-cursor {
+    &:hover:not(
+        :has([data-slot="input-group-inout"]:focus, [data-slot="input-group-input"]:focus-visible)
+      ),
+    &[data-hovered="true"]:not(
+        :has(
+          [data-slot="input-group-input"][data-focused="true"],
+          [data-slot="input-group-input"][data-focus-visible="true"]
+        )
+      ) {
+      background-color: var(--input-group-bg-hover);
+    }
+  }
+
+  /**
+     * Browser autofill state.
+     * The user-agent paints `:-webkit-autofill`/`:autofill` on the inner <input>
+     * element only, inside its content box. Because the inner input has its
+     * border-radius stripped on whichever side touches a prefix/suffix, the
+     * autofill highlight ends up as a sharp-cornered rectangle and the
+     * prefix/suffix slots receive no highlight at all. Lift the highlight
+     * onto the group so the rounded shell + prefix + suffix all share it.
+     */
+  &:has([data-slot="input-group-input"]:-webkit-autofill),
+  &:has([data-slot="input-group-input"]:autofill) {
+    background-color: var(--input-group-bg-hover);
+  }
+
+  @include transition-with-reduce-motion(
+    background-color var(--duration-md) var(--ease-smooth),
+    border-color var(--duration-sm) var(--ease-smooth),
+    box-shadow var(--duration-sm) var(--ease-smooth)
+  );
+}
+
+.Input {
+  --input-bg: transparent;
+  --input-bg-hover: var(--input-bg);
+  --input-fg: var(--field-foreground);
+
+  block-size: calc(var(--spacing) * 10);
+  padding-inline: var(--spacing-2xl);
+  border: 0;
+  border-radius: var(--rounded-lg);
+
+  font-size: var(--text-md);
+  color: var(--input-fg);
+
+  background-color: var(--input-bg);
+
+  &::placeholder {
+    color: var(--muted);
+  }
+
+  &:focus,
+  &[data-focused="true"],
+  &:focus-visible,
+  &[data-focus-visible="true"] {
+    outline: none;
+  }
+
+  &:disabled,
+  &[data-disabled="true"],
+  &[aria-disabled="true"] {
+    @include status-disabled;
+  }
+
+  /**
+    * Neutralize the browser's per-input autofill paint so the inner <input>
+    * doesn't draw a sharp-cornered yellow rectangle. The unified highlight
+    * is applied to `.input-group` above. Preserve the autofilled text and
+    * caret colors, and pin the background-color transition so the inset
+    * box-shadow trick doesn't flicker on state changes.
+  */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active,
+  &:autofill {
+    box-shadow: 0 0 0 1000px transparent inset;
+    caret-color: var(--input-fg);
+    transition: background-color 9999s ease-in-out 0s;
+
+    -webkit-text-fill-color: var(--input-fg);
+  }
+}
+
+.Prefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  block-size: 100%;
+  padding-inline: var(--spacing-2xl);
+  border-start-start-radius: var(--rounded-lg);
+  border-end-start-radius: var(--rounded-lg);
+
+  color: var(--muted);
+
+  &[data-is-button="true"] {
+    padding-inline-start: 0;
+  }
+}
+
+.Suffix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  block-size: 100%;
+  padding-inline: var(--spacing-2xl);
+  border-start-end-radius: var(--rounded-lg);
+  border-end-end-radius: var(--rounded-lg);
+
+  color: var(--muted);
+
+  &[data-is-button="true"] {
+    padding-inline-end: 0;
+  }
+}

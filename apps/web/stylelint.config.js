@@ -1,6 +1,6 @@
 /** @type {import('stylelint').Config} */
 const config = {
-  plugins: ["./stylelintPlugins/slabSelectorClassPattern.mjs"],
+  plugins: ["./stylelintPlugins/slabSelectorClassPattern.mjs", "stylelint-use-logical"],
   extends: [
     "stylelint-config-standard-scss",
     "stylelint-config-css-modules",
@@ -8,6 +8,7 @@ const config = {
     "stylelint-config-clean-order",
   ],
   rules: {
+    "csstools/use-logical": "always",
     "custom-property-empty-line-before": [
       "always",
       { ignore: ["after-custom-property", "first-nested"] },

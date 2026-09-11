@@ -69,7 +69,7 @@
       var(--primary-foreground) 30%
     );
 
-    --secondary: oklch(25% 0 0deg);
+    --secondary: oklch(30% 0 0deg);
     --secondary-foreground: var(--snow);
     --secondary-hover: color-mix(in oklab, var(--secondary) 96%, var(--secondary-foreground) 4%);
 
@@ -85,11 +85,11 @@
     );
     --danger-soft-foreground: color-mix(in oklab, var(--danger) 80%, var(--danger-foreground) 30%);
 
-    --muted: oklch(60% 0 0deg);
+    --muted: oklch(70% 0 0deg);
 
-    --field-background: oklch(21% 0 0deg);
+    --field-background: oklch(24% 0 0deg);
     --field-foreground: var(--snow);
-    --field-hover: color-mix(in oklab, var(--field-background) 97%, var(--field-foreground) 3%);
+    --field-hover: color-mix(in oklab, var(--field-background) 98%, var(--field-foreground) 2%);
   }
 
   [data-theme="light"] {
