@@ -73,8 +73,9 @@
     --secondary-foreground: var(--snow);
     --secondary-hover: color-mix(in oklab, var(--secondary) 96%, var(--secondary-foreground) 4%);
 
-    --danger: oklch(51% 0.1712 29.54deg);
+    --danger: oklch(64.04% 0.2074 29.54deg);
     --danger-foreground: var(--snow);
+    --danger-ring: color-mix(in oklab, var(--danger) 60%, transparent);
     --danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
     --danger-soft: color-mix(in oklab, var(--danger) 15%, transparent);
     --danger-soft-hover: color-mix(

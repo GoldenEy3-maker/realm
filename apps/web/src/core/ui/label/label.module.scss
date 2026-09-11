@@ -1,5 +1,23 @@
+@use "helpers" as *;
+
 .Root {
-  font-size: var(-text-sm);
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--foreground);
+
+  [data-disabled="true"] & {
+    @include status-disabled;
+  }
+
+  [data-required="true"] & {
+    &::after {
+      content: "*";
+      margin-inline-start: var(--spacing-md);
+      color: var(--danger);
+    }
+  }
+
+  [data-invalid="true"] & {
+    color: var(--danger);
+  }
 }

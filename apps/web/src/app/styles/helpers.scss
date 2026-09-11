@@ -23,7 +23,7 @@
   &[data-focus-visible="true"],
   &:focus-within,
   &[data-focus-within="true"] {
-    --ring: var(--danger);
+    box-shadow: 0 0 0 var(--ring-offset) var(--danger-ring);
   }
 }
 
