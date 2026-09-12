@@ -1,0 +1,134 @@
+@use "helpers" as *;
+
+.Root {
+  position: relative;
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+
+  &[data-disabled="true"] {
+    @include status-disabled;
+  }
+}
+
+.Group {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+  min-inline-size: 0;
+}
+
+.Slot {
+  --input-otp-slot-bg: transparent;
+  --input-otp-slot-fg: currentcolor;
+
+  position: relative;
+
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  inline-size: calc(var(--spacing) * 9);
+  min-inline-size: 0;
+  block-size: calc(var(--spacing) * 10);
+  border: 1px solid transparent;
+  border-radius: var(--rounded-field);
+
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--input-otp-slot-fg);
+
+  background-color: var(--input-otp-slot-bg);
+
+  &[data-variant="primary"] {
+    --input-otp-slot-bg: var(--field-background);
+    --input-otp-slot-fg: var(--field-foreground);
+
+    box-shadow: var(--field-shadow, none);
+  }
+
+  &[data-variant="secondary"] {
+    --input-otp-slot-bg: var(--secondary);
+    --input-otp-slot-fg: var(--secondary-foreground);
+  }
+
+  &[data-active="true"] {
+    box-shadow: var(--ring-shadow);
+
+    &[data-invalid="true"] {
+      box-shadow: 0 0 0 var(--ring-offset) var(--danger-ring);
+    }
+  }
+
+  &[data-disabled="true"] {
+    @include status-disabled;
+  }
+
+  &[data-invalid="true"] {
+    border-color: var(--danger);
+  }
+
+  @include transition-with-reduce-motion(
+    background-color var(--duration-md) var(--ease-smooth),
+    border-color var(--duration-sm) var(--ease-smooth),
+    box-shadow var(--duration-sm) var(--ease-smooth)
+  );
+}
+
+.Char {
+  font-size: var(--text-lg);
+  animation: slot-char-in var(--duration-md) var(--ease-smooth) both;
+}
+
+.Placeholder {
+  font-size: var(--text-lg);
+  color: var(--muted);
+}
+
+.Caret {
+  position: absolute;
+
+  inline-size: var(--spacing-sm);
+  block-size: var(--spacing-3xl);
+  border-radius: var(--rounded-sm);
+
+  background-color: var(--muted);
+
+  animation: caret-blink calc(var(--duration) * 4) var(--ease-smooth) infinite;
+}
+
+.Separator {
+  flex-shrink: 0;
+
+  inline-size: var(--spacing-lg);
+  block-size: var(--spacing-sm);
+  border-radius: var(--rounded-sm);
+
+  background-color: var(--border);
+}
+
+@keyframes slot-char-in {
+  0% {
+    transform: translateY(8px) scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  70%,
+  100% {
+    opacity: 1;
+  }
+
+  20%,
+  50% {
+    opacity: 0;
+  }
+}

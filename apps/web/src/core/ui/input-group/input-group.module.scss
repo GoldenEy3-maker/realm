@@ -6,7 +6,7 @@
   --input-group-fg: currentcolor;
 
   border: 1px solid transparent;
-  border-radius: var(--rounded-lg);
+  border-radius: var(--rounded-field);
 
   font-size: var(--text-sm);
   color: var(--input-group-fg);
@@ -109,7 +109,7 @@
   block-size: calc(var(--spacing) * 10);
   padding-inline: var(--spacing-2xl);
   border: 0;
-  border-radius: var(--rounded-lg);
+  border-radius: var(--rounded-field);
 
   font-size: var(--text-md);
   color: var(--input-fg);
@@ -160,8 +160,8 @@
 
   block-size: 100%;
   padding-inline: var(--spacing-2xl);
-  border-start-start-radius: var(--rounded-lg);
-  border-end-start-radius: var(--rounded-lg);
+  border-start-start-radius: var(--rounded-field);
+  border-end-start-radius: var(--rounded-field);
 
   color: var(--muted);
 
@@ -177,8 +177,8 @@
 
   block-size: 100%;
   padding-inline: var(--spacing-2xl);
-  border-start-end-radius: var(--rounded-lg);
-  border-end-end-radius: var(--rounded-lg);
+  border-start-end-radius: var(--rounded-field);
+  border-end-end-radius: var(--rounded-field);
 
   color: var(--muted);
 

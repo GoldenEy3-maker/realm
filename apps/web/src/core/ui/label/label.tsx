@@ -8,5 +8,5 @@ import styles from "./label.module.scss";
 interface LabelProps extends LabelPrimitiveProps {}
 
 export function Label({ className, ...props }: LabelProps) {
-  return <LabelPrimitive {...props} className={cn(styles.Root, className)} />;
+  return <LabelPrimitive {...props} className={cn(styles.Root, className)} data-slot="label" />;
 }

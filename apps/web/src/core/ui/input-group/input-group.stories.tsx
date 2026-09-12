@@ -7,7 +7,7 @@ import { Button } from "../button";
 import { Description } from "../description";
 import { ErrorMessage } from "../error-message";
 import { Label } from "../label";
-import { TextField } from "../textfield";
+import { TextField } from "../text-field";
 import { InputGroup } from "./input-group";
 
 const meta = {

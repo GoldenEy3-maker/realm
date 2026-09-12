@@ -4,7 +4,7 @@ import { Description } from "../description";
 import { ErrorMessage } from "../error-message";
 import { Input } from "../input";
 import { Label } from "../label";
-import { TextField } from "./textfield";
+import { TextField } from "./text-field";
 
 const meta = {
   title: "Core/TextField",

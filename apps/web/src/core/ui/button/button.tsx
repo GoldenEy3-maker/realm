@@ -28,6 +28,7 @@ export function Button({
       className={cn(styles.Root, className)}
       data-icon-only={isIconOnly}
       data-size={size}
+      data-slot="button"
       data-variant={variant}
     />
   );
